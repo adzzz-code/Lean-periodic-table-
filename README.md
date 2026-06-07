@@ -1,5 +1,7 @@
 # Lean Atelier — Tableau périodique du Lean & de l'excellence opérationnelle
 
+**🌐 En ligne : https://adzzz-code.github.io/Lean-periodic-table-/**
+
 Un **tableau périodique des concepts Lean et d'excellence opérationnelle**, conçu pour rendre
 les outils et méthodes des grandes entreprises **accessibles aux TPE/PME et aux entrepreneurs**,
 adaptés à leur contexte (moyens limités, petites équipes), avec leurs **limites** assumées.
