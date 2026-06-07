@@ -23,12 +23,13 @@ quand un outil ne sert à rien et ses limites — anti « cargo cult »).
   (Fondamentaux → Structuration → Optimisation → Excellence). « Trous » assumés.
 - Double public : **TPE/PME (prioritaire)** + couche praticiens sur chaque fiche.
 - Fiche = gabarit fixe : Essentiel · **Limites & anti-usage** · couche TPE/PME · badge
-  pertinence (impact/effort) · couche praticien · concepts liés. Détail : `docs/PRD.md` §4.
+  pertinence (impact/effort) · couche praticien · concepts liés · **sources**. Détail : `docs/PRD.md` §4.
 
 ## Conventions
 
-- **Source de vérité contenu** : `src/data/concepts.js` (+ `families.js`). Ne pas dupliquer
-  ailleurs. Ajouter un concept = une entrée respectant le gabarit (en-tête du fichier).
+- **Source de vérité contenu** : `src/data/concepts.js` (+ `families.js`, `sources.js`). Ne pas
+  dupliquer ailleurs. Ajouter un concept = une entrée respectant le gabarit + **≥ 1 source**.
+- **Qualité** : `npm run validate` (intégrité + sources), `npm run lint`, `npm run format` — vérifiés en CI.
 - **Stack** : Astro + JS + CSS natif. Pas de TypeScript ni framework CSS lourd sans demande.
 - **Langue** : FR uniquement en V1.
 - **Naming** : kebab-case ; slugs de concepts en kebab-case ; symboles 1-3 caractères.

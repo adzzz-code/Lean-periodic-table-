@@ -3,6 +3,7 @@
 // Lancer : `npm run validate`.
 import { concepts } from '../src/data/concepts.js';
 import { families, levels } from '../src/data/families.js';
+import { sources } from '../src/data/sources.js';
 
 const famIds = new Set(families.map((f) => f.id));
 const lvls = new Set(levels.map((l) => l.level));
@@ -41,7 +42,14 @@ for (const c of concepts) {
   }
   for (const r of c.related || [])
     if (!setSlugs.has(r)) issues.push(`${id} : related cassé → « ${r} »`);
+  const refs = sources[c.slug];
+  if (!Array.isArray(refs) || refs.length === 0)
+    issues.push(`${id} : aucune source (cf. sources.js)`);
 }
+
+// Toute clé de sources doit correspondre à un concept existant.
+for (const key of Object.keys(sources))
+  if (!setSlugs.has(key)) issues.push(`sources.js : clé orpheline « ${key} » (slug inconnu)`);
 
 if (issues.length) {
   console.error(`❌ ${issues.length} problème(s) d'intégrité :\n- ${issues.join('\n- ')}`);

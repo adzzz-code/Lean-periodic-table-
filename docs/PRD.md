@@ -71,6 +71,7 @@ Tous les croisements (famille × niveau) ne sont pas remplis — les « trous »
 | **Badge pertinence**     | Impact / effort pour une petite équipe (ex. fort impact / faible effort)                             |
 | **Couche praticien**     | Pour aller plus loin · prérequis · indicateurs de succès                                             |
 | **Concepts liés**        | Liens vers d'autres éléments (le tableau est aussi un graphe de relations)                           |
+| **Sources & références** | Auteur(s) / ouvrage(s) de référence du concept (`src/data/sources.js`, ≥ 1 par fiche)                |
 
 ## 5. Fonctionnalités V1
 
@@ -106,7 +107,8 @@ respecte le gabarit §4. Qualité éditoriale > exhaustivité.
 
 - **Langue** : FR uniquement (V1).
 - **Naming** : kebab-case pour fichiers et identifiants ; symboles concepts = 1-3 caractères.
-- **Source de vérité contenu** : `src/data/concepts.js` + `src/data/families.js`.
+- **Source de vérité contenu** : `src/data/concepts.js` + `src/data/families.js` + `src/data/sources.js`.
+- **Qualité** : `npm run validate` (intégrité données + ≥ 1 source/fiche), `lint`, `format` — en CI.
 - **Accessibilité** : contrastes AA, navigation clavier sur le tableau.
 
 ## 9. Décisions de cadrage (refinement 2026-06-07)

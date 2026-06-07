@@ -24,11 +24,13 @@ La progression suit la logique du produit : **d'abord une référence crédible 
 > Objectif : rendre le site **public, soigné et trouvable**. Peu de nouvelles fonctions,
 > beaucoup de finition.
 
-- Déploiement continu (Netlify / Vercel / GitHub Pages) + nom de domaine.
-- Branding : figer le nom définitif, logo, palette validée.
-- SEO de base (sitemap, métadonnées, Open Graph) + page « À propos / méthode ».
-- Audit accessibilité (navigation clavier complète, contrastes, lecteurs d'écran).
-- Relecture éditoriale des 40 fiches + ajout de références/sources.
+- [x] Déploiement continu (GitHub Pages + configs Netlify/Vercel). _Nom de domaine : à venir._
+- [x] Branding : nom figé (**Lean Élémentaire**), logo, favicon, Open Graph.
+- [x] SEO (sitemap, OG, canonical, **JSON-LD**) + **page « À propos / méthode »**.
+- [x] Accessibilité : contrastes AA (8/8), sémantique du tableau, `aria-label`. _Test lecteur d'écran : à compléter._
+- [x] **Sources/références** par fiche (imposées par la validation). _Relecture éditoriale fine : en continu._
+
+➡️ **V1.1 quasi complète** : reste un nom de domaine, la relecture éditoriale fine et un test lecteur d'écran.
 
 ## 🧭 V2 — L'aide à la décision
 
