@@ -41,6 +41,8 @@
 - [x] `P0` **Nom** figé : **Lean Élémentaire** — slogan _« Le Lean, élément par élément. »_ (2026-06-07).
 - [x] `P1` **Logo + favicon** (tuile « Lé ») + **image Open Graph** (`public/og.png`, généré via `npm run og`) + balises OG/Twitter.
 - [ ] `P1` Valider la palette définitive et la cohérence des couleurs de familles.
+- [x] `P1` **Affichage responsive mobile** : corrigé (débordements/scroll horizontal sur cartes Pépites
+      et navigation). À re-vérifier à chaque nouvelle mise en page.
 - [ ] `P2` Illustrations / pictos par famille.
 - [ ] `P2` Mode sombre.
 
