@@ -8,7 +8,16 @@ import sharp from 'sharp';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const out = join(__dirname, '..', 'public', 'og.png');
 
-const FAM = ['#7c3aed', '#0f766e', '#2563eb', '#15803d', '#c2410c', '#b45309', '#dc2626', '#4f46e5'];
+const FAM = [
+  '#7c3aed',
+  '#0f766e',
+  '#2563eb',
+  '#15803d',
+  '#c2410c',
+  '#b45309',
+  '#dc2626',
+  '#4f46e5',
+];
 
 // Petites tuiles "éléments" décoratives en bas.
 const chips = ['5S', 'PD', 'Vs', 'Kb', 'Pa', 'A3', 'Gb', 'Kz'];

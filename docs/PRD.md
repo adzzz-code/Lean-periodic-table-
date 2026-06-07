@@ -1,6 +1,6 @@
 # PRD — Tableau périodique du Lean & de l'Excellence Opérationnelle
 
-> Nom retenu : **Lean Élémentaire** — *Le Lean, élément par élément.* (figé le 2026-06-07).
+> Nom retenu : **Lean Élémentaire** — _Le Lean, élément par élément._ (figé le 2026-06-07).
 > Statut : V1 — cadrage validé le 2026-06-07. Document de référence, à amender par versions.
 
 ## 1. Vision
@@ -19,6 +19,7 @@ ses **limites**, pour éviter le « cargo cult » d'outils.
 ## 2. Public cible
 
 Double couche assumée (décision de cadrage) :
+
 - **TPE/PME & entrepreneurs débutants** (public prioritaire) : vulgarisation, premiers pas
   réalistes, exemples concrets de petite structure, zéro jargon non expliqué.
 - **Praticiens confirmés** : couche « pour aller plus loin » (prérequis, indicateurs,
@@ -34,42 +35,42 @@ assumés), mais on s'autorise des écarts si la pédagogie l'exige.
 
 8 familles, chacune avec un code couleur :
 
-| # | Id | Famille | Exemples |
-|---|----|---------|----------|
-| 1 | `mindset` | **Mindset & principes** | Genchi Genbutsu, Respect des personnes, Amélioration continue, Hansei, Nemawashi, Pensée long terme |
-| 2 | `client-valeur` | **Voix du client & valeur** | Valeur, VOC, Gemba, Gaspillages (3M), CTQ |
-| 3 | `flux` | **Flux & système de production** | VSM, JIT, Kanban/Flux tiré, Takt Time, Heijunka, SMED |
-| 4 | `stabilite-qualite` | **Stabilité & qualité** | 5S, Travail standardisé, Poka-Yoke, Jidoka, TPM, Andon |
-| 5 | `resolution` | **Résolution de problèmes** | PDCA, 5 Pourquoi, Ishikawa, A3, DMAIC, 8D |
-| 6 | `mesure` | **Mesure & maîtrise statistique** | KPI, Pareto, SPC/MSP, OEE/TRS |
-| 7 | `management` | **Management & culture** | Kaizen, Hoshin Kanri, Management visuel, Leader Standard Work |
-| 8 | `avance` | **Amélioration avancée / Six Sigma** | Six Sigma, Théorie des contraintes, Kata, DOE |
+| #   | Id                  | Famille                              | Exemples                                                                                            |
+| --- | ------------------- | ------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| 1   | `mindset`           | **Mindset & principes**              | Genchi Genbutsu, Respect des personnes, Amélioration continue, Hansei, Nemawashi, Pensée long terme |
+| 2   | `client-valeur`     | **Voix du client & valeur**          | Valeur, VOC, Gemba, Gaspillages (3M), CTQ                                                           |
+| 3   | `flux`              | **Flux & système de production**     | VSM, JIT, Kanban/Flux tiré, Takt Time, Heijunka, SMED                                               |
+| 4   | `stabilite-qualite` | **Stabilité & qualité**              | 5S, Travail standardisé, Poka-Yoke, Jidoka, TPM, Andon                                              |
+| 5   | `resolution`        | **Résolution de problèmes**          | PDCA, 5 Pourquoi, Ishikawa, A3, DMAIC, 8D                                                           |
+| 6   | `mesure`            | **Mesure & maîtrise statistique**    | KPI, Pareto, SPC/MSP, OEE/TRS                                                                       |
+| 7   | `management`        | **Management & culture**             | Kaizen, Hoshin Kanri, Management visuel, Leader Standard Work                                       |
+| 8   | `avance`            | **Amélioration avancée / Six Sigma** | Six Sigma, Théorie des contraintes, Kata, DOE                                                       |
 
 ### 3.2 Axe vertical — Niveau de maturité (lignes / « périodes »)
 
 Les lignes encodent **par où commencer** : du fondamental vers l'avancé.
 
-| Niveau | Libellé | Intention |
-|--------|---------|-----------|
-| 1 | **Fondamentaux** | À déployer en premier, peu de prérequis |
-| 2 | **Structuration** | Met de l'ordre et de la méthode |
-| 3 | **Optimisation** | Améliore et fiabilise un système déjà stable |
-| 4 | **Excellence** | Pratiques avancées / culture mature |
+| Niveau | Libellé           | Intention                                    |
+| ------ | ----------------- | -------------------------------------------- |
+| 1      | **Fondamentaux**  | À déployer en premier, peu de prérequis      |
+| 2      | **Structuration** | Met de l'ordre et de la méthode              |
+| 3      | **Optimisation**  | Améliore et fiabilise un système déjà stable |
+| 4      | **Excellence**    | Pratiques avancées / culture mature          |
 
 Tous les croisements (famille × niveau) ne sont pas remplis — les « trous » sont assumés
 (comme dans un vrai tableau périodique).
 
 ## 4. Anatomie d'un élément (gabarit de fiche)
 
-| Bloc | Contenu |
-|------|---------|
-| **En-tête** | Symbole court (`5S`, `VSM`…), nom complet, famille (couleur), n°, niveau de maturité |
-| **Essentiel** | Définition en 1 phrase + à quoi ça sert |
-| **Limites & anti-usage** | À quoi ça **ne** sert **pas**, quand ne pas l'utiliser, limites, pièges classiques |
-| **Couche TPE/PME** | Pourquoi ça compte pour une petite structure · 1er pas réaliste · exemple concret · erreur fréquente |
-| **Badge pertinence** | Impact / effort pour une petite équipe (ex. fort impact / faible effort) |
-| **Couche praticien** | Pour aller plus loin · prérequis · indicateurs de succès |
-| **Concepts liés** | Liens vers d'autres éléments (le tableau est aussi un graphe de relations) |
+| Bloc                     | Contenu                                                                                              |
+| ------------------------ | ---------------------------------------------------------------------------------------------------- |
+| **En-tête**              | Symbole court (`5S`, `VSM`…), nom complet, famille (couleur), n°, niveau de maturité                 |
+| **Essentiel**            | Définition en 1 phrase + à quoi ça sert                                                              |
+| **Limites & anti-usage** | À quoi ça **ne** sert **pas**, quand ne pas l'utiliser, limites, pièges classiques                   |
+| **Couche TPE/PME**       | Pourquoi ça compte pour une petite structure · 1er pas réaliste · exemple concret · erreur fréquente |
+| **Badge pertinence**     | Impact / effort pour une petite équipe (ex. fort impact / faible effort)                             |
+| **Couche praticien**     | Pour aller plus loin · prérequis · indicateurs de succès                                             |
+| **Concepts liés**        | Liens vers d'autres éléments (le tableau est aussi un graphe de relations)                           |
 
 ## 5. Fonctionnalités V1
 
@@ -82,6 +83,7 @@ Tous les croisements (famille × niveau) ne sont pas remplis — les « trous »
 - **Graphe de relations léger** : liens « concepts liés » entre fiches.
 
 ### Hors périmètre V1
+
 - Comptes utilisateurs, favoris, progression personnelle.
 - Multilingue (FR uniquement en V1).
 - Backend / CMS (contenu en fichiers de données versionnés).
@@ -121,6 +123,7 @@ respecte le gabarit §4. Qualité éditoriale > exhaustivité.
 ## 10. Roadmap & backlog
 
 Le détail vit dans des documents dédiés, tenus à jour :
+
 - **Roadmap** : [`ROADMAP.md`](ROADMAP.md) (V1 livrée · V1.1 consolidation · V2 aide à la
   décision · V3 personnalisation).
 - **Backlog** des tâches actionnables priorisées : [`BACKLOG.md`](BACKLOG.md).

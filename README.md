@@ -1,6 +1,6 @@
 # Lean Élémentaire — Tableau périodique du Lean & de l'excellence opérationnelle
 
-> *Le Lean, élément par élément.*
+> _Le Lean, élément par élément._
 
 **🌐 En ligne : https://adzzz-code.github.io/Lean-periodic-table-/**
 

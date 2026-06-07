@@ -30,7 +30,7 @@
 
 ## 3. Design & branding
 
-- [x] `P0` **Nom** figé : **Lean Élémentaire** — slogan *« Le Lean, élément par élément. »* (2026-06-07).
+- [x] `P0` **Nom** figé : **Lean Élémentaire** — slogan _« Le Lean, élément par élément. »_ (2026-06-07).
 - [x] `P1` **Logo + favicon** (tuile « Lé ») + **image Open Graph** (`public/og.png`, généré via `npm run og`) + balises OG/Twitter.
 - [ ] `P1` Valider la palette définitive et la cohérence des couleurs de familles.
 - [ ] `P2` Illustrations / pictos par famille.
@@ -45,10 +45,10 @@
 - [x] `P1` SEO : balises Open Graph / Twitter + image de partage (fait au branding).
 - [x] `P0` **LICENSE** ajoutée : code **MIT** + contenu éditorial **tous droits réservés** (cf. `LICENSE`).
 - [ ] `P1` SEO : **données structurées JSON-LD** (WebSite, BreadcrumbList, DefinedTerm) — cf. `AUDIT.md` §4.
-- [ ] `P1` Linter + formatage (ESLint/Prettier) en CI.
-- [ ] `P1` **Validation des données en CI** : promouvoir le contrôle d'intégrité en `npm run validate`
-      (slugs/symboles uniques, `related` existants, champs requis) et l'ajouter à `ci.yml` — cf. `AUDIT.md` §7.
-- [ ] `P1` Page 404 personnalisée + page « À propos / méthode ».
+- [x] `P1` **Linter + formatage** (ESLint flat config + Prettier) avec scripts `lint` / `format` / `format:check`, branchés en CI.
+- [x] `P1` **Validation des données en CI** : `scripts/validate-data.mjs` + `npm run validate` (slugs/symboles uniques,
+      `related` existants, champs requis), bloquant dans `ci.yml`.
+- [x] `P1` **Page 404** personnalisée. (Page « À propos / méthode » : reste à faire.)
 - [ ] `P2` Tests légers (build + cohérence des données) en CI.
 - [ ] `P2` Audit performance / Lighthouse.
 - [ ] `P2` Préparer l'i18n (structure de contenu prête pour l'EN) — sans traduire en V1.
@@ -58,8 +58,8 @@
 - [x] `P0` **Contrastes AA** corrigés : les 8 familles passent désormais (≥ 5.0 avec texte blanc).
       Teal `#0f766e`, vert `#15803d`, orange `#c2410c`, ambre `#b45309`. Cf. `AUDIT.md` §3.
 - [~] `P1` Navigation clavier (focus visibles, skip-link ✅ ; valider l'ordre au lecteur d'écran).
-- [ ] `P1` Sémantique tableau : compléter ou retirer `role="grid"` (rôles row/gridcell) +
-      `aria-label` famille sur chaque case (l'info ne doit pas passer par la couleur seule).
+- [x] `P1` Sémantique tableau : `role="grid"` incomplet retiré + `aria-label` enrichi sur chaque case
+      (nom, famille, niveau) → l'info ne passe plus par la couleur seule.
 
 ## 6. Produit & croissance
 

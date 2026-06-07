@@ -5,10 +5,10 @@ l'option par défaut (gratuite, intégrée, aucun compte externe).
 
 ## Variables d'environnement
 
-| Variable | Rôle | Défaut |
-|----------|------|--------|
-| `SITE_URL` | URL publique (sitemap, métadonnées) | `https://adzzz-code.github.io` |
-| `BASE_PATH` | Préfixe de chemin | `/` |
+| Variable    | Rôle                                | Défaut                         |
+| ----------- | ----------------------------------- | ------------------------------ |
+| `SITE_URL`  | URL publique (sitemap, métadonnées) | `https://adzzz-code.github.io` |
+| `BASE_PATH` | Préfixe de chemin                   | `/`                            |
 
 > Les liens internes utilisent `withBase()` (`src/lib/url.js`) : le site fonctionne donc à la
 > racine **comme** dans un sous-dossier, sans rien changer au code.
@@ -21,10 +21,11 @@ Workflow : `.github/workflows/deploy.yml` (build avec `BASE_PATH=/Lean-periodic-
 déploiement à chaque push sur `main`).
 
 **Étape unique à faire une seule fois (manuelle, côté GitHub) :**
+
 1. Repo → **Settings** → **Pages**.
 2. **Build and deployment → Source : GitHub Actions**.
 
-Au prochain push sur `main` (ou via *Actions → Deploy → Run workflow*), le site sera publié sur :
+Au prochain push sur `main` (ou via _Actions → Deploy → Run workflow_), le site sera publié sur :
 
 ```
 https://adzzz-code.github.io/Lean-periodic-table-/
@@ -34,6 +35,7 @@ https://adzzz-code.github.io/Lean-periodic-table-/
 > d'activer Pages — c'est attendu.
 
 ### Domaine personnalisé
+
 Avec un domaine propre servi à la racine, repasser `BASE_PATH` à `/` (modifier le `env:` du
 workflow) et ajuster `SITE_URL` + l'URL du sitemap dans `public/robots.txt`.
 
@@ -42,6 +44,7 @@ workflow) et ajuster `SITE_URL` + l'URL du sitemap dans `public/robots.txt`.
 ## Option B — Netlify
 
 Config : `netlify.toml` (build `npm run build`, publication `dist`, servi à la racine).
+
 1. Connecter le dépôt sur Netlify.
 2. Aucune config supplémentaire (`BASE_PATH` reste `/`).
 3. Renseigner `SITE_URL` avec l'URL Netlify si besoin (sitemap).
@@ -49,6 +52,7 @@ Config : `netlify.toml` (build `npm run build`, publication `dist`, servi à la 
 ## Option C — Vercel
 
 Config : `vercel.json` (framework Astro détecté).
+
 1. Importer le dépôt sur Vercel.
 2. Build et output déjà définis ; servi à la racine.
 

@@ -82,11 +82,15 @@ const effortLabel = { low: 'Faible', medium: 'Moyen', high: 'Élevé' };
           <div class="relevance">
             <div class="m">
               <span class="k">Impact</span>
-              <span class={`v dot-impact-${c.relevance.impact}`}>● {impactLabel[c.relevance.impact]}</span>
+              <span class={`v dot-impact-${c.relevance.impact}`}
+                >● {impactLabel[c.relevance.impact]}</span
+              >
             </div>
             <div class="m">
               <span class="k">Effort</span>
-              <span class={`v dot-effort-${c.relevance.effort}`}>● {effortLabel[c.relevance.effort]}</span>
+              <span class={`v dot-effort-${c.relevance.effort}`}
+                >● {effortLabel[c.relevance.effort]}</span
+              >
             </div>
           </div>
           {c.pmeStarter && <p class="starter-flag">★ Recommandé pour démarrer en TPE/PME</p>}
@@ -104,21 +108,25 @@ const effortLabel = { low: 'Faible', medium: 'Moyen', high: 'Élevé' };
           </dl>
         </section>
 
-        {c.related?.length > 0 && (
-          <section class="card">
-            <h2>Concepts liés</h2>
-            <div class="related-links">
-              {c.related.map((rs) => {
-                const rc = conceptBySlug[rs];
-                if (!rc) return null;
-                const rf = familyById[rc.family];
-                return (
-                  <a href={withBase(`/concept/${rc.slug}/`)} style={`--c:${rf.color}`}>{rc.symbol} · {rc.name}</a>
-                );
-              })}
-            </div>
-          </section>
-        )}
+        {
+          c.related?.length > 0 && (
+            <section class="card">
+              <h2>Concepts liés</h2>
+              <div class="related-links">
+                {c.related.map((rs) => {
+                  const rc = conceptBySlug[rs];
+                  if (!rc) return null;
+                  const rf = familyById[rc.family];
+                  return (
+                    <a href={withBase(`/concept/${rc.slug}/`)} style={`--c:${rf.color}`}>
+                      {rc.symbol} · {rc.name}
+                    </a>
+                  );
+                })}
+              </div>
+            </section>
+          )
+        }
       </div>
 
       <a class="back-link" href={withBase('/')}>← Retour au tableau</a>
