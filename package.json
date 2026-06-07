@@ -1,0 +1,16 @@
+{
+  "name": "lean-atelier",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Tableau périodique du Lean & de l'excellence opérationnelle, adapté aux TPE/PME.",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.7.0"
+  }
+}
