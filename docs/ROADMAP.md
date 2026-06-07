@@ -42,7 +42,8 @@ La progression suit la logique du produit : **d'abord une référence crédible 
       (`/diagnostic/`, 12 problèmes en langage courant → concepts ordonnés + « pourquoi »),
       mis en avant en tête d'accueil et en navigation.
 - [ ] **Vue graphe** des relations entre concepts (prérequis / concepts liés).
-- [ ] Tri / mise en avant par pertinence TPE/PME (impact vs effort).
+- [x] Mise en avant par pertinence : **page Pépites** (`/pepites/`) — fort impact / faible effort,
+      orientée **gain de temps** (objection n°1 des petites structures : « pas le temps »).
 - [ ] Élargissement du contenu (objectif ~60 concepts) + glossaire.
 - [ ] Fiches enrichies : check-lists de démarrage téléchargeables, mini-cas.
 - [ ] Élargir la couverture des problèmes (et affiner les recommandations).
