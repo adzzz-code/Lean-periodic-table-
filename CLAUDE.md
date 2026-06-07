@@ -43,12 +43,12 @@ quand un outil ne sert à rien et ses limites — anti « cargo cult »).
   séparées visuellement).
 - ❌ Casser la métaphore : colonnes = familles, lignes = maturité.
 
-## Roadmap
+## Roadmap & backlog
 
-- **V1 (présent)** : tableau interactif + ~40 fiches + mode TPE/PME.
-- **V2** (envisagé) : parcours de diagnostic guidé (« quel problème → quels concepts »),
-  graphe de relations enrichi, plus de concepts.
-- **V3+** : comptes/progression, exports, internationalisation éventuelle.
+Documents tenus à jour :
+- **Roadmap** : `docs/ROADMAP.md` (V1 livrée · V1.1 consolidation/mise en ligne · V2 aide à la
+  décision · V3 personnalisation).
+- **Backlog** priorisé (P0/P1/P2) : `docs/BACKLOG.md`.
 
 ## Style attendu
 

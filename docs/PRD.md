@@ -118,8 +118,9 @@ respecte le gabarit §4. Qualité éditoriale > exhaustivité.
 7. Fiche : ajout d'un bloc **Limites & anti-usage**.
 8. Stack : **Astro**, JS, contenu en données versionnées.
 
-## 10. Roadmap indicative
+## 10. Roadmap & backlog
 
-- **V1 (présent)** : tableau interactif + ~38 fiches + mode TPE/PME.
-- **V2** : parcours de diagnostic guidé, graphe de relations enrichi, plus de concepts.
-- **V3+** : comptes / progression, exports, éventuelle internationalisation.
+Le détail vit dans des documents dédiés, tenus à jour :
+- **Roadmap** : [`ROADMAP.md`](ROADMAP.md) (V1 livrée · V1.1 consolidation · V2 aide à la
+  décision · V3 personnalisation).
+- **Backlog** des tâches actionnables priorisées : [`BACKLOG.md`](BACKLOG.md).
