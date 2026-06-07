@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { families, levels } from '../data/families.js';
 import { concepts } from '../data/concepts.js';
+import { problems } from '../data/problems.js';
 import { withBase } from '../lib/url.js';
 
 // Index { level -> familyId -> [concepts] } pour la matrice.
@@ -9,6 +10,8 @@ const cellOf = (level, famId) =>
   concepts
     .filter((c) => c.level === level && c.family === famId)
     .sort((a, b) => a.number - b.number);
+
+const featured = problems.filter((p) => p.featured);
 ---
 
 <Base title={null}>
@@ -20,11 +23,38 @@ const cellOf = (level, famId) =>
         appliqués dans une TPE ou une petite équipe, avec leurs limites et leurs vrais premiers pas.
       </p>
       <p>
-        <strong>Colonnes</strong> = familles de concepts · <strong>Lignes</strong> = niveau de maturité
-        (commencez en haut). Cliquez une case pour ouvrir la fiche.
+        Deux façons d'entrer : <strong>partez de votre problème</strong> (recommandé si vous débutez),
+        ou <strong>explorez le tableau</strong> par famille et niveau de maturité.
       </p>
     </div>
   </section>
+
+  <section class="start-here">
+    <div class="wrap">
+      <div class="start-head">
+        <h2>Vous ne connaissez pas le Lean ? Partez de votre problème</h2>
+        <a class="start-all" href={withBase('/diagnostic/')}>Tous les problèmes →</a>
+      </div>
+      <div class="start-grid">
+        {
+          featured.map((p) => (
+            <a class="start-card" href={withBase(`/diagnostic/${p.slug}/`)}>
+              <span class="start-q">« {p.problem} »</span>
+              <span class="start-meta">{p.solutions.length} méthodes →</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap table-intro">
+    <h2>Ou explorez le tableau complet</h2>
+    <p>
+      <strong>Colonnes</strong> = familles de concepts · <strong>Lignes</strong> = niveau de maturité
+      (commencez en haut). Cliquez une case pour ouvrir la fiche.
+    </p>
+  </div>
 
   <div class="controls">
     <div class="wrap">

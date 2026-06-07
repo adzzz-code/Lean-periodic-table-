@@ -1,0 +1,195 @@
+---
+import Base from '../../layouts/Base.astro';
+import { problems, problemBySlug } from '../../data/problems.js';
+import { conceptBySlug } from '../../data/concepts.js';
+import { familyById, levels } from '../../data/families.js';
+import { withBase } from '../../lib/url.js';
+
+export function getStaticPaths() {
+  return problems.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const { slug } = Astro.params;
+const p = problemBySlug[slug];
+
+const home = new URL(withBase('/'), Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tableau', item: home },
+    {
+      '@type': 'ListItem',
+      position: 2,
+      name: 'Par où commencer',
+      item: new URL(withBase('/diagnostic/'), Astro.site).href,
+    },
+    { '@type': 'ListItem', position: 3, name: p.problem, item: canonical },
+  ],
+};
+---
+
+<Base
+  title={p.problem}
+  description={`${p.lead} Méthodes recommandées et par où commencer.`}
+  jsonld={[breadcrumb]}
+>
+  <article class="diag">
+    <div class="wrap">
+      <p class="breadcrumb">
+        <a href={withBase('/')}>Tableau</a> ›
+        <a href={withBase('/diagnostic/')}>Par où commencer</a> › Votre problème
+      </p>
+
+      <h1>« {p.problem} »</h1>
+      <p class="lead">{p.lead}</p>
+
+      <p class="howto">
+        Voici les méthodes utiles, de la plus accessible à la plus avancée.
+        <strong>Commencez par la première.</strong>
+      </p>
+
+      <ol class="solution-list">
+        {
+          p.solutions.map((s, i) => {
+            const c = conceptBySlug[s.slug];
+            const fam = familyById[c.family];
+            const lvl = levels.find((l) => l.level === c.level);
+            return (
+              <li class="solution">
+                <a
+                  class="sol-badge"
+                  href={withBase(`/concept/${c.slug}/`)}
+                  style={`--c:${fam.color}`}
+                >
+                  <span class="sym">{c.symbol}</span>
+                </a>
+                <div class="sol-body">
+                  <a class="sol-name" href={withBase(`/concept/${c.slug}/`)}>
+                    {i === 0 && <span class="first">Commencez ici</span>}
+                    {c.name}
+                  </a>
+                  <p class="sol-why">{s.why}</p>
+                  <p class="sol-meta">
+                    <span class="tag fam" style={`background:${fam.color}`}>
+                      {fam.name}
+                    </span>
+                    <span class="tag">
+                      Niveau {c.level} — {lvl.name}
+                    </span>
+                  </p>
+                </div>
+              </li>
+            );
+          })
+        }
+      </ol>
+
+      <div class="diag-nav">
+        <a class="back-link" href={withBase('/diagnostic/')}>← Autres problèmes</a>
+        <a class="back-link" href={withBase('/')}>Voir le tableau complet →</a>
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .diag {
+    padding: 22px 0 60px;
+  }
+  .diag h1 {
+    font-size: clamp(1.5rem, 3.5vw, 2.1rem);
+    letter-spacing: -0.02em;
+    margin: 8px 0 10px;
+    max-width: 24ch;
+  }
+  .diag .lead {
+    font-size: 1.1rem;
+    color: var(--ink);
+    max-width: 66ch;
+  }
+  .howto {
+    color: var(--ink-soft);
+    margin: 6px 0 18px;
+  }
+  .solution-list {
+    list-style: none;
+    counter-reset: sol;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .solution {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+  }
+  .sol-badge {
+    --c: #888;
+    flex: 0 0 auto;
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    text-decoration: none;
+  }
+  .sol-badge .sym {
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+  .sol-body {
+    flex: 1;
+  }
+  .sol-name {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .sol-name:hover {
+    color: var(--brand);
+  }
+  .first {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: #fff;
+    background: var(--brand);
+    border-radius: 999px;
+    padding: 2px 8px;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .sol-why {
+    color: var(--ink-soft);
+    margin: 4px 0 8px;
+  }
+  .sol-meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 0;
+  }
+  .diag-nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+  }
+</style>

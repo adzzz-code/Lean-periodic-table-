@@ -22,13 +22,17 @@ quand un outil ne sert à rien et ses limites — anti « cargo cult »).
 - **Colonnes = 8 familles** (cf. `src/data/families.js`). **Lignes = 4 niveaux de maturité**
   (Fondamentaux → Structuration → Optimisation → Excellence). « Trous » assumés.
 - Double public : **TPE/PME (prioritaire)** + couche praticiens sur chaque fiche.
+- **Entrée prioritaire par le problème** (la cible ne connaît pas le Lean) : `/diagnostic/`
+  (`src/data/problems.js`) mappe une douleur en langage courant → concepts recommandés. Mise en
+  avant dès l'accueil. Le tableau reste la signature/exploration.
 - Fiche = gabarit fixe : Essentiel · **Limites & anti-usage** · couche TPE/PME · badge
   pertinence (impact/effort) · couche praticien · concepts liés · **sources**. Détail : `docs/PRD.md` §4.
 
 ## Conventions
 
-- **Source de vérité contenu** : `src/data/concepts.js` (+ `families.js`, `sources.js`). Ne pas
-  dupliquer ailleurs. Ajouter un concept = une entrée respectant le gabarit + **≥ 1 source**.
+- **Source de vérité contenu** : `src/data/concepts.js` (+ `families.js`, `sources.js`,
+  `problems.js`). Ne pas dupliquer ailleurs. Ajouter un concept = une entrée respectant le
+  gabarit + **≥ 1 source**. Les solutions d'un problème pointent des slugs de concepts existants.
 - **Qualité** : `npm run validate` (intégrité + sources), `npm run lint`, `npm run format` — vérifiés en CI.
 - **Stack** : Astro + JS + CSS natif. Pas de TypeScript ni framework CSS lourd sans demande.
 - **Langue** : FR uniquement en V1.

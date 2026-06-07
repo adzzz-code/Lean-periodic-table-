@@ -4,6 +4,7 @@
 import { concepts } from '../src/data/concepts.js';
 import { families, levels } from '../src/data/families.js';
 import { sources } from '../src/data/sources.js';
+import { problems } from '../src/data/problems.js';
 
 const famIds = new Set(families.map((f) => f.id));
 const lvls = new Set(levels.map((l) => l.level));
@@ -50,6 +51,18 @@ for (const c of concepts) {
 // Toute clé de sources doit correspondre à un concept existant.
 for (const key of Object.keys(sources))
   if (!setSlugs.has(key)) issues.push(`sources.js : clé orpheline « ${key} » (slug inconnu)`);
+
+// Problèmes (entrée par le problème) : slugs uniques, ≥ 1 solution, concepts existants.
+const dupProblems = dup(problems.map((p) => p.slug));
+if (dupProblems.length) issues.push(`problems.js : slugs dupliqués : ${dupProblems.join(', ')}`);
+for (const p of problems) {
+  const pid = p.slug || '(sans slug)';
+  if (!p.problem) issues.push(`problème ${pid} : champ « problem » manquant`);
+  if (!Array.isArray(p.solutions) || p.solutions.length === 0)
+    issues.push(`problème ${pid} : aucune solution`);
+  for (const s of p.solutions || [])
+    if (!setSlugs.has(s.slug)) issues.push(`problème ${pid} : concept inconnu « ${s.slug} »`);
+}
 
 if (issues.length) {
   console.error(`❌ ${issues.length} problème(s) d'intégrité :\n- ${issues.join('\n- ')}`);
