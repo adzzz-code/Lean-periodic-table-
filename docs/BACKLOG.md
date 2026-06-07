@@ -22,14 +22,15 @@
 ## 2. UX & interactivité
 
 - [ ] `P1` Tri / mise en avant par **pertinence TPE/PME** (impact ↑ / effort ↓).
-- [ ] `P1` Recherche tolérante aux fautes (fuzzy) et aux accents.
+- [x] `P1` Recherche **insensible aux accents** + **multi-mots** (tous les termes doivent matcher).
+      _Fuzzy/tolérance aux fautes : reste à faire._
 - [ ] `P1` État de filtre persistant dans l'URL (partage d'une vue filtrée).
 - [x] **Parcours de diagnostic guidé** « quel problème → quels concepts » (`/diagnostic/`) —
       **entrée prioritaire** pour la cible qui ne connaît pas le Lean ; en tête d'accueil + nav.
 - [ ] `P2` Élargir/affiner les problèmes du diagnostic (couverture, recommandations).
 - [ ] `P2` **Vue graphe** des concepts liés (prérequis / relations).
 - [ ] `P2` Aperçu rapide d'une fiche en survol / panneau latéral (sans changer de page).
-- [ ] `P2` Filtre par niveau de maturité (en plus des familles).
+- [x] `P2` **Filtre par niveau de maturité** (chips Niveau 1-4, en plus des familles).
 
 ## 3. Design & branding
 
