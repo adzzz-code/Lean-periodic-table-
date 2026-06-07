@@ -27,7 +27,9 @@ quand un outil ne sert à rien et ses limites — anti « cargo cult »).
   avant dès l'accueil. Le tableau reste la signature/exploration.
 - **Pépites** (`/pepites/`, `src/data/quickwins.js`) : objection n°1 = « pas le temps », donc on
   met en avant le **gain de temps** (fort impact / faible effort) + une **estimation indicative**
-  (`estimate`) présentée honnêtement comme ordre de grandeur. Argument de valeur central.
+  (`estimate`) présentée honnêtement comme ordre de grandeur. **Calculateur** : coût horaire →
+  gain €/mois·an (récurrent, basé sur `hoursPerWeek`). Argument de valeur central.
+- **Vue graphe** (`/graphe/`) : SVG radial des relations « concepts liés », surbrillance au survol.
 - Fiche = gabarit fixe : Essentiel · **Limites & anti-usage** · couche TPE/PME · badge
   pertinence (impact/effort) · couche praticien · concepts liés · **sources**. Détail : `docs/PRD.md` §4.
 

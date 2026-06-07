@@ -41,7 +41,8 @@ La progression suit la logique du produit : **d'abord une référence crédible 
 - [x] **Parcours de diagnostic guidé** : « quel est votre problème → quels concepts pour vous »
       (`/diagnostic/`, 12 problèmes en langage courant → concepts ordonnés + « pourquoi »),
       mis en avant en tête d'accueil et en navigation.
-- [ ] **Vue graphe** des relations entre concepts (prérequis / concepts liés).
+- [x] **Vue graphe** des relations entre concepts (`/graphe/`) — SVG radial, surbrillance au survol.
+- [x] **Calculateur de gain** (sur `/pepites/`) : coût horaire → €/mois et €/an (gain récurrent annualisé).
 - [x] Mise en avant par pertinence : **page Pépites** (`/pepites/`) — fort impact / faible effort,
       orientée **gain de temps** (objection n°1 des petites structures : « pas le temps »),
       avec **estimation indicative** du temps gagné par pépite.
