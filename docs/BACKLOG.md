@@ -43,7 +43,7 @@
 - [x] `P0` Vérification de **build en CI** sur push/PR (`.github/workflows/ci.yml`).
 - [x] `P0` SEO : `sitemap-index.xml` (intégration `@astrojs/sitemap`) + `robots.txt`.
 - [x] `P1` SEO : balises Open Graph / Twitter + image de partage (fait au branding).
-- [ ] `P0` **LICENSE** à ajouter (décision owner : code + contenu) — cf. `AUDIT.md` §6.
+- [x] `P0` **LICENSE** ajoutée : code **MIT** + contenu éditorial **tous droits réservés** (cf. `LICENSE`).
 - [ ] `P1` SEO : **données structurées JSON-LD** (WebSite, BreadcrumbList, DefinedTerm) — cf. `AUDIT.md` §4.
 - [ ] `P1` Linter + formatage (ESLint/Prettier) en CI.
 - [ ] `P1` **Validation des données en CI** : promouvoir le contrôle d'intégrité en `npm run validate`
@@ -55,9 +55,8 @@
 
 ## 5. Accessibilité
 
-- [ ] `P0` **Contrastes AA** : corriger les 4 familles en échec pour l'usage « texte blanc sur fond »
-      — Mesure `#ca8a04` (2.94 ❌), Stabilité `#16a34a` (3.30), Résolution `#ea580c` (3.56),
-      Client `#0d9488` (3.74). Cf. `AUDIT.md` §3.
+- [x] `P0` **Contrastes AA** corrigés : les 8 familles passent désormais (≥ 5.0 avec texte blanc).
+      Teal `#0f766e`, vert `#15803d`, orange `#c2410c`, ambre `#b45309`. Cf. `AUDIT.md` §3.
 - [~] `P1` Navigation clavier (focus visibles, skip-link ✅ ; valider l'ordre au lecteur d'écran).
 - [ ] `P1` Sémantique tableau : compléter ou retirer `role="grid"` (rôles row/gridcell) +
       `aria-label` famille sur chaque case (l'info ne doit pas passer par la couleur seule).

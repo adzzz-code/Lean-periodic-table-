@@ -1,0 +1,46 @@
+Lean Élémentaire — Licence
+
+Ce dépôt combine deux régimes de licence distincts.
+
+────────────────────────────────────────────────────────────────────────
+1. CODE SOURCE  —  Licence MIT
+────────────────────────────────────────────────────────────────────────
+S'applique au code (fichiers .astro, .js, .mjs, configuration, styles,
+scripts de build), à l'exclusion du contenu éditorial décrit au §2.
+
+MIT License
+
+Copyright (c) 2026 Adel — Lean Élémentaire
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+────────────────────────────────────────────────────────────────────────
+2. CONTENU ÉDITORIAL  —  Tous droits réservés
+────────────────────────────────────────────────────────────────────────
+S'applique aux textes et au contenu éditorial : descriptions des concepts et
+toutes les chaînes de texte de `src/data/` (notamment `concepts.js`), la
+documentation de `docs/`, les éléments de marque (nom « Lean Élémentaire »,
+logo, favicon, image Open Graph).
+
+© 2026 Adel — Lean Élémentaire. Tous droits réservés.
+
+Ce contenu ne peut être reproduit, republié, redistribué ni utilisé pour créer
+des œuvres dérivées, en tout ou partie, sans autorisation écrite préalable du
+titulaire des droits. La consultation du dépôt et la contribution au projet
+restent bien entendu permises.

@@ -14,7 +14,7 @@ export const families = [
     id: 'client-valeur',
     name: 'Voix du client & valeur',
     short: 'Client & valeur',
-    color: '#0d9488',
+    color: '#0f766e',
     description:
       'Comprendre ce que le client valorise réellement et débusquer ce qui ne crée pas de valeur.',
   },
@@ -29,21 +29,21 @@ export const families = [
     id: 'stabilite-qualite',
     name: 'Stabilité & qualité',
     short: 'Stabilité & qualité',
-    color: '#16a34a',
+    color: '#15803d',
     description: 'Rendre les processus fiables, propres et capables de produire bon du premier coup.',
   },
   {
     id: 'resolution',
     name: 'Résolution de problèmes',
     short: 'Résolution',
-    color: '#ea580c',
+    color: '#c2410c',
     description: "Aller à la cause racine plutôt que de traiter les symptômes.",
   },
   {
     id: 'mesure',
     name: 'Mesure & maîtrise statistique',
     short: 'Mesure',
-    color: '#ca8a04',
+    color: '#b45309',
     description: 'Décider sur des faits chiffrés et distinguer le signal du bruit.',
   },
   {
