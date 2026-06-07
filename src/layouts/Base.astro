@@ -2,10 +2,15 @@
 import '../styles/global.css';
 import { withBase } from '../lib/url.js';
 const { title, description } = Astro.props;
-const fullTitle = title ? `${title} — Lean Atelier` : 'Lean Atelier — Tableau périodique du Lean';
+const SITE_NAME = 'Lean Élémentaire';
+const fullTitle = title ? `${title} — ${SITE_NAME}` : `${SITE_NAME} — Le tableau périodique du Lean`;
 const desc =
   description ??
-  "Le tableau périodique du Lean et de l'excellence opérationnelle, adapté aux TPE/PME.";
+  "Le tableau périodique du Lean et de l'excellence opérationnelle, adapté aux TPE/PME. Le Lean, élément par élément.";
+
+// URLs absolues pour le SEO / le partage (Astro.site défini dans astro.config.mjs).
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(withBase('/og.png'), Astro.site).href;
 ---
 
 <!doctype html>
@@ -14,14 +19,42 @@ const desc =
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={desc} />
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+    <link rel="canonical" href={canonical} />
     <title>{fullTitle}</title>
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={desc} />
+    <meta name="twitter:image" content={ogImage} />
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
     <header class="site-header">
       <div class="wrap">
-        <a class="brand" href={withBase('/')}>Lean<span>Atelier</span></a>
-        <span class="tagline">Le tableau périodique du Lean & de l'excellence opérationnelle</span>
+        <a class="brand" href={withBase('/')} aria-label={`${SITE_NAME} — accueil`}>
+          <svg class="brand-mark" width="34" height="34" viewBox="0 0 34 34" aria-hidden="true">
+            <rect x="1" y="1" width="32" height="32" rx="7" fill="url(#bg)" />
+            <text x="6" y="11" font-size="6" fill="#cfe6f5" font-family="system-ui, sans-serif">1</text>
+            <text x="17" y="24" font-size="15" font-weight="800" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif">Lé</text>
+            <defs>
+              <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#1668a0" />
+                <stop offset="1" stop-color="#1b8a8a" />
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="brand-word">Lean<span>Élémentaire</span></span>
+        </a>
+        <span class="tagline">Le Lean, élément par élément — pour les TPE & PME</span>
       </div>
     </header>
     <main id="contenu">
@@ -29,7 +62,7 @@ const desc =
     </main>
     <footer class="site-footer">
       <div class="wrap">
-        Lean Atelier — outils & méthodes des grandes entreprises, adaptés aux TPE/PME. · V1 · FR
+        {SITE_NAME} — outils & méthodes des grandes entreprises, adaptés aux TPE/PME. · V1 · FR
       </div>
     </footer>
   </body>

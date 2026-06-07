@@ -1,6 +1,6 @@
 # PRD — Tableau périodique du Lean & de l'Excellence Opérationnelle
 
-> Nom de travail : **Lean Atelier** (branding définitif à figer ultérieurement).
+> Nom retenu : **Lean Élémentaire** — *Le Lean, élément par élément.* (figé le 2026-06-07).
 > Statut : V1 — cadrage validé le 2026-06-07. Document de référence, à amender par versions.
 
 ## 1. Vision

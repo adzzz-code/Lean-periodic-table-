@@ -41,8 +41,10 @@ a { color: var(--brand); }
   background: var(--surface);
 }
 .site-header .wrap { display: flex; align-items: baseline; gap: 16px; padding-block: 14px; flex-wrap: wrap; }
-.brand { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
-.brand span { color: var(--brand); }
+.brand { display: inline-flex; align-items: center; gap: 9px; text-decoration: none; }
+.brand-mark { flex: 0 0 auto; border-radius: 7px; box-shadow: var(--shadow); }
+.brand-word { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.02em; color: var(--ink); }
+.brand-word span { color: var(--brand); }
 .tagline { color: var(--ink-soft); font-size: 0.9rem; }
 
 /* ── Hero ── */
