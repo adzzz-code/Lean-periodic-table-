@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { withBase } from '../lib/url.js';
 const { title, description } = Astro.props;
 const fullTitle = title ? `${title} — Lean Atelier` : 'Lean Atelier — Tableau périodique du Lean';
 const desc =
@@ -19,7 +20,7 @@ const desc =
     <a class="skip-link" href="#contenu">Aller au contenu</a>
     <header class="site-header">
       <div class="wrap">
-        <a class="brand" href="/">Lean<span>Atelier</span></a>
+        <a class="brand" href={withBase('/')}>Lean<span>Atelier</span></a>
         <span class="tagline">Le tableau périodique du Lean & de l'excellence opérationnelle</span>
       </div>
     </header>

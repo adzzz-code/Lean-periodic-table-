@@ -1,0 +1,19 @@
+name: CI
+
+# Vérifie que le site construit bien sur chaque push et chaque PR.
+on:
+  push:
+    branches-ignore: [main] # main est couvert par le workflow de déploiement
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run build
