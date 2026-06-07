@@ -4,7 +4,8 @@
 
 ## Vision & Owner
 
-**Tableau périodique du Lean & de l'excellence opérationnelle** (nom de travail : **Lean Atelier**).
+**Tableau périodique du Lean & de l'excellence opérationnelle** — **Lean Élémentaire** (*Le Lean, élément par élément.*).
+En ligne : https://adzzz-code.github.io/Lean-periodic-table-/
 Objectif : rendre les outils et méthodes des grandes entreprises **accessibles aux TPE/PME et
 entrepreneurs**, adaptés à leur contexte, avec une posture éditoriale **honnête** (on dit aussi
 quand un outil ne sert à rien et ses limites — anti « cargo cult »).

@@ -1,4 +1,6 @@
-# Lean Atelier — Tableau périodique du Lean & de l'excellence opérationnelle
+# Lean Élémentaire — Tableau périodique du Lean & de l'excellence opérationnelle
+
+> *Le Lean, élément par élément.*
 
 **🌐 En ligne : https://adzzz-code.github.io/Lean-periodic-table-/**
 
@@ -6,7 +8,7 @@ Un **tableau périodique des concepts Lean et d'excellence opérationnelle**, co
 les outils et méthodes des grandes entreprises **accessibles aux TPE/PME et aux entrepreneurs**,
 adaptés à leur contexte (moyens limités, petites équipes), avec leurs **limites** assumées.
 
-> Nom de travail : **Lean Atelier** (branding définitif à figer ultérieurement).
+> Nom retenu : **Lean Élémentaire** (figé le 2026-06-07).
 
 ## Concept
 

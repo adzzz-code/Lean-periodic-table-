@@ -1,4 +1,4 @@
-# BACKLOG — Lean Atelier
+# BACKLOG — Lean Élémentaire
 
 > Liste de tâches actionnables, regroupées par thème et priorisées.
 > Roadmap d'ensemble : [`ROADMAP.md`](ROADMAP.md). Cadrage : [`PRD.md`](PRD.md).
@@ -30,8 +30,8 @@
 
 ## 3. Design & branding
 
-- [ ] `P0` Figer le **nom définitif** (actuellement « Lean Atelier ») + slogan.
-- [ ] `P1` Logo + favicon + image Open Graph.
+- [x] `P0` **Nom** figé : **Lean Élémentaire** — slogan *« Le Lean, élément par élément. »* (2026-06-07).
+- [x] `P1` **Logo + favicon** (tuile « Lé ») + **image Open Graph** (`public/og.png`, généré via `npm run og`) + balises OG/Twitter.
 - [ ] `P1` Valider la palette définitive et la cohérence des couleurs de familles.
 - [ ] `P2` Illustrations / pictos par famille.
 - [ ] `P2` Mode sombre.

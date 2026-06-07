@@ -1,5 +1,5 @@
 {
-  "name": "lean-atelier",
+  "name": "lean-elementaire",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -8,10 +8,14 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "og": "node scripts/generate-og.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
     "astro": "^5.7.0"
+  },
+  "devDependencies": {
+    "sharp": "^0.34.5"
   }
 }

@@ -1,4 +1,4 @@
-# Déploiement — Lean Atelier
+# Déploiement — Lean Élémentaire
 
 Le site est statique (Astro). Trois options sont prêtes à l'emploi. **GitHub Pages** est
 l'option par défaut (gratuite, intégrée, aucun compte externe).

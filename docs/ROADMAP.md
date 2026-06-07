@@ -1,4 +1,4 @@
-# ROADMAP — Lean Atelier
+# ROADMAP — Lean Élémentaire
 
 > Vision : rendre les outils & méthodes des grandes entreprises accessibles aux TPE/PME.
 > Source de cadrage : [`PRD.md`](PRD.md). Tâches détaillées : [`BACKLOG.md`](BACKLOG.md).
