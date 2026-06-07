@@ -26,7 +26,8 @@ quand un outil ne sert à rien et ses limites — anti « cargo cult »).
   (`src/data/problems.js`) mappe une douleur en langage courant → concepts recommandés. Mise en
   avant dès l'accueil. Le tableau reste la signature/exploration.
 - **Pépites** (`/pepites/`, `src/data/quickwins.js`) : objection n°1 = « pas le temps », donc on
-  met en avant le **gain de temps** (fort impact / faible effort). Argument de valeur central.
+  met en avant le **gain de temps** (fort impact / faible effort) + une **estimation indicative**
+  (`estimate`) présentée honnêtement comme ordre de grandeur. Argument de valeur central.
 - Fiche = gabarit fixe : Essentiel · **Limites & anti-usage** · couche TPE/PME · badge
   pertinence (impact/effort) · couche praticien · concepts liés · **sources**. Détail : `docs/PRD.md` §4.
 

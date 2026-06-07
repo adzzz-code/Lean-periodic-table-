@@ -73,6 +73,7 @@ for (const q of quickwins) {
     continue;
   }
   if (!q.gain) issues.push(`pépite ${q.slug} : « gain » manquant`);
+  if (!q.estimate) issues.push(`pépite ${q.slug} : « estimate » manquant`);
   if (c.relevance?.impact !== 'high' || c.relevance?.effort !== 'low')
     issues.push(
       `pépite ${q.slug} : doit être fort impact + faible effort (or ${c.relevance?.impact}/${c.relevance?.effort})`,

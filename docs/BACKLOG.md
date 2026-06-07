@@ -23,6 +23,7 @@
 
 - [x] `P1` **Pépites** : mise en avant des concepts à fort impact / faible effort, page dédiée
       `/pepites/` orientée **gain de temps** (`src/data/quickwins.js`) — réponse à l'objection « pas le temps ».
+      Avec **estimation indicative du temps gagné** par pépite (`estimate`, présentée honnêtement comme ordre de grandeur).
 - [x] `P1` Recherche **insensible aux accents** + **multi-mots** (tous les termes doivent matcher).
       _Fuzzy/tolérance aux fautes : reste à faire._
 - [ ] `P1` État de filtre persistant dans l'URL (partage d'une vue filtrée).

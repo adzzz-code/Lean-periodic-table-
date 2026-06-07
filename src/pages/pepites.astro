@@ -49,12 +49,15 @@ const breadcrumb = {
                   <span class="sym">{c.symbol}</span>
                 </a>
                 <div class="qw-body">
-                  <a class="qw-name" href={withBase(`/concept/${c.slug}/`)}>
-                    {c.name}
-                  </a>
-                  <p class="qw-gain">
-                    <span class="qw-clock">⏱</span> {q.gain}
-                  </p>
+                  <div class="qw-top">
+                    <a class="qw-name" href={withBase(`/concept/${c.slug}/`)}>
+                      {c.name}
+                    </a>
+                    <span class="qw-est" title="Estimation indicative">
+                      ⏱ {q.estimate}*
+                    </span>
+                  </div>
+                  <p class="qw-gain">{q.gain}</p>
                   <p class="qw-meta">
                     <span class="tag fam" style={`background:${fam.color}`}>
                       {fam.name}
@@ -67,6 +70,12 @@ const breadcrumb = {
           })
         }
       </ol>
+
+      <p class="pepites-note">
+        * Estimations indicatives, en ordre de grandeur. Le gain réel dépend de votre activité et de
+        votre point de départ — l’objectif est de montrer que ces méthodes <em>libèrent</em> du temps,
+        pas de promettre un chiffre exact.
+      </p>
 
       <p class="pepites-foot">
         Vous avez un besoin précis ? <a href={withBase('/diagnostic/')}>Partez de votre problème</a>
@@ -155,13 +164,27 @@ const breadcrumb = {
   .qw-name:hover {
     color: var(--brand);
   }
+  .qw-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .qw-est {
+    flex: 0 0 auto;
+    font-weight: 800;
+    font-size: 0.82rem;
+    color: #15803d;
+    background: #e8f4ee;
+    border: 1px solid #bfe3cd;
+    border-radius: 999px;
+    padding: 2px 10px;
+    white-space: nowrap;
+  }
   .qw-gain {
     margin: 4px 0 8px;
     color: var(--ink);
-  }
-  .qw-clock {
-    color: var(--brand);
-    font-weight: 700;
   }
   .qw-meta {
     display: flex;
@@ -174,8 +197,15 @@ const breadcrumb = {
     color: #15803d;
     border-color: #bfe3cd;
   }
+  .pepites-note {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+    font-style: italic;
+    margin: 18px 0 0;
+    max-width: 70ch;
+  }
   .pepites-foot {
     color: var(--ink-soft);
-    margin-top: 28px;
+    margin-top: 18px;
   }
 </style>
