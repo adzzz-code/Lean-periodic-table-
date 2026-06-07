@@ -74,6 +74,8 @@ for (const q of quickwins) {
   }
   if (!q.gain) issues.push(`pépite ${q.slug} : « gain » manquant`);
   if (!q.estimate) issues.push(`pépite ${q.slug} : « estimate » manquant`);
+  if (typeof q.hoursPerWeek !== 'number' || q.hoursPerWeek <= 0)
+    issues.push(`pépite ${q.slug} : « hoursPerWeek » doit être un nombre > 0`);
   if (c.relevance?.impact !== 'high' || c.relevance?.effort !== 'low')
     issues.push(
       `pépite ${q.slug} : doit être fort impact + faible effort (or ${c.relevance?.impact}/${c.relevance?.effort})`,

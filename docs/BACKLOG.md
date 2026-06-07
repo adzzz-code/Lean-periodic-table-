@@ -24,13 +24,15 @@
 - [x] `P1` **Pépites** : mise en avant des concepts à fort impact / faible effort, page dédiée
       `/pepites/` orientée **gain de temps** (`src/data/quickwins.js`) — réponse à l'objection « pas le temps ».
       Avec **estimation indicative du temps gagné** par pépite (`estimate`, présentée honnêtement comme ordre de grandeur).
+- [x] `P1` **Calculateur de gain** : saisie du coût horaire → gains €/mois et €/an, par pépite et au total
+      (le temps gagné est **récurrent** → annualisé). Basé sur `hoursPerWeek`.
 - [x] `P1` Recherche **insensible aux accents** + **multi-mots** (tous les termes doivent matcher).
       _Fuzzy/tolérance aux fautes : reste à faire._
 - [ ] `P1` État de filtre persistant dans l'URL (partage d'une vue filtrée).
 - [x] **Parcours de diagnostic guidé** « quel problème → quels concepts » (`/diagnostic/`) —
       **entrée prioritaire** pour la cible qui ne connaît pas le Lean ; en tête d'accueil + nav.
 - [ ] `P2` Élargir/affiner les problèmes du diagnostic (couverture, recommandations).
-- [ ] `P2` **Vue graphe** des concepts liés (prérequis / relations).
+- [x] `P2` **Vue graphe** des concepts liés (`/graphe/`) — SVG radial par famille, surbrillance des relations au survol.
 - [ ] `P2` Aperçu rapide d'une fiche en survol / panneau latéral (sans changer de page).
 - [x] `P2` **Filtre par niveau de maturité** (chips Niveau 1-4, en plus des familles).
 

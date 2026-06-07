@@ -33,6 +33,25 @@ const breadcrumb = {
         <strong>une</strong>, cette semaine.
       </p>
 
+      <section class="calc" aria-label="Calculateur de gain">
+        <div class="calc-row">
+          <label for="rate">Votre coût horaire</label>
+          <span class="calc-input">
+            <input id="rate" type="number" value="35" min="0" step="5" inputmode="numeric" />
+            <span>€/h</span>
+          </span>
+          <span class="calc-hint">(salaire chargé, ou ce que vaut votre heure)</span>
+        </div>
+        <p class="calc-out">
+          En adoptant ces pépites, vous pourriez libérer <strong id="tot-h">0</strong> h/semaine — soit
+          <strong id="tot-month">0 €</strong>/mois, <strong id="tot-year">0 €</strong>/an.
+        </p>
+        <p class="calc-why">
+          Un gain de temps n’est pas ponctuel : il <strong>revient chaque semaine</strong>. C’est
+          pourquoi le cumul annuel surprend autant.
+        </p>
+      </section>
+
       <ol class="qw-list">
         {
           quickwins.map((q, i) => {
@@ -53,8 +72,11 @@ const breadcrumb = {
                     <a class="qw-name" href={withBase(`/concept/${c.slug}/`)}>
                       {c.name}
                     </a>
-                    <span class="qw-est" title="Estimation indicative">
-                      ⏱ {q.estimate}*
+                    <span class="qw-badges">
+                      <span class="qw-est" title="Estimation indicative">
+                        ⏱ {q.estimate}*
+                      </span>
+                      <span class="qw-eur" data-hours={q.hoursPerWeek} />
                     </span>
                   </div>
                   <p class="qw-gain">{q.gain}</p>
@@ -98,6 +120,76 @@ const breadcrumb = {
     font-size: 1.1rem;
     color: var(--ink);
     max-width: 64ch;
+  }
+  .calc {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--brand);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px 18px;
+    margin: 20px 0 6px;
+  }
+  .calc-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .calc-row label {
+    font-weight: 700;
+  }
+  .calc-input {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .calc-input input {
+    width: 92px;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 1rem;
+    color: var(--ink);
+  }
+  .calc-input input:focus {
+    outline: 2px solid var(--brand);
+    outline-offset: 1px;
+  }
+  .calc-hint {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+  .calc-out {
+    font-size: 1.15rem;
+    margin: 14px 0 6px;
+  }
+  .calc-out strong {
+    color: var(--brand);
+  }
+  .calc-why {
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+  .qw-badges {
+    display: inline-flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    flex: 0 0 auto;
+  }
+  .qw-eur {
+    font-weight: 800;
+    font-size: 0.82rem;
+    color: var(--brand);
+    background: rgba(22, 104, 160, 0.08);
+    border: 1px solid rgba(22, 104, 160, 0.25);
+    border-radius: 999px;
+    padding: 2px 10px;
+    white-space: nowrap;
+  }
+  .qw-eur:empty {
+    display: none;
   }
   .qw-list {
     list-style: none;
@@ -209,3 +301,32 @@ const breadcrumb = {
     margin-top: 18px;
   }
 </style>
+
+<script>
+  const WEEKS_PER_MONTH = 4.33;
+  const WEEKS_PER_YEAR = 52;
+  const rate = document.getElementById('rate');
+  const eurCells = Array.from(document.querySelectorAll('.qw-eur'));
+  const totH = document.getElementById('tot-h');
+  const totMonth = document.getElementById('tot-month');
+  const totYear = document.getElementById('tot-year');
+
+  const euro = (n) => `${Math.round(n).toLocaleString('fr-FR')} €`;
+  const round10 = (n) => Math.round(n / 10) * 10;
+
+  function compute() {
+    const r = Math.max(0, parseFloat(rate.value) || 0);
+    let totalHours = 0;
+    for (const cell of eurCells) {
+      const h = parseFloat(cell.dataset.hours) || 0;
+      totalHours += h;
+      cell.textContent = r > 0 ? `≈ ${euro(h * r * WEEKS_PER_MONTH)}/mois` : '';
+    }
+    totH.textContent = Number.isInteger(totalHours) ? totalHours : totalHours.toFixed(1);
+    totMonth.textContent = euro(round10(totalHours * r * WEEKS_PER_MONTH));
+    totYear.textContent = euro(round10(totalHours * r * WEEKS_PER_YEAR));
+  }
+
+  rate.addEventListener('input', compute);
+  compute();
+</script>
