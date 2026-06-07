@@ -30,14 +30,15 @@ export const families = [
     name: 'Stabilité & qualité',
     short: 'Stabilité & qualité',
     color: '#15803d',
-    description: 'Rendre les processus fiables, propres et capables de produire bon du premier coup.',
+    description:
+      'Rendre les processus fiables, propres et capables de produire bon du premier coup.',
   },
   {
     id: 'resolution',
     name: 'Résolution de problèmes',
     short: 'Résolution',
     color: '#c2410c',
-    description: "Aller à la cause racine plutôt que de traiter les symptômes.",
+    description: 'Aller à la cause racine plutôt que de traiter les symptômes.',
   },
   {
     id: 'mesure',

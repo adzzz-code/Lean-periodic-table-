@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/url.js';
+---
+
+<Base title="Page introuvable" description="Cette page n'existe pas (ou plus).">
+  <section class="notfound">
+    <div class="wrap">
+      <p class="code">404</p>
+      <h1>Élément introuvable</h1>
+      <p>
+        La page que vous cherchez n'existe pas (ou plus). Comme dans un tableau périodique,
+        certaines cases sont vides.
+      </p>
+      <a class="back-link" href={withBase('/')}>← Retour au tableau</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .notfound {
+    padding: 80px 0;
+    text-align: center;
+  }
+  .notfound .code {
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--brand);
+    margin: 0;
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .notfound h1 {
+    margin: 8px 0 14px;
+    font-size: 1.6rem;
+  }
+  .notfound p {
+    color: var(--ink-soft);
+    max-width: 48ch;
+    margin: 0 auto 10px;
+  }
+  .notfound .back-link {
+    margin-top: 24px;
+  }
+</style>

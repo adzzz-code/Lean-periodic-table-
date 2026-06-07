@@ -4,7 +4,7 @@
 
 ## Vision & Owner
 
-**Tableau périodique du Lean & de l'excellence opérationnelle** — **Lean Élémentaire** (*Le Lean, élément par élément.*).
+**Tableau périodique du Lean & de l'excellence opérationnelle** — **Lean Élémentaire** (_Le Lean, élément par élément._).
 En ligne : https://adzzz-code.github.io/Lean-periodic-table-/
 Objectif : rendre les outils et méthodes des grandes entreprises **accessibles aux TPE/PME et
 entrepreneurs**, adaptés à leur contexte, avec une posture éditoriale **honnête** (on dit aussi
@@ -47,6 +47,7 @@ quand un outil ne sert à rien et ses limites — anti « cargo cult »).
 ## Roadmap & backlog
 
 Documents tenus à jour :
+
 - **Roadmap** : `docs/ROADMAP.md` (V1 livrée · V1.1 consolidation/mise en ligne · V2 aide à la
   décision · V3 personnalisation).
 - **Backlog** priorisé (P0/P1/P2) : `docs/BACKLOG.md`.

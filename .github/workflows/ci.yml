@@ -1,6 +1,6 @@
 name: CI
 
-# Vérifie que le site construit bien sur chaque push et chaque PR.
+# Vérifie sur chaque push et chaque PR : intégrité des données, lint, format et build.
 on:
   push:
     branches-ignore: [main] # main est couvert par le workflow de déploiement
@@ -16,4 +16,11 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
-      - run: npm run build
+      - name: Intégrité des données
+        run: npm run validate
+      - name: Lint (ESLint)
+        run: npm run lint
+      - name: Format (Prettier)
+        run: npm run format:check
+      - name: Build
+        run: npm run build

@@ -20,8 +20,8 @@ const cellOf = (level, famId) =>
         appliqués dans une TPE ou une petite équipe, avec leurs limites et leurs vrais premiers pas.
       </p>
       <p>
-        <strong>Colonnes</strong> = familles de concepts · <strong>Lignes</strong> = niveau de
-        maturité (commencez en haut). Cliquez une case pour ouvrir la fiche.
+        <strong>Colonnes</strong> = familles de concepts · <strong>Lignes</strong> = niveau de maturité
+        (commencez en haut). Cliquez une case pour ouvrir la fiche.
       </p>
     </div>
   </section>
@@ -33,7 +33,7 @@ const cellOf = (level, famId) =>
         {
           families.map((f) => (
             <button class="chip-btn fam-btn" data-family={f.id} aria-pressed="true">
-              <span class="fam-dot" style={`background:${f.color}`}></span>
+              <span class="fam-dot" style={`background:${f.color}`} />
               {f.short}
             </button>
           ))
@@ -62,17 +62,25 @@ const cellOf = (level, famId) =>
   <div class="wrap">
     <div class="legend">
       <span class="item"><strong>★</strong> = incontournable pour une petite structure</span>
-      {levels.map((l) => (
-        <span class="item"><strong>Niveau {l.level}</strong> {l.name} — {l.hint}</span>
-      ))}
+      {
+        levels.map((l) => (
+          <span class="item">
+            <strong>Niveau {l.level}</strong> {l.name} — {l.hint}
+          </span>
+        ))
+      }
     </div>
 
     <div class="table-scroll">
-      <div class="matrix" role="grid" aria-label="Tableau périodique des concepts Lean">
+      <div class="matrix">
         <div class="corner">Niveau ＼ Famille</div>
-        {families.map((f) => (
-          <div class="fam-head" style={`background:${f.color}`}>{f.name}</div>
-        ))}
+        {
+          families.map((f) => (
+            <div class="fam-head" style={`background:${f.color}`}>
+              {f.name}
+            </div>
+          ))
+        }
 
         {
           levels.map((l) => (
@@ -93,11 +101,16 @@ const cellOf = (level, famId) =>
                         data-family={c.family}
                         data-pme={c.pmeStarter ? '1' : '0'}
                         data-search={`${c.name} ${c.symbol} ${c.fullName}`.toLowerCase()}
+                        aria-label={`${c.name} — famille ${f.name}, niveau ${l.level} (${l.name})${c.pmeStarter ? ', incontournable TPE/PME' : ''}`}
                       >
                         <span class="num">{c.number}</span>
                         <span class="sym">{c.symbol}</span>
                         <span class="nm">{c.name}</span>
-                        {c.pmeStarter && <span class="star" title="Incontournable TPE/PME">★</span>}
+                        {c.pmeStarter && (
+                          <span class="star" title="Incontournable TPE/PME">
+                            ★
+                          </span>
+                        )}
                       </a>
                     ))}
                   </div>
