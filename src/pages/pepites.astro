@@ -68,16 +68,14 @@ const breadcrumb = {
                   <span class="sym">{c.symbol}</span>
                 </a>
                 <div class="qw-body">
-                  <div class="qw-top">
-                    <a class="qw-name" href={withBase(`/concept/${c.slug}/`)}>
-                      {c.name}
-                    </a>
-                    <span class="qw-badges">
-                      <span class="qw-est" title="Estimation indicative">
-                        ⏱ {q.estimate}*
-                      </span>
-                      <span class="qw-eur" data-hours={q.hoursPerWeek} />
+                  <a class="qw-name" href={withBase(`/concept/${c.slug}/`)}>
+                    {c.name}
+                  </a>
+                  <div class="qw-badges">
+                    <span class="qw-est" title="Estimation indicative">
+                      ⏱ {q.estimate}*
                     </span>
+                    <span class="qw-eur" data-hours={q.hoursPerWeek} />
                   </div>
                   <p class="qw-gain">{q.gain}</p>
                   <p class="qw-meta">
@@ -173,10 +171,10 @@ const breadcrumb = {
     margin: 0;
   }
   .qw-badges {
-    display: inline-flex;
+    display: flex;
     gap: 6px;
     flex-wrap: wrap;
-    flex: 0 0 auto;
+    margin-top: 6px;
   }
   .qw-eur {
     font-weight: 800;
@@ -249,6 +247,7 @@ const breadcrumb = {
     min-width: 0; /* autorise le contenu à se réduire/retourner à la ligne (évite le débordement) */
   }
   .qw-name {
+    display: block;
     font-weight: 700;
     font-size: 1.08rem;
     color: var(--ink);
@@ -256,13 +255,6 @@ const breadcrumb = {
   }
   .qw-name:hover {
     color: var(--brand);
-  }
-  .qw-top {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 10px;
-    flex-wrap: wrap;
   }
   .qw-est {
     font-weight: 800;
