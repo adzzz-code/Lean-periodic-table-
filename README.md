@@ -53,3 +53,9 @@ src/styles/global.css           Styles
 Ajouter une entrée dans `src/data/concepts.js` en respectant le gabarit (voir l'en-tête du
 fichier et `docs/PRD.md` §4). La case apparaît automatiquement à l'intersection
 famille × niveau.
+
+## Licence
+
+- **Code source** : [MIT](LICENSE) — librement réutilisable.
+- **Contenu éditorial** (textes des fiches, documentation, marque, logo) : © 2026 Adel —
+  Lean Élémentaire, **tous droits réservés**. Voir [`LICENSE`](LICENSE).
