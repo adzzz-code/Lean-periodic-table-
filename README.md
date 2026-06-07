@@ -20,39 +20,67 @@ adaptés à leur contexte (moyens limités, petites équipes), avec leurs **limi
   couche dédiée TPE/PME, badge de pertinence (impact/effort) et concepts liés.
 - **Mode TPE/PME** : met en avant les incontournables pour une petite structure.
 
+## Trois entrées (la cible ne connaît pas le Lean)
+
+1. **« J'ai un problème »** → `/diagnostic/` : 12 problèmes en langage courant → concepts
+   recommandés, avec le « pourquoi » de chacun.
+2. **« J'ai pas le temps »** → `/pepites/` : sélection fort impact / faible effort, orientée
+   **gain de temps**, avec un **calculateur** (coût horaire → gains €/mois et €/an, récurrents).
+3. **« Je veux explorer »** → le **tableau** (filtres famille/niveau, recherche) et la
+   **vue graphe** (`/graphe/`) des relations entre concepts.
+
+Page **À propos / méthode** : `/a-propos/`.
+
 Cadrage complet : [`docs/PRD.md`](docs/PRD.md) · Roadmap : [`docs/ROADMAP.md`](docs/ROADMAP.md) · Backlog : [`docs/BACKLOG.md`](docs/BACKLOG.md) · Déploiement : [`docs/DEPLOIEMENT.md`](docs/DEPLOIEMENT.md) · Audit : [`docs/AUDIT.md`](docs/AUDIT.md).
 
 ## Stack
 
 - [Astro](https://astro.build) (site statique, SEO-friendly), JavaScript, CSS natif.
-- Contenu = source de vérité dans `src/data/` (`families.js`, `concepts.js`).
+- Contenu = source de vérité dans `src/data/` : `families.js`, `concepts.js`, `sources.js`,
+  `problems.js`, `quickwins.js`.
+- Qualité vérifiée en CI : intégrité des données, ESLint, Prettier, build.
 
 ## Démarrer
 
 ```bash
 npm install
-npm run dev      # serveur de développement
-npm run build    # build statique dans dist/
-npm run preview  # prévisualiser le build
+npm run dev       # serveur de développement
+npm run build     # build statique dans dist/
+npm run preview   # prévisualiser le build
+npm run validate  # intégrité des données (slugs, sources, pépites…)
+npm run lint      # ESLint
+npm run format    # Prettier
+npm run og        # (re)génère l'image Open Graph
 ```
 
 ## Structure
 
 ```
-docs/PRD.md                     Cahier des charges V1
+docs/                           PRD · ROADMAP · BACKLOG · AUDIT · DEPLOIEMENT
 src/data/families.js            Familles (colonnes) + niveaux (lignes)
-src/data/concepts.js            Concepts (source de vérité du contenu)
-src/layouts/Base.astro          Layout commun
-src/pages/index.astro           Tableau interactif (filtres, recherche, mode TPE/PME)
+src/data/concepts.js            Concepts — source de vérité du contenu
+src/data/sources.js             Sources / références par concept
+src/data/problems.js            Entrée « par le problème » (diagnostic)
+src/data/quickwins.js           Pépites (gain de temps) + estimation horaire
+src/layouts/Base.astro          Layout commun (SEO, OG, JSON-LD, navigation)
+src/lib/url.js                  withBase() — liens compatibles racine & sous-dossier
+src/pages/index.astro           Accueil : entrées + tableau interactif
 src/pages/concept/[slug].astro  Fiche détaillée d'un concept
-src/styles/global.css           Styles
+src/pages/diagnostic/           Diagnostic par problème (liste + détail)
+src/pages/pepites.astro         Pépites + calculateur de gain
+src/pages/graphe.astro          Vue graphe des relations
+src/pages/a-propos.astro        À propos & méthode
+src/pages/404.astro             Page introuvable
+scripts/                        validate-data.mjs · generate-og.mjs
 ```
 
 ## Ajouter un concept
 
-Ajouter une entrée dans `src/data/concepts.js` en respectant le gabarit (voir l'en-tête du
-fichier et `docs/PRD.md` §4). La case apparaît automatiquement à l'intersection
-famille × niveau.
+1. Ajouter une entrée dans `src/data/concepts.js` (gabarit : voir l'en-tête du fichier et
+   `docs/PRD.md` §4).
+2. Ajouter **≥ 1 source** dans `src/data/sources.js` (obligatoire).
+3. `npm run validate` pour vérifier l'intégrité. La case apparaît automatiquement à
+   l'intersection famille × niveau.
 
 ## Licence
 
