@@ -98,8 +98,9 @@ a {
 .site-nav {
   margin-left: auto;
   display: flex;
-  gap: 18px;
+  gap: 14px 18px;
   align-items: baseline;
+  flex-wrap: wrap;
 }
 .nav-link {
   font-weight: 600;
