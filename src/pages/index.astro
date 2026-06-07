@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import { families, levels } from '../data/families.js';
 import { concepts } from '../data/concepts.js';
+import { withBase } from '../lib/url.js';
 
 // Index { level -> familyId -> [concepts] } pour la matrice.
 const cellOf = (level, famId) =>
@@ -87,7 +88,7 @@ const cellOf = (level, famId) =>
                     {cell.map((c) => (
                       <a
                         class="el"
-                        href={`/concept/${c.slug}/`}
+                        href={withBase(`/concept/${c.slug}/`)}
                         style={`--c:${f.color}`}
                         data-family={c.family}
                         data-pme={c.pmeStarter ? '1' : '0'}

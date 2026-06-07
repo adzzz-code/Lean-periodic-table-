@@ -38,9 +38,12 @@
 
 ## 4. Technique & qualité
 
-- [ ] `P0` **Déploiement** (Netlify / Vercel / GitHub Pages) + build automatique sur push.
-- [ ] `P0` SEO : `sitemap.xml`, métadonnées par fiche, balises Open Graph / Twitter.
-- [ ] `P1` Linter + formatage (ESLint/Prettier) et vérification de build en CI (GitHub Actions).
+- [x] `P0` **Déploiement** GitHub Pages automatisé + configs Netlify/Vercel (cf. `DEPLOIEMENT.md`).
+      ⚠️ Reste une action manuelle unique : activer *Settings → Pages → Source : GitHub Actions*.
+- [x] `P0` Vérification de **build en CI** sur push/PR (`.github/workflows/ci.yml`).
+- [x] `P0` SEO : `sitemap-index.xml` (intégration `@astrojs/sitemap`) + `robots.txt`.
+- [ ] `P1` SEO : métadonnées par fiche enrichies + balises Open Graph / Twitter (image partage).
+- [ ] `P1` Linter + formatage (ESLint/Prettier) en CI.
 - [ ] `P1` Validation des données `concepts.js` (slugs uniques, `related` existants, champs requis).
 - [ ] `P1` Page 404 personnalisée + page « À propos / méthode ».
 - [ ] `P2` Tests légers (build + cohérence des données) en CI.

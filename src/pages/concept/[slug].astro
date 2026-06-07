@@ -2,6 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import { concepts, conceptBySlug } from '../../data/concepts.js';
 import { familyById, levels } from '../../data/families.js';
+import { withBase } from '../../lib/url.js';
 
 export function getStaticPaths() {
   return concepts.map((c) => ({ params: { slug: c.slug } }));
@@ -19,7 +20,7 @@ const effortLabel = { low: 'Faible', medium: 'Moyen', high: 'Élevé' };
 <Base title={c.name} description={c.definition}>
   <article class="concept">
     <div class="wrap">
-      <p class="breadcrumb"><a href="/">Tableau</a> › {fam.name} › {c.name}</p>
+      <p class="breadcrumb"><a href={withBase('/')}>Tableau</a> › {fam.name} › {c.name}</p>
 
       <header class="concept-head">
         <div class="badge-sym" style={`--c:${fam.color}`}>
@@ -112,7 +113,7 @@ const effortLabel = { low: 'Faible', medium: 'Moyen', high: 'Élevé' };
                 if (!rc) return null;
                 const rf = familyById[rc.family];
                 return (
-                  <a href={`/concept/${rc.slug}/`} style={`--c:${rf.color}`}>{rc.symbol} · {rc.name}</a>
+                  <a href={withBase(`/concept/${rc.slug}/`)} style={`--c:${rf.color}`}>{rc.symbol} · {rc.name}</a>
                 );
               })}
             </div>
@@ -120,7 +121,7 @@ const effortLabel = { low: 'Faible', medium: 'Moyen', high: 'Élevé' };
         )}
       </div>
 
-      <a class="back-link" href="/">← Retour au tableau</a>
+      <a class="back-link" href={withBase('/')}>← Retour au tableau</a>
     </div>
   </article>
 </Base>
