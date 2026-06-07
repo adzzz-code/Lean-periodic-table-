@@ -1,10 +1,11 @@
 // Contrôle d'intégrité des données de contenu. Sort en erreur (code 1) si un problème
 // est détecté → utilisable en CI pour bloquer un merge qui casserait les données.
 // Lancer : `npm run validate`.
-import { concepts } from '../src/data/concepts.js';
+import { concepts, conceptBySlug } from '../src/data/concepts.js';
 import { families, levels } from '../src/data/families.js';
 import { sources } from '../src/data/sources.js';
 import { problems } from '../src/data/problems.js';
+import { quickwins } from '../src/data/quickwins.js';
 
 const famIds = new Set(families.map((f) => f.id));
 const lvls = new Set(levels.map((l) => l.level));
@@ -62,6 +63,20 @@ for (const p of problems) {
     issues.push(`problème ${pid} : aucune solution`);
   for (const s of p.solutions || [])
     if (!setSlugs.has(s.slug)) issues.push(`problème ${pid} : concept inconnu « ${s.slug} »`);
+}
+
+// Pépites : concept existant, gain renseigné, et réellement fort impact + faible effort.
+for (const q of quickwins) {
+  const c = conceptBySlug[q.slug];
+  if (!c) {
+    issues.push(`pépite « ${q.slug} » : concept inconnu`);
+    continue;
+  }
+  if (!q.gain) issues.push(`pépite ${q.slug} : « gain » manquant`);
+  if (c.relevance?.impact !== 'high' || c.relevance?.effort !== 'low')
+    issues.push(
+      `pépite ${q.slug} : doit être fort impact + faible effort (or ${c.relevance?.impact}/${c.relevance?.effort})`,
+    );
 }
 
 if (issues.length) {
