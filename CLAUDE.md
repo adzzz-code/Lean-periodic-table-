@@ -9,7 +9,7 @@ En ligne : https://adzzz-code.github.io/Lean-periodic-table-/
 Objectif : rendre les outils et méthodes des grandes entreprises **accessibles aux TPE/PME et
 entrepreneurs**, adaptés à leur contexte, avec une posture éditoriale **honnête** (on dit aussi
 quand un outil ne sert à rien et ses limites — anti « cargo cult »).
-**Owner** : Adel (`adel.fayet@outlook.fr`). Pilote/valide, n'écrit pas de code.
+**Owner** : Adel — pilote/valide, n'écrit pas de code. (Coordonnées privées, non versionnées dans ce dépôt public.)
 
 ## État courant
 
@@ -50,6 +50,7 @@ Documents tenus à jour :
 - **Roadmap** : `docs/ROADMAP.md` (V1 livrée · V1.1 consolidation/mise en ligne · V2 aide à la
   décision · V3 personnalisation).
 - **Backlog** priorisé (P0/P1/P2) : `docs/BACKLOG.md`.
+- **Audit** technique (dev senior, constats sourcés) : `docs/AUDIT.md`.
 
 ## Style attendu
 

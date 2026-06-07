@@ -1,7 +1,7 @@
 # BACKLOG — Lean Élémentaire
 
 > Liste de tâches actionnables, regroupées par thème et priorisées.
-> Roadmap d'ensemble : [`ROADMAP.md`](ROADMAP.md). Cadrage : [`PRD.md`](PRD.md).
+> Roadmap d'ensemble : [`ROADMAP.md`](ROADMAP.md). Cadrage : [`PRD.md`](PRD.md). Audit : [`AUDIT.md`](AUDIT.md).
 
 **Priorités** : `P0` = à faire avant la mise en ligne · `P1` = important, court terme ·
 `P2` = souhaitable, moyen terme.
@@ -42,9 +42,12 @@
       ✅ **En ligne** : https://adzzz-code.github.io/Lean-periodic-table-/ (Pages activé, déploiement auto sur push `main`).
 - [x] `P0` Vérification de **build en CI** sur push/PR (`.github/workflows/ci.yml`).
 - [x] `P0` SEO : `sitemap-index.xml` (intégration `@astrojs/sitemap`) + `robots.txt`.
-- [ ] `P1` SEO : métadonnées par fiche enrichies + balises Open Graph / Twitter (image partage).
+- [x] `P1` SEO : balises Open Graph / Twitter + image de partage (fait au branding).
+- [ ] `P0` **LICENSE** à ajouter (décision owner : code + contenu) — cf. `AUDIT.md` §6.
+- [ ] `P1` SEO : **données structurées JSON-LD** (WebSite, BreadcrumbList, DefinedTerm) — cf. `AUDIT.md` §4.
 - [ ] `P1` Linter + formatage (ESLint/Prettier) en CI.
-- [ ] `P1` Validation des données `concepts.js` (slugs uniques, `related` existants, champs requis).
+- [ ] `P1` **Validation des données en CI** : promouvoir le contrôle d'intégrité en `npm run validate`
+      (slugs/symboles uniques, `related` existants, champs requis) et l'ajouter à `ci.yml` — cf. `AUDIT.md` §7.
 - [ ] `P1` Page 404 personnalisée + page « À propos / méthode ».
 - [ ] `P2` Tests légers (build + cohérence des données) en CI.
 - [ ] `P2` Audit performance / Lighthouse.
@@ -52,9 +55,12 @@
 
 ## 5. Accessibilité
 
-- [ ] `P0` Navigation clavier complète sur le tableau et les filtres (focus visibles, ordre logique).
-- [ ] `P1` Vérifier les contrastes AA (notamment textes sur couleurs de familles).
-- [ ] `P1` Rôles/labels ARIA cohérents sur la matrice et les contrôles ; test lecteur d'écran.
+- [ ] `P0` **Contrastes AA** : corriger les 4 familles en échec pour l'usage « texte blanc sur fond »
+      — Mesure `#ca8a04` (2.94 ❌), Stabilité `#16a34a` (3.30), Résolution `#ea580c` (3.56),
+      Client `#0d9488` (3.74). Cf. `AUDIT.md` §3.
+- [~] `P1` Navigation clavier (focus visibles, skip-link ✅ ; valider l'ordre au lecteur d'écran).
+- [ ] `P1` Sémantique tableau : compléter ou retirer `role="grid"` (rôles row/gridcell) +
+      `aria-label` famille sur chaque case (l'info ne doit pas passer par la couleur seule).
 
 ## 6. Produit & croissance
 

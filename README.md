@@ -20,7 +20,7 @@ adaptés à leur contexte (moyens limités, petites équipes), avec leurs **limi
   couche dédiée TPE/PME, badge de pertinence (impact/effort) et concepts liés.
 - **Mode TPE/PME** : met en avant les incontournables pour une petite structure.
 
-Cadrage complet : [`docs/PRD.md`](docs/PRD.md) · Roadmap : [`docs/ROADMAP.md`](docs/ROADMAP.md) · Backlog : [`docs/BACKLOG.md`](docs/BACKLOG.md) · Déploiement : [`docs/DEPLOIEMENT.md`](docs/DEPLOIEMENT.md).
+Cadrage complet : [`docs/PRD.md`](docs/PRD.md) · Roadmap : [`docs/ROADMAP.md`](docs/ROADMAP.md) · Backlog : [`docs/BACKLOG.md`](docs/BACKLOG.md) · Déploiement : [`docs/DEPLOIEMENT.md`](docs/DEPLOIEMENT.md) · Audit : [`docs/AUDIT.md`](docs/AUDIT.md).
 
 ## Stack
 
