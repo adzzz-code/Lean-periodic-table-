@@ -121,6 +121,10 @@ respecte le gabarit §4. Qualité éditoriale > exhaustivité.
 6. Adaptation TPE/PME : **bloc dédié dans la fiche + badge/filtre** dans le tableau.
 7. Fiche : ajout d'un bloc **Limites & anti-usage**.
 8. Stack : **Astro**, JS, contenu en données versionnées.
+9. _(V2, 2026-06-07)_ **Entrée prioritaire par le problème** : la cible ne connaît pas le Lean ;
+   elle aborde le site par sa douleur, pas par les outils. D'où le diagnostic `/diagnostic/`
+   (problème en langage courant → concepts recommandés + « pourquoi »), mis en avant dès l'accueil.
+   Source de vérité : `src/data/problems.js`.
 
 ## 10. Roadmap & backlog
 

@@ -35,12 +35,17 @@ La progression suit la logique du produit : **d'abord une référence crédible 
 ## 🧭 V2 — L'aide à la décision
 
 > Objectif : ne plus seulement consulter, mais **être guidé** vers les bons concepts.
+> **Principe clé** : la cible (TPE/PME) ne connaît pas le Lean → elle entre **par son problème**,
+> pas par les outils. L'entrée « par le problème » est donc le **funnel prioritaire**.
 
-- **Parcours de diagnostic guidé** : « quel est ton problème → quels concepts pour toi ».
-- **Vue graphe** des relations entre concepts (prérequis / concepts liés).
-- Tri / mise en avant par pertinence TPE/PME (impact vs effort).
-- Élargissement du contenu (objectif ~60 concepts) + glossaire.
-- Fiches enrichies : check-lists de démarrage téléchargeables, mini-cas.
+- [x] **Parcours de diagnostic guidé** : « quel est votre problème → quels concepts pour vous »
+      (`/diagnostic/`, 12 problèmes en langage courant → concepts ordonnés + « pourquoi »),
+      mis en avant en tête d'accueil et en navigation.
+- [ ] **Vue graphe** des relations entre concepts (prérequis / concepts liés).
+- [ ] Tri / mise en avant par pertinence TPE/PME (impact vs effort).
+- [ ] Élargissement du contenu (objectif ~60 concepts) + glossaire.
+- [ ] Fiches enrichies : check-lists de démarrage téléchargeables, mini-cas.
+- [ ] Élargir la couverture des problèmes (et affiner les recommandations).
 
 ## 🚀 V3 — Personnalisation & diffusion
 
