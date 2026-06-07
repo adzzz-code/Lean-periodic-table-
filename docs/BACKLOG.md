@@ -12,7 +12,8 @@
 ## 1. Contenu éditorial
 
 - [ ] `P0` Relire les 40 fiches existantes (justesse lean, ton TPE/PME, fautes).
-- [ ] `P1` Ajouter des **sources / références** par concept (livre, auteur, lien).
+- [x] `P1` **Sources / références** par concept (`src/data/sources.js`), affichées sur la fiche et
+      **imposées par `npm run validate`** (≥ 1 source par concept).
 - [ ] `P1` Vérifier l'équilibre des familles (certaines cases de niveau sont vides — voulu ?).
 - [ ] `P1` Ajouter un **glossaire** des termes japonais / acronymes.
 - [ ] `P2` Étendre à ~60 concepts (cf. V2) : ex. SIPOC, Kano, QFD, Spaghetti, Yamazumi, 5 Pourquoi inversés.
@@ -44,11 +45,11 @@
 - [x] `P0` SEO : `sitemap-index.xml` (intégration `@astrojs/sitemap`) + `robots.txt`.
 - [x] `P1` SEO : balises Open Graph / Twitter + image de partage (fait au branding).
 - [x] `P0` **LICENSE** ajoutée : code **MIT** + contenu éditorial **tous droits réservés** (cf. `LICENSE`).
-- [ ] `P1` SEO : **données structurées JSON-LD** (WebSite, BreadcrumbList, DefinedTerm) — cf. `AUDIT.md` §4.
+- [x] `P1` SEO : **données structurées JSON-LD** — WebSite (global), BreadcrumbList + DefinedTerm (fiches).
 - [x] `P1` **Linter + formatage** (ESLint flat config + Prettier) avec scripts `lint` / `format` / `format:check`, branchés en CI.
 - [x] `P1` **Validation des données en CI** : `scripts/validate-data.mjs` + `npm run validate` (slugs/symboles uniques,
       `related` existants, champs requis), bloquant dans `ci.yml`.
-- [x] `P1` **Page 404** personnalisée. (Page « À propos / méthode » : reste à faire.)
+- [x] `P1` **Page 404** personnalisée + **page « À propos / méthode »** (`/a-propos/`, liée en en-tête et pied).
 - [ ] `P2` Tests légers (build + cohérence des données) en CI.
 - [ ] `P2` Audit performance / Lighthouse.
 - [ ] `P2` Préparer l'i18n (structure de contenu prête pour l'EN) — sans traduire en V1.

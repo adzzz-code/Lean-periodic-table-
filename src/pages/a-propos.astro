@@ -1,0 +1,116 @@
+---
+import Base from '../layouts/Base.astro';
+import { families, levels } from '../data/families.js';
+import { withBase } from '../lib/url.js';
+---
+
+<Base
+  title="À propos & méthode"
+  description="La démarche derrière Lean Élémentaire : pour qui, comment lire le tableau, et notre posture éditoriale honnête."
+>
+  <article class="page">
+    <div class="wrap">
+      <p class="breadcrumb"><a href={withBase('/')}>Tableau</a> › À propos</p>
+      <h1>À propos & méthode</h1>
+
+      <p class="lead">
+        <strong>Lean Élémentaire</strong> rend les outils et méthodes d'excellence opérationnelle des
+        grandes entreprises <strong>accessibles aux TPE/PME et aux entrepreneurs</strong>, adaptés à
+        leur contexte — moyens limités, petites équipes, polyvalence.
+      </p>
+
+      <section class="prose">
+        <h2>Pour qui ?</h2>
+        <p>
+          Deux publics, sur chaque fiche : les <strong>TPE/PME et débutants</strong> (priorité — vulgarisation,
+          premiers pas réalistes, exemples concrets) et les
+          <strong>praticiens</strong> (couche « pour aller plus loin »).
+        </p>
+
+        <h2>Comment lire le tableau</h2>
+        <p>
+          C'est un tableau périodique <em>hybride pédagogique</em> : on garde la logique de classement
+          (familles, couleurs, symboles courts, « trous » assumés), au service de l'apprentissage.
+        </p>
+        <ul>
+          <li>
+            <strong>Colonnes = {families.length} familles</strong> de concepts (couleur dédiée) :
+            {families.map((f) => f.short).join(', ')}.
+          </li>
+          <li>
+            <strong>Lignes = {levels.length} niveaux de maturité</strong> — du fondamental vers l'avancé,
+            pour répondre à « par où commencer ? » :
+            {levels.map((l) => `${l.level}. ${l.name}`).join(' → ')}.
+          </li>
+          <li>
+            Le <strong>mode TPE/PME</strong> (★) met en avant les concepts à fort impact et faible effort
+            pour une petite structure.
+          </li>
+        </ul>
+
+        <h2>L'anatomie d'une fiche</h2>
+        <p>Chaque concept suit le même gabarit, avec des couches volontairement séparées :</p>
+        <ul>
+          <li><strong>L'essentiel</strong> — définition et utilité en une phrase.</li>
+          <li>
+            <strong>Limites & anti-usage</strong> — à quoi ça <em>ne</em> sert <em>pas</em>, quand
+            ne pas l'utiliser, pièges classiques.
+          </li>
+          <li>
+            <strong>Couche TPE/PME</strong> — pourquoi, premier pas, exemple, erreur fréquente.
+          </li>
+          <li><strong>Badge de pertinence</strong> — impact / effort pour une petite équipe.</li>
+          <li><strong>Couche praticien</strong> — approfondissement, prérequis, indicateurs.</li>
+          <li><strong>Concepts liés</strong> et <strong>sources & références</strong>.</li>
+        </ul>
+
+        <h2>Notre posture : honnête, anti « cargo cult »</h2>
+        <p>
+          Un outil n'est pas une fin en soi. On dit aussi <strong
+            >quand un outil ne sert à rien</strong
+          >
+          et quelles sont ses limites : copier les méthodes d'un grand groupe sans en comprendre les conditions,
+          c'est du « cargo cult ». Chaque fiche cite ses <strong>sources</strong>
+          (auteurs, ouvrages de référence) pour que vous puissiez creuser.
+        </p>
+
+        <h2>Comment c'est fait</h2>
+        <p>
+          Site statique (Astro), contenu francophone, open source côté code. Le projet évolue par
+          versions ; les améliorations sont suivies publiquement dans le dépôt.
+        </p>
+      </section>
+
+      <a class="back-link" href={withBase('/')}>← Retour au tableau</a>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .page {
+    padding: 26px 0 60px;
+  }
+  .page h1 {
+    font-size: 1.9rem;
+    letter-spacing: -0.02em;
+    margin: 6px 0 14px;
+  }
+  .prose {
+    max-width: 70ch;
+  }
+  .prose h2 {
+    font-size: 1.15rem;
+    margin: 28px 0 8px;
+    color: var(--brand);
+  }
+  .prose p,
+  .prose li {
+    color: var(--ink);
+  }
+  .prose ul {
+    padding-left: 20px;
+  }
+  .prose li {
+    margin: 6px 0;
+  }
+</style>

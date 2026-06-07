@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { withBase } from '../lib/url.js';
-const { title, description } = Astro.props;
+const { title, description, jsonld = [] } = Astro.props;
 const SITE_NAME = 'Lean Élémentaire';
 const fullTitle = title
   ? `${title} — ${SITE_NAME}`
@@ -13,6 +13,18 @@ const desc =
 // URLs absolues pour le SEO / le partage (Astro.site défini dans astro.config.mjs).
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const ogImage = new URL(withBase('/og.png'), Astro.site).href;
+const home = new URL(withBase('/'), Astro.site).href;
+
+// Données structurées : WebSite (toujours) + éventuels schémas fournis par la page.
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: SITE_NAME,
+  url: home,
+  description: desc,
+  inLanguage: 'fr-FR',
+};
+const schemas = [websiteSchema, ...jsonld];
 ---
 
 <!doctype html>
@@ -37,6 +49,8 @@ const ogImage = new URL(withBase('/og.png'), Astro.site).href;
     <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={desc} />
     <meta name="twitter:image" content={ogImage} />
+
+    {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -67,6 +81,7 @@ const ogImage = new URL(withBase('/og.png'), Astro.site).href;
           <span class="brand-word">Lean<span>Élémentaire</span></span>
         </a>
         <span class="tagline">Le Lean, élément par élément — pour les TPE & PME</span>
+        <a class="nav-link" href={withBase('/a-propos/')}>À propos</a>
       </div>
     </header>
     <main id="contenu">
@@ -74,7 +89,8 @@ const ogImage = new URL(withBase('/og.png'), Astro.site).href;
     </main>
     <footer class="site-footer">
       <div class="wrap">
-        {SITE_NAME} — outils & méthodes des grandes entreprises, adaptés aux TPE/PME. · V1 · FR
+        {SITE_NAME} — outils & méthodes des grandes entreprises, adaptés aux TPE/PME. ·
+        <a href={withBase('/a-propos/')}>À propos & méthode</a> · V1 · FR
       </div>
     </footer>
   </body>
