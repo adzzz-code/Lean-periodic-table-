@@ -70,6 +70,17 @@ const featured = problems.filter((p) => p.featured);
         }
       </div>
 
+      <div class="control-group" id="level-filters">
+        <span class="control-label">Niveau</span>
+        {
+          levels.map((l) => (
+            <button class="chip-btn lvl-btn" data-level={l.level} aria-pressed="true">
+              {l.level}. {l.name}
+            </button>
+          ))
+        }
+      </div>
+
       <div class="control-group">
         <label class="toggle">
           <input type="checkbox" id="pme-toggle" />
@@ -129,6 +140,7 @@ const featured = problems.filter((p) => p.featured);
                         href={withBase(`/concept/${c.slug}/`)}
                         style={`--c:${f.color}`}
                         data-family={c.family}
+                        data-level={c.level}
                         data-pme={c.pmeStarter ? '1' : '0'}
                         data-search={`${c.name} ${c.symbol} ${c.fullName}`.toLowerCase()}
                         aria-label={`${c.name} — famille ${f.name}, niveau ${l.level} (${l.name})${c.pmeStarter ? ', incontournable TPE/PME' : ''}`}
@@ -158,42 +170,58 @@ const featured = problems.filter((p) => p.featured);
   const search = document.getElementById('search');
   const pmeToggle = document.getElementById('pme-toggle');
   const famButtons = Array.from(document.querySelectorAll('#family-filters .fam-btn'));
+  const lvlButtons = Array.from(document.querySelectorAll('#level-filters .lvl-btn'));
   const els = Array.from(document.querySelectorAll('.el'));
   const count = document.getElementById('count');
 
   const activeFamilies = new Set(famButtons.map((b) => b.dataset.family));
+  const activeLevels = new Set(lvlButtons.map((b) => b.dataset.level));
+
+  // Normalise pour une recherche insensible à la casse ET aux accents.
+  const norm = (s) =>
+    (s || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase();
 
   function apply() {
-    const q = (search.value || '').trim().toLowerCase();
+    const terms = norm(search.value).split(/\s+/).filter(Boolean);
     const pmeOnly = pmeToggle.checked;
     let visible = 0;
 
     for (const el of els) {
       const famOk = activeFamilies.has(el.dataset.family);
+      const lvlOk = activeLevels.has(el.dataset.level);
       const pmeOk = !pmeOnly || el.dataset.pme === '1';
-      const searchOk = !q || el.dataset.search.includes(q);
+      // Multi-mots : tous les termes doivent être présents (accents ignorés).
+      const haystack = norm(el.dataset.search);
+      const searchOk = terms.every((t) => haystack.includes(t));
 
-      // Famille décochée ou hors mode PME → on masque vraiment (la case se vide).
-      const hidden = !famOk || !pmeOk;
+      // Filtres (famille / niveau / mode PME) → on masque vraiment (la case se vide).
+      const hidden = !famOk || !lvlOk || !pmeOk;
       el.classList.toggle('is-hidden', hidden);
       // Recherche → on grise les non-correspondants pour garder la structure du tableau.
-      el.classList.toggle('is-dim', !hidden && !!q && !searchOk);
+      el.classList.toggle('is-dim', !hidden && terms.length > 0 && !searchOk);
 
-      if (!hidden && (!q || searchOk)) visible++;
+      if (!hidden && searchOk) visible++;
     }
     count.textContent = `${visible} concept${visible > 1 ? 's' : ''} affiché${visible > 1 ? 's' : ''}`;
   }
 
-  famButtons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const id = btn.dataset.family;
-      const pressed = btn.getAttribute('aria-pressed') === 'true';
-      btn.setAttribute('aria-pressed', String(!pressed));
-      if (pressed) activeFamilies.delete(id);
-      else activeFamilies.add(id);
-      apply();
-    });
-  });
+  function toggleButton(btn, set, key) {
+    const pressed = btn.getAttribute('aria-pressed') === 'true';
+    btn.setAttribute('aria-pressed', String(!pressed));
+    if (pressed) set.delete(key);
+    else set.add(key);
+    apply();
+  }
+
+  famButtons.forEach((btn) =>
+    btn.addEventListener('click', () => toggleButton(btn, activeFamilies, btn.dataset.family)),
+  );
+  lvlButtons.forEach((btn) =>
+    btn.addEventListener('click', () => toggleButton(btn, activeLevels, btn.dataset.level)),
+  );
 
   search.addEventListener('input', apply);
   pmeToggle.addEventListener('change', apply);
