@@ -1,0 +1,69 @@
+# BACKLOG — Lean Atelier
+
+> Liste de tâches actionnables, regroupées par thème et priorisées.
+> Roadmap d'ensemble : [`ROADMAP.md`](ROADMAP.md). Cadrage : [`PRD.md`](PRD.md).
+
+**Priorités** : `P0` = à faire avant la mise en ligne · `P1` = important, court terme ·
+`P2` = souhaitable, moyen terme.
+**Statut** : `[ ]` à faire · `[~]` en cours · `[x]` fait.
+
+---
+
+## 1. Contenu éditorial
+
+- [ ] `P0` Relire les 40 fiches existantes (justesse lean, ton TPE/PME, fautes).
+- [ ] `P1` Ajouter des **sources / références** par concept (livre, auteur, lien).
+- [ ] `P1` Vérifier l'équilibre des familles (certaines cases de niveau sont vides — voulu ?).
+- [ ] `P1` Ajouter un **glossaire** des termes japonais / acronymes.
+- [ ] `P2` Étendre à ~60 concepts (cf. V2) : ex. SIPOC, Kano, QFD, Spaghetti, Yamazumi, 5 Pourquoi inversés.
+- [ ] `P2` Mini-cas concrets TPE/PME illustrés (1 par famille).
+
+## 2. UX & interactivité
+
+- [ ] `P1` Tri / mise en avant par **pertinence TPE/PME** (impact ↑ / effort ↓).
+- [ ] `P1` Recherche tolérante aux fautes (fuzzy) et aux accents.
+- [ ] `P1` État de filtre persistant dans l'URL (partage d'une vue filtrée).
+- [ ] `P2` **Parcours de diagnostic guidé** « quel problème → quels concepts » (V2).
+- [ ] `P2` **Vue graphe** des concepts liés (prérequis / relations).
+- [ ] `P2` Aperçu rapide d'une fiche en survol / panneau latéral (sans changer de page).
+- [ ] `P2` Filtre par niveau de maturité (en plus des familles).
+
+## 3. Design & branding
+
+- [ ] `P0` Figer le **nom définitif** (actuellement « Lean Atelier ») + slogan.
+- [ ] `P1` Logo + favicon + image Open Graph.
+- [ ] `P1` Valider la palette définitive et la cohérence des couleurs de familles.
+- [ ] `P2` Illustrations / pictos par famille.
+- [ ] `P2` Mode sombre.
+
+## 4. Technique & qualité
+
+- [ ] `P0` **Déploiement** (Netlify / Vercel / GitHub Pages) + build automatique sur push.
+- [ ] `P0` SEO : `sitemap.xml`, métadonnées par fiche, balises Open Graph / Twitter.
+- [ ] `P1` Linter + formatage (ESLint/Prettier) et vérification de build en CI (GitHub Actions).
+- [ ] `P1` Validation des données `concepts.js` (slugs uniques, `related` existants, champs requis).
+- [ ] `P1` Page 404 personnalisée + page « À propos / méthode ».
+- [ ] `P2` Tests légers (build + cohérence des données) en CI.
+- [ ] `P2` Audit performance / Lighthouse.
+- [ ] `P2` Préparer l'i18n (structure de contenu prête pour l'EN) — sans traduire en V1.
+
+## 5. Accessibilité
+
+- [ ] `P0` Navigation clavier complète sur le tableau et les filtres (focus visibles, ordre logique).
+- [ ] `P1` Vérifier les contrastes AA (notamment textes sur couleurs de familles).
+- [ ] `P1` Rôles/labels ARIA cohérents sur la matrice et les contrôles ; test lecteur d'écran.
+
+## 6. Produit & croissance
+
+- [ ] `P1` Analytics respectueux de la vie privée (Plausible / Umami).
+- [ ] `P2` Boucle de feedback (« cette fiche vous a-t-elle aidé ? », suggestion de concept).
+- [ ] `P2` Export PDF d'une fiche ou d'un parcours.
+- [ ] `P2` Partage social d'une fiche.
+- [ ] `P2` Newsletter / capture d'e-mail pour les nouveautés.
+
+---
+
+### Notes
+
+- Garder la **source de vérité du contenu** dans `src/data/concepts.js` (cf. en-tête du fichier).
+- Toute nouvelle fiche doit respecter le gabarit `PRD.md` §4, **bloc « Limites & anti-usage » inclus**.

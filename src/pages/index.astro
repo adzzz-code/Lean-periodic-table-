@@ -1,0 +1,157 @@
+---
+import Base from '../layouts/Base.astro';
+import { families, levels } from '../data/families.js';
+import { concepts } from '../data/concepts.js';
+
+// Index { level -> familyId -> [concepts] } pour la matrice.
+const cellOf = (level, famId) =>
+  concepts
+    .filter((c) => c.level === level && c.family === famId)
+    .sort((a, b) => a.number - b.number);
+---
+
+<Base title={null}>
+  <section class="hero">
+    <div class="wrap">
+      <h1>Le tableau périodique du Lean & de l'excellence opérationnelle</h1>
+      <p>
+        Les outils et méthodes des grandes entreprises, classés et expliqués — pensés pour être
+        appliqués dans une TPE ou une petite équipe, avec leurs limites et leurs vrais premiers pas.
+      </p>
+      <p>
+        <strong>Colonnes</strong> = familles de concepts · <strong>Lignes</strong> = niveau de
+        maturité (commencez en haut). Cliquez une case pour ouvrir la fiche.
+      </p>
+    </div>
+  </section>
+
+  <div class="controls">
+    <div class="wrap">
+      <div class="control-group" id="family-filters">
+        <span class="control-label">Familles</span>
+        {
+          families.map((f) => (
+            <button class="chip-btn fam-btn" data-family={f.id} aria-pressed="true">
+              <span class="fam-dot" style={`background:${f.color}`}></span>
+              {f.short}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="control-group">
+        <label class="toggle">
+          <input type="checkbox" id="pme-toggle" />
+          Mode TPE/PME (incontournables)
+        </label>
+      </div>
+
+      <input
+        class="search"
+        id="search"
+        type="search"
+        placeholder="Rechercher un concept, un symbole…"
+        aria-label="Rechercher un concept"
+      />
+
+      <span class="result-count" id="count" aria-live="polite"></span>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="legend">
+      <span class="item"><strong>★</strong> = incontournable pour une petite structure</span>
+      {levels.map((l) => (
+        <span class="item"><strong>Niveau {l.level}</strong> {l.name} — {l.hint}</span>
+      ))}
+    </div>
+
+    <div class="table-scroll">
+      <div class="matrix" role="grid" aria-label="Tableau périodique des concepts Lean">
+        <div class="corner">Niveau ＼ Famille</div>
+        {families.map((f) => (
+          <div class="fam-head" style={`background:${f.color}`}>{f.name}</div>
+        ))}
+
+        {
+          levels.map((l) => (
+            <>
+              <div class="level-head">
+                <span class="n">Niveau {l.level}</span>
+                {l.name}
+              </div>
+              {families.map((f) => {
+                const cell = cellOf(l.level, f.id);
+                return (
+                  <div class={`cell${cell.length === 0 ? ' empty' : ''}`}>
+                    {cell.map((c) => (
+                      <a
+                        class="el"
+                        href={`/concept/${c.slug}/`}
+                        style={`--c:${f.color}`}
+                        data-family={c.family}
+                        data-pme={c.pmeStarter ? '1' : '0'}
+                        data-search={`${c.name} ${c.symbol} ${c.fullName}`.toLowerCase()}
+                      >
+                        <span class="num">{c.number}</span>
+                        <span class="sym">{c.symbol}</span>
+                        <span class="nm">{c.name}</span>
+                        {c.pmeStarter && <span class="star" title="Incontournable TPE/PME">★</span>}
+                      </a>
+                    ))}
+                  </div>
+                );
+              })}
+            </>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</Base>
+
+<script>
+  const search = document.getElementById('search');
+  const pmeToggle = document.getElementById('pme-toggle');
+  const famButtons = Array.from(document.querySelectorAll('#family-filters .fam-btn'));
+  const els = Array.from(document.querySelectorAll('.el'));
+  const count = document.getElementById('count');
+
+  const activeFamilies = new Set(famButtons.map((b) => b.dataset.family));
+
+  function apply() {
+    const q = (search.value || '').trim().toLowerCase();
+    const pmeOnly = pmeToggle.checked;
+    let visible = 0;
+
+    for (const el of els) {
+      const famOk = activeFamilies.has(el.dataset.family);
+      const pmeOk = !pmeOnly || el.dataset.pme === '1';
+      const searchOk = !q || el.dataset.search.includes(q);
+
+      // Famille décochée ou hors mode PME → on masque vraiment (la case se vide).
+      const hidden = !famOk || !pmeOk;
+      el.classList.toggle('is-hidden', hidden);
+      // Recherche → on grise les non-correspondants pour garder la structure du tableau.
+      el.classList.toggle('is-dim', !hidden && !!q && !searchOk);
+
+      if (!hidden && (!q || searchOk)) visible++;
+    }
+    count.textContent = `${visible} concept${visible > 1 ? 's' : ''} affiché${visible > 1 ? 's' : ''}`;
+  }
+
+  famButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.family;
+      const pressed = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', String(!pressed));
+      if (pressed) activeFamilies.delete(id);
+      else activeFamilies.add(id);
+      apply();
+    });
+  });
+
+  search.addEventListener('input', apply);
+  pmeToggle.addEventListener('change', apply);
+  apply();
+</script>

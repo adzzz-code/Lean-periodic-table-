@@ -1,0 +1,126 @@
+---
+import Base from '../../layouts/Base.astro';
+import { concepts, conceptBySlug } from '../../data/concepts.js';
+import { familyById, levels } from '../../data/families.js';
+
+export function getStaticPaths() {
+  return concepts.map((c) => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const c = conceptBySlug[slug];
+const fam = familyById[c.family];
+const lvl = levels.find((l) => l.level === c.level);
+
+const impactLabel = { high: 'Fort', medium: 'Moyen', low: 'Faible' };
+const effortLabel = { low: 'Faible', medium: 'Moyen', high: 'Élevé' };
+---
+
+<Base title={c.name} description={c.definition}>
+  <article class="concept">
+    <div class="wrap">
+      <p class="breadcrumb"><a href="/">Tableau</a> › {fam.name} › {c.name}</p>
+
+      <header class="concept-head">
+        <div class="badge-sym" style={`--c:${fam.color}`}>
+          <span class="sym">{c.symbol}</span>
+          <span class="num">N° {c.number}</span>
+        </div>
+        <div class="concept-titles">
+          <h1>{c.name}</h1>
+          <p class="full">{c.fullName}</p>
+          <div class="meta-row">
+            <span class="tag fam" style={`background:${fam.color}`}>{fam.name}</span>
+            <span class="tag">Niveau {c.level} — {lvl.name}</span>
+            {c.pmeStarter && <span class="tag">★ Incontournable TPE/PME</span>}
+          </div>
+        </div>
+      </header>
+
+      <p class="lead">{c.definition}</p>
+
+      <div class="grid-cards">
+        <section class="card">
+          <h2>L'essentiel</h2>
+          <dl>
+            <dt>Définition</dt>
+            <dd>{c.definition}</dd>
+            <dt>À quoi ça sert</dt>
+            <dd>{c.purpose}</dd>
+          </dl>
+        </section>
+
+        <section class="card warn">
+          <h2>Limites & anti-usage</h2>
+          <dl>
+            <dt>À quoi ça ne sert pas</dt>
+            <dd>{c.limits.notFor}</dd>
+            <dt>Quand ne pas l'utiliser</dt>
+            <dd>{c.limits.whenNot}</dd>
+            <dt>Pièges classiques</dt>
+            <dd>{c.limits.pitfalls}</dd>
+          </dl>
+        </section>
+
+        <section class="card pme">
+          <h2>Pour une TPE / petite équipe</h2>
+          <dl>
+            <dt>Pourquoi ça compte</dt>
+            <dd>{c.pme.why}</dd>
+            <dt>Premier pas réaliste</dt>
+            <dd>{c.pme.firstStep}</dd>
+            <dt>Exemple concret</dt>
+            <dd>{c.pme.example}</dd>
+            <dt>Erreur fréquente</dt>
+            <dd>{c.pme.commonMistake}</dd>
+          </dl>
+        </section>
+
+        <section class="card">
+          <h2>Pertinence pour une petite structure</h2>
+          <div class="relevance">
+            <div class="m">
+              <span class="k">Impact</span>
+              <span class={`v dot-impact-${c.relevance.impact}`}>● {impactLabel[c.relevance.impact]}</span>
+            </div>
+            <div class="m">
+              <span class="k">Effort</span>
+              <span class={`v dot-effort-${c.relevance.effort}`}>● {effortLabel[c.relevance.effort]}</span>
+            </div>
+          </div>
+          {c.pmeStarter && <p class="starter-flag">★ Recommandé pour démarrer en TPE/PME</p>}
+        </section>
+
+        <section class="card">
+          <h2>Pour aller plus loin (praticiens)</h2>
+          <dl>
+            <dt>Approfondissement</dt>
+            <dd>{c.practitioner.deeper}</dd>
+            <dt>Prérequis</dt>
+            <dd><ul>{c.practitioner.prerequisites.map((p) => <li>{p}</li>)}</ul></dd>
+            <dt>Indicateurs de succès</dt>
+            <dd><ul>{c.practitioner.successIndicators.map((s) => <li>{s}</li>)}</ul></dd>
+          </dl>
+        </section>
+
+        {c.related?.length > 0 && (
+          <section class="card">
+            <h2>Concepts liés</h2>
+            <div class="related-links">
+              {c.related.map((rs) => {
+                const rc = conceptBySlug[rs];
+                if (!rc) return null;
+                const rf = familyById[rc.family];
+                return (
+                  <a href={`/concept/${rc.slug}/`} style={`--c:${rf.color}`}>{rc.symbol} · {rc.name}</a>
+                );
+              })}
+            </div>
+          </section>
+        )}
+      </div>
+
+      <a class="back-link" href="/">← Retour au tableau</a>
+    </div>
+  </article>
+</Base>

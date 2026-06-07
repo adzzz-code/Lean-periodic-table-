@@ -1,0 +1,35 @@
+---
+import '../styles/global.css';
+const { title, description } = Astro.props;
+const fullTitle = title ? `${title} — Lean Atelier` : 'Lean Atelier — Tableau périodique du Lean';
+const desc =
+  description ??
+  "Le tableau périodique du Lean et de l'excellence opérationnelle, adapté aux TPE/PME.";
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={desc} />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#contenu">Aller au contenu</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">Lean<span>Atelier</span></a>
+        <span class="tagline">Le tableau périodique du Lean & de l'excellence opérationnelle</span>
+      </div>
+    </header>
+    <main id="contenu">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        Lean Atelier — outils & méthodes des grandes entreprises, adaptés aux TPE/PME. · V1 · FR
+      </div>
+    </footer>
+  </body>
+</html>
