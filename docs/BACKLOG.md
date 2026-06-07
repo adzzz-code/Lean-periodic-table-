@@ -39,7 +39,7 @@
 ## 4. Technique & qualité
 
 - [x] `P0` **Déploiement** GitHub Pages automatisé + configs Netlify/Vercel (cf. `DEPLOIEMENT.md`).
-      ⚠️ Reste une action manuelle unique : activer *Settings → Pages → Source : GitHub Actions*.
+      ✅ **En ligne** : https://adzzz-code.github.io/Lean-periodic-table-/ (Pages activé, déploiement auto sur push `main`).
 - [x] `P0` Vérification de **build en CI** sur push/PR (`.github/workflows/ci.yml`).
 - [x] `P0` SEO : `sitemap-index.xml` (intégration `@astrojs/sitemap`) + `robots.txt`.
 - [ ] `P1` SEO : métadonnées par fiche enrichies + balises Open Graph / Twitter (image partage).
