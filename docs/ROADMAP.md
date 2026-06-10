@@ -55,7 +55,10 @@ La progression suit la logique du produit : **d'abord une référence crédible 
       quand la recherche ne donne rien.
 - [x] **Vue filtrée partageable** : filtres famille/niveau, recherche et mode TPE/PME persistés
       dans l'URL.
-- [ ] Élargissement du contenu (objectif ~60 concepts) + glossaire.
+- [x] **Landing pages diagnostic** : chaque problème = contexte (langage de dirigeant) + FAQ
+      avec données structurées `FAQPage` — le levier SEO long-tail du projet.
+- [x] **Glossaire** (`/glossaire/`) : ~45 termes japonais/acronymes en une phrase, liés aux fiches.
+- [ ] Élargissement du contenu (objectif ~60 concepts).
 - [ ] Fiches enrichies : check-lists de démarrage téléchargeables, mini-cas.
 
 ## 🚀 V3 — Personnalisation & diffusion

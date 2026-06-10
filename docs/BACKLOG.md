@@ -19,7 +19,11 @@
 - [x] `P1` **Sources / références** par concept (`src/data/sources.js`), affichées sur la fiche et
       **imposées par `npm run validate`** (≥ 1 source par concept).
 - [ ] `P1` Vérifier l'équilibre des familles (certaines cases de niveau sont vides — voulu ?).
-- [ ] `P1` Ajouter un **glossaire** des termes japonais / acronymes.
+- [x] `P1` **Glossaire** des termes japonais / acronymes (`/glossaire/`, `src/data/glossary.js`) :
+      ~45 termes en une phrase, liés aux fiches, JSON-LD `DefinedTermSet`, entrée de navigation.
+- [x] `P1` **Landing pages diagnostic** : chaque problème enrichi d'un **contexte** (2 §, langage
+      de dirigeant — SEO long-tail) et d'une **FAQ** (objections réelles, réponses honnêtes),
+      rendue en JSON-LD `FAQPage`. Champs obligatoires, imposés par `npm run validate`.
 - [ ] `P2` Étendre à ~60 concepts (cf. V2) : ex. SIPOC, Kano, QFD, Spaghetti, Yamazumi, 5 Pourquoi inversés.
 - [ ] `P2` Mini-cas concrets TPE/PME illustrés (1 par famille).
 

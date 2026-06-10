@@ -1,0 +1,134 @@
+---
+import Base from '../layouts/Base.astro';
+import { glossary } from '../data/glossary.js';
+import { conceptBySlug } from '../data/concepts.js';
+import { familyById } from '../data/families.js';
+import { withBase } from '../lib/url.js';
+
+const sorted = [...glossary].sort((a, b) => a.term.localeCompare(b.term, 'fr'));
+
+const home = new URL(withBase('/'), Astro.site).href;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Tableau', item: home },
+    { '@type': 'ListItem', position: 2, name: 'Glossaire', item: canonical },
+  ],
+};
+const termSet = {
+  '@context': 'https://schema.org',
+  '@type': 'DefinedTermSet',
+  name: 'Glossaire Lean — Lean Élémentaire',
+  url: canonical,
+  hasDefinedTerm: sorted.map((g) => ({
+    '@type': 'DefinedTerm',
+    name: g.term,
+    description: g.def,
+  })),
+};
+---
+
+<Base
+  title="Glossaire du Lean : termes japonais et acronymes"
+  description="Kaizen, gemba, muda, takt time, SMED, PDCA… Tous les termes du Lean expliqués en une phrase, sans jargon — avec un lien vers la fiche détaillée."
+  jsonld={[breadcrumb, termSet]}
+>
+  <article class="glossary">
+    <div class="wrap">
+      <p class="breadcrumb"><a href={withBase('/')}>Tableau</a> › Glossaire</p>
+
+      <h1>Glossaire : le Lean sans jargon</h1>
+      <p class="lead">
+        Les termes japonais et les acronymes du Lean, expliqués en une phrase. Quand une fiche
+        détaillée existe, le lien vous y mène.
+      </p>
+
+      <dl class="terms">
+        {
+          sorted.map((g) => {
+            const c = g.slug ? conceptBySlug[g.slug] : null;
+            const fam = c ? familyById[c.family] : null;
+            return (
+              <div class="term">
+                <dt>{g.term}</dt>
+                <dd>
+                  {g.def}
+                  {c && (
+                    <a
+                      class="term-link"
+                      href={withBase(`/concept/${c.slug}/`)}
+                      style={`--c:${fam.color}`}
+                    >
+                      {c.symbol} · fiche {c.name} →
+                    </a>
+                  )}
+                </dd>
+              </div>
+            );
+          })
+        }
+      </dl>
+
+      <p class="glossary-foot">
+        Un terme manque ? Le tableau complet est <a href={withBase('/')}>par ici</a> — et si vous partez
+        d'un problème concret, <a href={withBase('/diagnostic/')}>commencez plutôt là</a>.
+      </p>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .glossary {
+    padding: 22px 0 60px;
+  }
+  .glossary h1 {
+    font-size: clamp(1.5rem, 3.6vw, 2.2rem);
+    letter-spacing: -0.02em;
+    margin: 8px 0 10px;
+  }
+  .glossary .lead {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 66ch;
+  }
+  .terms {
+    margin: 24px 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 12px;
+  }
+  .term {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+  }
+  .term dt {
+    font-weight: 800;
+    color: var(--ink);
+  }
+  .term dd {
+    margin: 4px 0 0;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+  }
+  .term-link {
+    --c: var(--brand);
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--brand);
+    text-decoration: none;
+    border-bottom: 2px solid var(--c);
+  }
+  .term-link:hover {
+    opacity: 0.8;
+  }
+  .glossary-foot {
+    color: var(--ink-soft);
+    margin-top: 26px;
+  }
+</style>
