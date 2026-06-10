@@ -11,7 +11,11 @@
 
 ## 1. Contenu éditorial
 
-- [ ] `P0` Relire les 40 fiches existantes (justesse lean, ton TPE/PME, fautes).
+- [~] `P0` Relire les 40 fiches existantes (justesse lean, ton TPE/PME, fautes).
+  **Passe « expert lean » faite le 2026-06-10** : 7 corrections (8D : cause racine = D4 ;
+  définition TOC précisée ; hansei recalé sur Check/Act ; ambiguïté « on recommande » du
+  kanban ; pertinence heijunka recalibrée ; sources takt time et management visuel
+  consolidées). **Reste : validation finale par un œil humain du métier.**
 - [x] `P1` **Sources / références** par concept (`src/data/sources.js`), affichées sur la fiche et
       **imposées par `npm run validate`** (≥ 1 source par concept).
 - [ ] `P1` Vérifier l'équilibre des familles (certaines cases de niveau sont vides — voulu ?).

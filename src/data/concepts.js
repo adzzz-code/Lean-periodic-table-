@@ -144,7 +144,8 @@ export const concepts = [
     relevance: { impact: 'medium', effort: 'low' },
     pmeStarter: false,
     practitioner: {
-      deeper: "Pilier de la section 'agir/standardiser' du PDCA et du retour d'expérience A3.",
+      deeper:
+        "Nourrit les phases Check/Act du PDCA et le retour d'expérience du A3 ; chez Toyota, pratiqué même quand le projet réussit.",
       prerequisites: ['Culture sans blâme'],
       successIndicators: ['Leçons documentées et réutilisées', 'Erreurs non répétées'],
     },
@@ -444,7 +445,8 @@ export const concepts = [
     },
     pme: {
       why: 'Un simple système de cartes ou de bacs évite à la fois les ruptures et le sur-stock qui plombe la trésorerie.',
-      firstStep: 'Mettre en place un système à 2 bacs : quand le premier est vide, on recommande.',
+      firstStep:
+        'Mettre en place un système à 2 bacs : quand le premier est vide, on passe commande et on puise dans le second.',
       example: "Un café gère ses consommables avec un repère 'point de commande' sur l'étagère.",
       commonMistake: 'Garder un Kanban figé alors que la consommation a changé.',
     },
@@ -581,7 +583,7 @@ export const concepts = [
         'Un cabinet lisse ses rendez-vous pour éviter le rush du lundi et le creux du jeudi.',
       commonMistake: 'Confondre lissage et simple planning : oublier de lisser aussi le mix.',
     },
-    relevance: { impact: 'low', effort: 'high' },
+    relevance: { impact: 'medium', effort: 'medium' },
     pmeStarter: false,
     practitioner: {
       deeper: "Boîte de lissage, intervalle EPEI ; condition d'un JIT robuste.",
@@ -992,7 +994,7 @@ export const concepts = [
         'Lourd pour des problèmes mineurs ; pensé pour les non-conformités sérieuses (souvent client).',
       whenNot: "Inutile si aucune action de confinement immédiat n'est nécessaire.",
       pitfalls:
-        "S'arrêter au confinement (D3) et oublier la cause racine et la prévention (D5-D7).",
+        "S'arrêter au confinement (D3) et oublier la cause racine et la prévention (D4-D7).",
     },
     pme: {
       why: 'Donne un cadre carré pour répondre à une réclamation client importante sans rien oublier.',
@@ -1331,7 +1333,7 @@ export const concepts = [
     family: 'avance',
     level: 4,
     definition:
-      "Tout système est limité par un goulot ; améliorer le reste ne sert qu'une fois le goulot exploité.",
+      "Tout système est limité par un goulot : tant qu'il n'est pas traité, améliorer ailleurs n'augmente pas le débit.",
     purpose: "Maximiser le débit global en concentrant l'effort sur la contrainte.",
     limits: {
       notFor:
