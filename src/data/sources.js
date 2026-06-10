@@ -31,7 +31,10 @@ export const sources = {
   // Flux & système de production
   vsm: ['Mike Rother & John Shook — Learning to See (1999)'],
   kanban: ['Taiichi Ohno — Toyota Production System (1978)'],
-  'takt-time': ['Toyota Production System ; littérature lean (takt = Taktzeit)'],
+  'takt-time': [
+    'Origine : Taktzeit, industrie aéronautique allemande (années 1930), adopté par Toyota',
+    'Mike Rother & John Shook — Learning to See (1999)',
+  ],
   jit: ['Taiichi Ohno — Toyota Production System (1978)'],
   smed: ['Shigeo Shingo — A Revolution in Manufacturing: The SMED System (1985)'],
   heijunka: ['Jeffrey Liker — The Toyota Way (2004)', 'Toyota Production System'],
@@ -71,7 +74,10 @@ export const sources = {
   ],
 
   // Management & culture
-  'management-visuel': ['Hiroyuki Hirano — visual workplace', 'Lean management quotidien'],
+  'management-visuel': [
+    'Michel Greif — L’Usine s’affiche (1989)',
+    'Gwendolyn Galsworth — Visual Workplace, Visual Thinking (2005)',
+  ],
   kaizen: ['Masaaki Imai — Kaizen (1986)'],
   'leader-standard-work': ['David Mann — Creating a Lean Culture (2005)'],
   'hoshin-kanri': ['Yoji Akao — Hoshin Kanri: Policy Deployment for Successful TQM (1991)'],
