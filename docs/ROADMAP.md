@@ -39,16 +39,24 @@ La progression suit la logique du produit : **d'abord une référence crédible 
 > pas par les outils. L'entrée « par le problème » est donc le **funnel prioritaire**.
 
 - [x] **Parcours de diagnostic guidé** : « quel est votre problème → quels concepts pour vous »
-      (`/diagnostic/`, 12 problèmes en langage courant → concepts ordonnés + « pourquoi »),
-      mis en avant en tête d'accueil et en navigation.
-- [x] **Vue graphe** des relations entre concepts (`/graphe/`) — SVG radial, surbrillance au survol.
-- [x] **Calculateur de gain** (sur `/pepites/`) : coût horaire → €/mois et €/an (gain récurrent annualisé).
+      (`/diagnostic/`, **16** problèmes en langage courant → concepts ordonnés + « pourquoi »),
+      mis en avant en tête d'accueil et en navigation. **Couverture complète** : chaque concept
+      est recommandé par au moins un problème (vérifié par `npm run validate`).
+- [x] ~~Vue graphe~~ — **retirée** (2026-06-10) : peu de valeur pour la cible, inutilisable au
+      tactile. Remplacée par le maillage des fiches : « concepts liés » affiche désormais les
+      liens sortants **et entrants** (calculés au build).
+- [x] **Calculateur de gain** (sur `/pepites/`) : coût horaire → €/mois et €/an (gain récurrent
+      annualisé), **opt-in** — le total ne cumule que les pépites cochées (honnêteté d'abord).
 - [x] Mise en avant par pertinence : **page Pépites** (`/pepites/`) — fort impact / faible effort,
       orientée **gain de temps** (objection n°1 des petites structures : « pas le temps »),
       avec **estimation indicative** du temps gagné par pépite.
+- [x] **Recherche en langage courant** : mots-clés par concept (`src/data/keywords.js`) —
+      « rangement », « goulot », « stock »… trouvent le bon concept ; renvoi vers le diagnostic
+      quand la recherche ne donne rien.
+- [x] **Vue filtrée partageable** : filtres famille/niveau, recherche et mode TPE/PME persistés
+      dans l'URL.
 - [ ] Élargissement du contenu (objectif ~60 concepts) + glossaire.
 - [ ] Fiches enrichies : check-lists de démarrage téléchargeables, mini-cas.
-- [ ] Élargir la couverture des problèmes (et affiner les recommandations).
 
 ## 🚀 V3 — Personnalisation & diffusion
 

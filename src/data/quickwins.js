@@ -5,6 +5,9 @@
 // `hoursPerWeek`= valeur numérique (h/semaine) utilisée par le calculateur de gain. Conservatrice.
 //                 Un gain de temps est RÉCURRENT → on l'annualise dans le calculateur.
 // Ordre = ordre d'affichage (du plus évident au plus structurant).
+// NB : sélection éditoriale, pas exhaustive. D'autres concepts fort impact/faible effort
+// (genchi-genbutsu, amelioration-continue, valeur, voix-client) ne sont volontairement pas
+// listés : leur gain est réel mais difficile à formuler honnêtement en heures/semaine.
 
 export const quickwins = [
   {

@@ -73,6 +73,10 @@ export const problems = [
         slug: 'ishikawa',
         why: 'Explorer en équipe toutes les causes possibles avant de conclure.',
       },
+      {
+        slug: 'huit-d',
+        why: 'Pour une réclamation client sérieuse : protéger le client d’abord, éradiquer ensuite.',
+      },
     ],
   },
   {
@@ -214,8 +218,104 @@ export const problems = [
       { slug: 'spc', why: 'Suivre le procédé pour réagir aux vraies dérives sans sur-réagir.' },
       { slug: 'poka-yoke', why: 'Sécuriser le point critique contre l’erreur.' },
       {
+        slug: 'dmaic',
+        why: 'Le cadre pas-à-pas pour réduire une variation chiffrée, mesures à l’appui.',
+      },
+      {
         slug: 'six-sigma',
         why: 'En dernier recours, pour un problème de variation chiffré, coûteux et persistant.',
+      },
+    ],
+  },
+  {
+    slug: 'incendies-quotidien',
+    problem: 'Je passe mes journées à éteindre des incendies',
+    lead: 'L’urgence permanente cache des problèmes jamais traités à la racine. On les fait remonter tôt, et on traite à froid.',
+    featured: true,
+    solutions: [
+      {
+        slug: 'andon',
+        why: 'Faire signaler le problème dès qu’il apparaît, quand il est encore petit.',
+      },
+      {
+        slug: 'genchi-genbutsu',
+        why: 'Aller voir le problème réel avant de réagir : on traite la bonne urgence.',
+      },
+      {
+        slug: 'jidoka',
+        why: 'Arrêter au premier défaut plutôt que laisser l’erreur se propager.',
+      },
+      {
+        slug: 'leader-standard-work',
+        why: 'Des rituels courts et réguliers qui traitent les problèmes avant qu’ils ne flambent.',
+      },
+    ],
+  },
+  {
+    slug: 'preparations-trop-longues',
+    problem: 'Mes changements de série ou mes préparations me prennent des heures',
+    lead: 'Une grande partie du temps de changement peut se faire sans arrêter l’activité. On sépare, on prépare, on raccourcit.',
+    featured: false,
+    solutions: [
+      {
+        slug: 'smed',
+        why: 'Séparer ce qui peut se préparer à l’avance de ce qui exige vraiment l’arrêt.',
+      },
+      {
+        slug: 'cinq-s',
+        why: 'Un poste prêt et rangé élimine la moitié du temps de préparation.',
+      },
+      {
+        slug: 'travail-standardise',
+        why: 'Une check-list de changement stabilise la procédure et la raccourcit.',
+      },
+    ],
+  },
+  {
+    slug: 'strategie-natterrit-pas',
+    problem: 'J’ai des objectifs en tête, mais rien n’atterrit sur le terrain',
+    lead: 'Une stratégie qui reste dans la tête du dirigeant n’existe pas. On la traduit en quelques priorités visibles et suivies.',
+    featured: false,
+    solutions: [
+      {
+        slug: 'hoshin-kanri',
+        why: 'Déployer 1 à 3 priorités annuelles en actions concrètes, partagées par tous.',
+      },
+      {
+        slug: 'a3',
+        why: 'Formaliser un objectif en une page : problème, cible, plan — lisible par l’équipe.',
+      },
+      {
+        slug: 'pensee-long-terme',
+        why: 'Arbitrer le quotidien à l’aune du cap, pas de l’urgence du jour.',
+      },
+      {
+        slug: 'kpi',
+        why: 'Suivre l’avancement avec 3-4 chiffres, pas avec des impressions.',
+      },
+    ],
+  },
+  {
+    slug: 'ameliorations-retombent',
+    problem: 'On améliore, puis tout retombe comme avant',
+    lead: 'Une amélioration sans ancrage retombe en quelques semaines. On installe la routine qui la fait tenir.',
+    featured: false,
+    solutions: [
+      {
+        slug: 'travail-standardise',
+        why: 'Ancrer la nouvelle façon de faire pour qu’elle survive au retour de l’urgence.',
+      },
+      {
+        slug: 'kata',
+        why: 'Transformer l’amélioration en routine d’entraînement, pas en coup d’éclat.',
+      },
+      {
+        slug: 'leader-standard-work',
+        why: 'Le suivi régulier du dirigeant est ce qui maintient le standard en vie.',
+      },
+      {
+        slug: 'hansei',
+        why: 'Tirer les leçons de ce qui n’a pas tenu, sans chercher de coupable.',
       },
     ],
   },

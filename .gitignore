@@ -5,3 +5,6 @@ dist/
 *.log
 .env
 .env.*
+
+# Images OG des fiches : régénérées au build (npm run og / prebuild)
+public/og/

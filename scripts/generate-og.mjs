@@ -1,12 +1,21 @@
-// Génère l'image Open Graph (aperçu de partage) en PNG à partir d'un SVG.
-// Lancer : `npm run og`. Le PNG produit (public/og.png) est versionné.
-import { writeFileSync } from 'node:fs';
+// Génère les images Open Graph (aperçus de partage) en PNG à partir de SVG :
+//   - public/og.png        : image générique du site (versionnée) ;
+//   - public/og/<slug>.png : une image par fiche concept (non versionnées, régénérées
+//     au build via `prebuild` — cf. package.json).
+// Lancer manuellement : `npm run og`.
+import { writeFileSync, mkdirSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import sharp from 'sharp';
+import { concepts } from '../src/data/concepts.js';
+import { familyById, levels } from '../src/data/families.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const out = join(__dirname, '..', 'public', 'og.png');
+const publicDir = join(__dirname, '..', 'public');
+const ogDir = join(publicDir, 'og');
+
+const esc = (s) =>
+  String(s).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
 const FAM = [
   '#7c3aed',
@@ -18,6 +27,8 @@ const FAM = [
   '#dc2626',
   '#4f46e5',
 ];
+
+// ─── Image générique du site ───────────────────────────────────────────────
 
 // Petites tuiles "éléments" décoratives en bas.
 const chips = ['5S', 'PD', 'Vs', 'Kb', 'Pa', 'A3', 'Gb', 'Kz'];
@@ -34,7 +45,7 @@ chips.forEach((s, i) => {
     </g>`;
 });
 
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+const homeSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0d2233"/>
@@ -65,6 +76,76 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" v
   ${deco}
 </svg>`;
 
-const png = await sharp(Buffer.from(svg)).png().toBuffer();
-writeFileSync(out, png);
-console.log(`OG image générée : ${out} (${png.length} octets)`);
+// ─── Image par fiche concept ───────────────────────────────────────────────
+
+// Coupe un nom trop long en deux lignes, au mot le plus proche du milieu.
+function splitName(name) {
+  if (name.length <= 20) return [name];
+  const words = name.split(' ');
+  if (words.length === 1) return [name];
+  let best = 1;
+  let bestDiff = Infinity;
+  for (let i = 1; i < words.length; i++) {
+    const left = words.slice(0, i).join(' ').length;
+    const diff = Math.abs(left - name.length / 2);
+    if (diff < bestDiff) {
+      bestDiff = diff;
+      best = i;
+    }
+  }
+  return [words.slice(0, best).join(' '), words.slice(best).join(' ')];
+}
+
+function conceptSvg(c) {
+  const fam = familyById[c.family];
+  const lvl = levels.find((l) => l.level === c.level);
+  const lines = splitName(c.name);
+  const fontSize = Math.max(...lines.map((l) => l.length)) > 16 ? 56 : 72;
+  const nameY = lines.length === 2 ? 195 : 235;
+  const nameSvg = lines
+    .map(
+      (l, i) =>
+        `<text x="400" y="${nameY + i * (fontSize + 12)}" font-family="DejaVu Sans, sans-serif" font-size="${fontSize}" font-weight="bold" fill="#ffffff">${esc(l)}</text>`,
+    )
+    .join('\n  ');
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d2233"/>
+      <stop offset="1" stop-color="#125a86"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Tuile "élément" aux couleurs de la famille -->
+  <g transform="translate(80,120)">
+    <rect width="240" height="240" rx="34" fill="#ffffff"/>
+    <rect width="240" height="240" rx="34" fill="${fam.color}" opacity="0.14"/>
+    <rect width="16" height="240" rx="8" fill="${fam.color}"/>
+    <text x="36" y="58" font-family="DejaVu Sans, sans-serif" font-size="32" fill="#4a5a6b">${c.number}</text>
+    <text x="128" y="166" text-anchor="middle" font-family="DejaVu Sans, sans-serif" font-size="96" font-weight="bold" fill="#0d2233">${esc(c.symbol)}</text>
+  </g>
+
+  <text x="400" y="120" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="bold" fill="#7fd1cf">${esc(fam.name)}</text>
+  ${nameSvg}
+  <text x="400" y="330" font-family="DejaVu Sans, sans-serif" font-size="26" fill="#9fb6c6">Niveau ${c.level} — ${esc(lvl.name)}</text>
+
+  <text x="80" y="500" font-family="DejaVu Sans, sans-serif" font-size="34" font-weight="bold" fill="#ffffff">Lean Élémentaire</text>
+  <text x="80" y="544" font-family="DejaVu Sans, sans-serif" font-size="24" fill="#7fd1cf">Le Lean, élément par élément — pour les TPE &amp; PME.</text>
+</svg>`;
+}
+
+// ─── Génération ────────────────────────────────────────────────────────────
+
+const homePng = await sharp(Buffer.from(homeSvg)).png().toBuffer();
+writeFileSync(join(publicDir, 'og.png'), homePng);
+
+mkdirSync(ogDir, { recursive: true });
+for (const c of concepts) {
+  const png = await sharp(Buffer.from(conceptSvg(c)))
+    .png()
+    .toBuffer();
+  writeFileSync(join(ogDir, `${c.slug}.png`), png);
+}
+console.log(`OG générées : og.png + ${concepts.length} fiches dans public/og/`);

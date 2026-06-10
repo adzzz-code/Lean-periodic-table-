@@ -18,6 +18,14 @@ const refs = sources[slug] ?? [];
 const impactLabel = { high: 'Fort', medium: 'Moyen', low: 'Faible' };
 const effortLabel = { low: 'Faible', medium: 'Moyen', high: 'Élevé' };
 
+// Concepts liés = liens sortants (saisis) + liens entrants (calculés au build) :
+// si A référence B, B affiche aussi A — le maillage reste complet sans double saisie.
+const outbound = c.related ?? [];
+const inbound = concepts
+  .filter((o) => (o.related ?? []).includes(slug) && !outbound.includes(o.slug))
+  .map((o) => o.slug);
+const relatedAll = [...outbound, ...inbound];
+
 // Données structurées de la fiche.
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const home = new URL(withBase('/'), Astro.site).href;
@@ -40,7 +48,12 @@ const definedTerm = {
 };
 ---
 
-<Base title={c.name} description={c.definition} jsonld={[breadcrumb, definedTerm]}>
+<Base
+  title={c.name}
+  description={c.definition}
+  jsonld={[breadcrumb, definedTerm]}
+  image={`/og/${slug}.png`}
+>
   <article class="concept">
     <div class="wrap">
       <p class="breadcrumb"><a href={withBase('/')}>Tableau</a> › {fam.name} › {c.name}</p>
@@ -132,11 +145,11 @@ const definedTerm = {
         </section>
 
         {
-          c.related?.length > 0 && (
+          relatedAll.length > 0 && (
             <section class="card">
               <h2>Concepts liés</h2>
               <div class="related-links">
-                {c.related.map((rs) => {
+                {relatedAll.map((rs) => {
                   const rc = conceptBySlug[rs];
                   if (!rc) return null;
                   const rf = familyById[rc.family];

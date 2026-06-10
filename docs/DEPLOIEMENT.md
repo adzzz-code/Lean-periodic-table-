@@ -5,10 +5,12 @@ l'option par défaut (gratuite, intégrée, aucun compte externe).
 
 ## Variables d'environnement
 
-| Variable    | Rôle                                | Défaut                         |
-| ----------- | ----------------------------------- | ------------------------------ |
-| `SITE_URL`  | URL publique (sitemap, métadonnées) | `https://adzzz-code.github.io` |
-| `BASE_PATH` | Préfixe de chemin                   | `/`                            |
+| Variable                  | Rôle                                          | Défaut                         |
+| ------------------------- | --------------------------------------------- | ------------------------------ |
+| `SITE_URL`                | URL publique (sitemap, métadonnées)           | `https://adzzz-code.github.io` |
+| `BASE_PATH`               | Préfixe de chemin                             | `/`                            |
+| `PUBLIC_ANALYTICS_SRC`    | URL du script analytics (cf. §Analytics)      | _(vide = pas d'analytics)_     |
+| `PUBLIC_ANALYTICS_DOMAIN` | Domaine déclaré chez le fournisseur analytics | _(vide)_                       |
 
 > Les liens internes utilisent `withBase()` (`src/lib/url.js`) : le site fonctionne donc à la
 > racine **comme** dans un sous-dossier, sans rien changer au code.
@@ -58,10 +60,26 @@ Config : `vercel.json` (framework Astro détecté).
 
 ---
 
+## Analytics (sans cookie, sans bannière RGPD)
+
+Le layout (`src/layouts/Base.astro`) sait injecter un script de mesure d'audience **sans
+cookie** (Plausible ou Umami) — mais **uniquement si configuré au build**. Tant que les deux
+variables sont vides, aucun script tiers n'est chargé.
+
+**Pour activer (une fois le compte créé chez le fournisseur) :**
+
+1. Créer un compte (ex. [Plausible](https://plausible.io) ou [Umami Cloud](https://umami.is))
+   et y déclarer le site (`adzzz-code.github.io` ou le futur domaine propre).
+2. Dans `.github/workflows/deploy.yml`, décommenter les deux lignes `PUBLIC_ANALYTICS_*`
+   (et ajuster leurs valeurs au fournisseur choisi).
+
+> Pourquoi c'est important : le site enseigne « décider sur des faits » — sans mesure d'usage
+> (diagnostic vs tableau, pépites consultées…), la roadmap se pilote au feeling.
+
 ## CI
 
-`.github/workflows/ci.yml` construit le site sur chaque push (hors `main`) et chaque PR, pour
-détecter une régression de build avant fusion.
+`.github/workflows/ci.yml` vérifie sur chaque push (hors `main`) et chaque PR : intégrité des
+données (`npm run validate`), tests unitaires (`npm test`), lint, format et build.
 
 ## Construire / prévisualiser en local
 

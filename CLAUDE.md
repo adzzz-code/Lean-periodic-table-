@@ -27,19 +27,28 @@ quand un outil ne sert à rien et ses limites — anti « cargo cult »).
   avant dès l'accueil. Le tableau reste la signature/exploration.
 - **Pépites** (`/pepites/`, `src/data/quickwins.js`) : objection n°1 = « pas le temps », donc on
   met en avant le **gain de temps** (fort impact / faible effort) + une **estimation indicative**
-  (`estimate`) présentée honnêtement comme ordre de grandeur. **Calculateur** : coût horaire →
-  gain €/mois·an (récurrent, basé sur `hoursPerWeek`). Argument de valeur central.
-- **Vue graphe** (`/graphe/`) : SVG radial des relations « concepts liés », surbrillance au survol.
+  (`estimate`) présentée honnêtement comme ordre de grandeur. **Calculateur opt-in** : coût
+  horaire → gain €/mois·an (récurrent, basé sur `hoursPerWeek`), mais le total ne cumule **que
+  les pépites cochées** (une seule par défaut — pas de promesse globale, posture anti cargo cult).
+- ~~Vue graphe~~ : **retirée** (2026-06-10) — peu de valeur pour la cible, inutilisable au
+  tactile. Le maillage passe par les « concepts liés » des fiches (liens sortants **et**
+  entrants, calculés au build).
 - Fiche = gabarit fixe : Essentiel · **Limites & anti-usage** · couche TPE/PME · badge
   pertinence (impact/effort) · couche praticien · concepts liés · **sources**. Détail : `docs/PRD.md` §4.
 
 ## Conventions
 
 - **Source de vérité contenu** : `src/data/concepts.js` (+ `families.js`, `sources.js`,
-  `problems.js`, `quickwins.js`). Ne pas dupliquer ailleurs. Ajouter un concept = une entrée
-  respectant le gabarit + **≥ 1 source**. Problèmes et pépites pointent des slugs existants
-  (pépites = fort impact/faible effort, vérifié par `npm run validate`).
-- **Qualité** : `npm run validate` (intégrité + sources), `npm run lint`, `npm run format` — vérifiés en CI.
+  `keywords.js`, `problems.js`, `quickwins.js`). Ne pas dupliquer ailleurs. Ajouter un concept =
+  une entrée respectant le gabarit + **≥ 1 source** + **≥ 1 mot-clé** de recherche en langage
+  courant (`keywords.js`). Problèmes et pépites pointent des slugs existants (pépites = fort
+  impact/faible effort, vérifié par `npm run validate`).
+- **Qualité** : `npm run validate` (intégrité + sources + mots-clés), `npm test` (recherche,
+  calcul de gain), `npm run lint`, `npm run format` — vérifiés en CI.
+- **OG images** : `scripts/generate-og.mjs` (lancé en `prebuild`) — `public/og.png` (versionnée)
+  et une image par fiche dans `public/og/` (non versionnées, régénérées au build).
+- **Analytics** : support Plausible/Umami sans cookie, activé par `PUBLIC_ANALYTICS_SRC` /
+  `PUBLIC_ANALYTICS_DOMAIN` au build (cf. `docs/DEPLOIEMENT.md`). Compte à créer par l'owner.
 - **Stack** : Astro + JS + CSS natif. Pas de TypeScript ni framework CSS lourd sans demande.
 - **Langue** : FR uniquement en V1.
 - **Naming** : kebab-case ; slugs de concepts en kebab-case ; symboles 1-3 caractères.

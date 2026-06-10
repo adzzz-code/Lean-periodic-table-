@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import { withBase } from '../lib/url.js';
-const { title, description, jsonld = [] } = Astro.props;
+const { title, description, jsonld = [], image } = Astro.props;
 const SITE_NAME = 'Lean Élémentaire';
 const fullTitle = title
   ? `${title} — ${SITE_NAME}`
@@ -12,8 +12,15 @@ const desc =
 
 // URLs absolues pour le SEO / le partage (Astro.site défini dans astro.config.mjs).
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
-const ogImage = new URL(withBase('/og.png'), Astro.site).href;
+const ogImage = new URL(withBase(image ?? '/og.png'), Astro.site).href;
 const home = new URL(withBase('/'), Astro.site).href;
+
+// Analytics sans cookie (Plausible/Umami), activé seulement si configuré au build :
+//   PUBLIC_ANALYTICS_SRC    : URL du script (ex. https://plausible.io/js/script.js)
+//   PUBLIC_ANALYTICS_DOMAIN : domaine déclaré chez le fournisseur (data-domain)
+// Cf. docs/DEPLOIEMENT.md §Analytics. Tant que non configuré : zéro script tiers.
+const analyticsSrc = import.meta.env.PUBLIC_ANALYTICS_SRC;
+const analyticsDomain = import.meta.env.PUBLIC_ANALYTICS_DOMAIN;
 
 // Données structurées : WebSite (toujours) + éventuels schémas fournis par la page.
 const websiteSchema = {
@@ -51,6 +58,7 @@ const schemas = [websiteSchema, ...jsonld];
     <meta name="twitter:image" content={ogImage} />
 
     {schemas.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+    {analyticsSrc && <script is:inline defer data-domain={analyticsDomain} src={analyticsSrc} />}
   </head>
   <body>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
@@ -84,7 +92,6 @@ const schemas = [websiteSchema, ...jsonld];
         <nav class="site-nav">
           <a class="nav-link" href={withBase('/diagnostic/')}>Par où commencer&nbsp;?</a>
           <a class="nav-link" href={withBase('/pepites/')}>Pépites</a>
-          <a class="nav-link" href={withBase('/graphe/')}>Graphe</a>
           <a class="nav-link" href={withBase('/a-propos/')}>À propos</a>
         </nav>
       </div>

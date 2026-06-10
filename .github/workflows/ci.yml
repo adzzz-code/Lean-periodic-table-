@@ -18,6 +18,8 @@ jobs:
       - run: npm ci
       - name: Intégrité des données
         run: npm run validate
+      - name: Tests unitaires
+        run: npm test
       - name: Lint (ESLint)
         run: npm run lint
       - name: Format (Prettier)
