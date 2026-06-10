@@ -24,7 +24,11 @@ quand un outil ne sert à rien et ses limites — anti « cargo cult »).
 - Double public : **TPE/PME (prioritaire)** + couche praticiens sur chaque fiche.
 - **Entrée prioritaire par le problème** (la cible ne connaît pas le Lean) : `/diagnostic/`
   (`src/data/problems.js`) mappe une douleur en langage courant → concepts recommandés. Mise en
-  avant dès l'accueil. Le tableau reste la signature/exploration.
+  avant dès l'accueil. Le tableau reste la signature/exploration. Chaque problème est une
+  **landing page** (contexte + FAQ, rendue en JSON-LD `FAQPage`) — c'est le levier SEO
+  long-tail du projet : on vise les requêtes en langage de dirigeant, pas le jargon.
+- **Glossaire** (`/glossaire/`, `src/data/glossary.js`) : termes japonais et acronymes en une
+  phrase, liés aux fiches quand elles existent.
 - **Pépites** (`/pepites/`, `src/data/quickwins.js`) : objection n°1 = « pas le temps », donc on
   met en avant le **gain de temps** (fort impact / faible effort) + une **estimation indicative**
   (`estimate`) présentée honnêtement comme ordre de grandeur. **Calculateur opt-in** : coût
@@ -39,9 +43,10 @@ quand un outil ne sert à rien et ses limites — anti « cargo cult »).
 ## Conventions
 
 - **Source de vérité contenu** : `src/data/concepts.js` (+ `families.js`, `sources.js`,
-  `keywords.js`, `problems.js`, `quickwins.js`). Ne pas dupliquer ailleurs. Ajouter un concept =
-  une entrée respectant le gabarit + **≥ 1 source** + **≥ 1 mot-clé** de recherche en langage
-  courant (`keywords.js`). Problèmes et pépites pointent des slugs existants (pépites = fort
+  `keywords.js`, `problems.js`, `quickwins.js`, `glossary.js`). Ne pas dupliquer ailleurs.
+  Ajouter un concept = une entrée respectant le gabarit + **≥ 1 source** + **≥ 1 mot-clé** de
+  recherche en langage courant (`keywords.js`). Un problème = `context` (≥ 1 §) + `faq` (≥ 1
+  Q/R) obligatoires. Problèmes et pépites pointent des slugs existants (pépites = fort
   impact/faible effort, vérifié par `npm run validate`).
 - **Qualité** : `npm run validate` (intégrité + sources + mots-clés), `npm test` (recherche,
   calcul de gain), `npm run lint`, `npm run format` — vérifiés en CI.

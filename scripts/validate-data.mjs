@@ -7,6 +7,7 @@ import { sources } from '../src/data/sources.js';
 import { keywords } from '../src/data/keywords.js';
 import { problems } from '../src/data/problems.js';
 import { quickwins } from '../src/data/quickwins.js';
+import { glossary } from '../src/data/glossary.js';
 
 const famIds = new Set(families.map((f) => f.id));
 const lvls = new Set(levels.map((l) => l.level));
@@ -64,7 +65,8 @@ for (const key of Object.keys(sources))
 for (const key of Object.keys(keywords))
   if (!setSlugs.has(key)) issues.push(`keywords.js : clé orpheline « ${key} » (slug inconnu)`);
 
-// Problèmes (entrée par le problème) : slugs uniques, ≥ 1 solution, concepts existants.
+// Problèmes (entrée par le problème) : slugs uniques, ≥ 1 solution, concepts existants,
+// et contenu de landing page complet (contexte + FAQ — cf. en-tête de problems.js).
 const dupProblems = dup(problems.map((p) => p.slug));
 if (dupProblems.length) issues.push(`problems.js : slugs dupliqués : ${dupProblems.join(', ')}`);
 for (const p of problems) {
@@ -74,6 +76,22 @@ for (const p of problems) {
     issues.push(`problème ${pid} : aucune solution`);
   for (const s of p.solutions || [])
     if (!setSlugs.has(s.slug)) issues.push(`problème ${pid} : concept inconnu « ${s.slug} »`);
+  if (!Array.isArray(p.context) || p.context.length === 0)
+    issues.push(`problème ${pid} : « context » manquant (≥ 1 paragraphe)`);
+  if (!Array.isArray(p.faq) || p.faq.length === 0)
+    issues.push(`problème ${pid} : « faq » manquante (≥ 1 question/réponse)`);
+  for (const f of p.faq || [])
+    if (!f.q || !f.a) issues.push(`problème ${pid} : entrée FAQ incomplète (q et a requis)`);
+}
+
+// Glossaire : termes uniques, définition présente, slug (optionnel) existant.
+const dupTerms = dup(glossary.map((g) => g.term));
+if (dupTerms.length) issues.push(`glossary.js : termes dupliqués : ${dupTerms.join(', ')}`);
+for (const g of glossary) {
+  if (!g.term || !g.def)
+    issues.push(`glossaire : entrée incomplète « ${g.term || '(sans terme)'} »`);
+  if (g.slug && !setSlugs.has(g.slug))
+    issues.push(`glossaire ${g.term} : concept inconnu « ${g.slug} »`);
 }
 
 // Pépites : concept existant, gain renseigné, et réellement fort impact + faible effort.

@@ -22,13 +22,14 @@ adaptés à leur contexte (moyens limités, petites équipes), avec leurs **limi
 
 ## Trois entrées (la cible ne connaît pas le Lean)
 
-1. **« J'ai un problème »** → `/diagnostic/` : 16 problèmes en langage courant → concepts
-   recommandés, avec le « pourquoi » de chacun.
+1. **« J'ai un problème »** → `/diagnostic/` : 16 problèmes en langage courant, chacun avec
+   contexte, concepts recommandés (et leur « pourquoi ») et FAQ.
 2. **« J'ai pas le temps »** → `/pepites/` : sélection fort impact / faible effort, orientée
    **gain de temps**, avec un **calculateur** (coût horaire → gains €/mois et €/an, récurrents)
    qui ne cumule **que les pépites cochées**.
 3. **« Je veux explorer »** → le **tableau** : filtres famille/niveau **partageables par URL**,
-   recherche en langage courant (mots-clés par concept).
+   recherche en langage courant (mots-clés par concept). Et un **glossaire** (`/glossaire/`)
+   des termes japonais et acronymes.
 
 Page **À propos / méthode** : `/a-propos/`.
 
@@ -63,8 +64,9 @@ src/data/families.js            Familles (colonnes) + niveaux (lignes)
 src/data/concepts.js            Concepts — source de vérité du contenu
 src/data/sources.js             Sources / références par concept
 src/data/keywords.js            Mots-clés de recherche (langage courant) par concept
-src/data/problems.js            Entrée « par le problème » (diagnostic)
+src/data/problems.js            Entrée « par le problème » (landing pages : contexte + FAQ)
 src/data/quickwins.js           Pépites (gain de temps) + estimation horaire
+src/data/glossary.js            Glossaire (termes japonais, acronymes)
 src/layouts/Base.astro          Layout commun (SEO, OG, JSON-LD, navigation, analytics)
 src/lib/url.js                  withBase() — liens compatibles racine & sous-dossier
 src/lib/search.js               Logique de recherche (testée)
@@ -73,6 +75,7 @@ src/pages/index.astro           Accueil : entrées + tableau interactif
 src/pages/concept/[slug].astro  Fiche détaillée d'un concept
 src/pages/diagnostic/           Diagnostic par problème (liste + détail)
 src/pages/pepites.astro         Pépites + calculateur de gain (opt-in)
+src/pages/glossaire.astro       Glossaire
 src/pages/a-propos.astro        À propos & méthode
 src/pages/404.astro             Page introuvable
 scripts/                        validate-data.mjs · generate-og.mjs
