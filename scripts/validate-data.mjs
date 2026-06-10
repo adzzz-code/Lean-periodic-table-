@@ -4,6 +4,7 @@
 import { concepts, conceptBySlug } from '../src/data/concepts.js';
 import { families, levels } from '../src/data/families.js';
 import { sources } from '../src/data/sources.js';
+import { keywords } from '../src/data/keywords.js';
 import { problems } from '../src/data/problems.js';
 import { quickwins } from '../src/data/quickwins.js';
 
@@ -30,6 +31,11 @@ const requiredPme = ['why', 'firstStep', 'example', 'commonMistake'];
 
 for (const c of concepts) {
   const id = c.slug || `#${c.number}`;
+  // Conventions (cf. CLAUDE.md) : slugs en kebab-case, symboles de 1 à 3 caractères.
+  if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(c.slug || ''))
+    issues.push(`${id} : slug non kebab-case « ${c.slug} »`);
+  if (!c.symbol || c.symbol.length > 3)
+    issues.push(`${id} : symbole invalide « ${c.symbol} » (1-3 caractères)`);
   if (!famIds.has(c.family)) issues.push(`${id} : famille inconnue « ${c.family} »`);
   if (!lvls.has(c.level)) issues.push(`${id} : niveau invalide « ${c.level} »`);
   for (const k of requiredTop) if (!c[k]) issues.push(`${id} : champ manquant « ${k} »`);
@@ -47,11 +53,16 @@ for (const c of concepts) {
   const refs = sources[c.slug];
   if (!Array.isArray(refs) || refs.length === 0)
     issues.push(`${id} : aucune source (cf. sources.js)`);
+  const kw = keywords[c.slug];
+  if (!Array.isArray(kw) || kw.length === 0)
+    issues.push(`${id} : aucun mot-clé de recherche (cf. keywords.js)`);
 }
 
-// Toute clé de sources doit correspondre à un concept existant.
+// Toute clé de sources / keywords doit correspondre à un concept existant.
 for (const key of Object.keys(sources))
   if (!setSlugs.has(key)) issues.push(`sources.js : clé orpheline « ${key} » (slug inconnu)`);
+for (const key of Object.keys(keywords))
+  if (!setSlugs.has(key)) issues.push(`keywords.js : clé orpheline « ${key} » (slug inconnu)`);
 
 // Problèmes (entrée par le problème) : slugs uniques, ≥ 1 solution, concepts existants.
 const dupProblems = dup(problems.map((p) => p.slug));
@@ -81,6 +92,15 @@ for (const q of quickwins) {
       `pépite ${q.slug} : doit être fort impact + faible effort (or ${c.relevance?.impact}/${c.relevance?.effort})`,
     );
 }
+
+// Avertissement (non bloquant) : le diagnostic est l'entrée prioritaire de la cible —
+// un concept qu'aucun problème ne recommande est quasi invisible pour elle.
+const recommended = new Set(problems.flatMap((p) => p.solutions.map((s) => s.slug)));
+const orphans = concepts.filter((c) => !recommended.has(c.slug)).map((c) => c.slug);
+if (orphans.length)
+  console.warn(
+    `⚠️  ${orphans.length} concept(s) jamais recommandé(s) par le diagnostic : ${orphans.join(', ')}`,
+  );
 
 if (issues.length) {
   console.error(`❌ ${issues.length} problème(s) d'intégrité :\n- ${issues.join('\n- ')}`);

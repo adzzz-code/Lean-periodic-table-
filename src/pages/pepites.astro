@@ -43,12 +43,15 @@ const breadcrumb = {
           <span class="calc-hint">(salaire chargé, ou ce que vaut votre heure)</span>
         </div>
         <p class="calc-out">
-          En adoptant ces pépites, vous pourriez libérer <strong id="tot-h">0</strong> h/semaine — soit
-          <strong id="tot-month">0 €</strong>/mois, <strong id="tot-year">0 €</strong>/an.
+          Avec <strong id="sel-count">1 pépite cochée</strong> : <strong id="tot-h">0</strong>
+          h/semaine — soit <strong id="tot-month">0 €</strong>/mois, <strong id="tot-year"
+            >0 €</strong
+          >/an.
         </p>
         <p class="calc-why">
-          Un gain de temps n’est pas ponctuel : il <strong>revient chaque semaine</strong>. C’est
-          pourquoi le cumul annuel surprend autant.
+          Le total ne compte que les pépites que vous <strong>cochez</strong> dans la liste — commencez
+          par une seule, les gains se recouvrent en partie. Un gain de temps
+          <strong>revient chaque semaine</strong> : c’est pourquoi le cumul annuel surprend.
         </p>
       </section>
 
@@ -76,6 +79,15 @@ const breadcrumb = {
                       ⏱ {q.estimate}*
                     </span>
                     <span class="qw-eur" data-hours={q.hoursPerWeek} />
+                    <label class="qw-pick">
+                      <input
+                        type="checkbox"
+                        class="qw-check"
+                        data-hours={q.hoursPerWeek}
+                        checked={i === 0}
+                      />
+                      Je l’adopte
+                    </label>
                   </div>
                   <p class="qw-gain">{q.gain}</p>
                   <p class="qw-meta">
@@ -189,6 +201,29 @@ const breadcrumb = {
   .qw-eur:empty {
     display: none;
   }
+  .qw-pick {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+    border: 1px dashed var(--line);
+    border-radius: 999px;
+    padding: 2px 10px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .qw-pick:has(:checked) {
+    color: var(--brand);
+    border-color: var(--brand);
+    border-style: solid;
+    background: rgba(22, 104, 160, 0.08);
+  }
+  .qw-pick input {
+    accent-color: var(--brand);
+    margin: 0;
+  }
   .qw-list {
     list-style: none;
     padding: 0;
@@ -294,30 +329,34 @@ const breadcrumb = {
 </style>
 
 <script>
-  const WEEKS_PER_MONTH = 4.33;
-  const WEEKS_PER_YEAR = 52;
+  import { monthlyGain, yearlyGain, round10, euro } from '../lib/gains.js';
+
   const rate = document.getElementById('rate');
   const eurCells = Array.from(document.querySelectorAll('.qw-eur'));
+  const checks = Array.from(document.querySelectorAll('.qw-check'));
+  const selCount = document.getElementById('sel-count');
   const totH = document.getElementById('tot-h');
   const totMonth = document.getElementById('tot-month');
   const totYear = document.getElementById('tot-year');
 
-  const euro = (n) => `${Math.round(n).toLocaleString('fr-FR')} €`;
-  const round10 = (n) => Math.round(n / 10) * 10;
-
   function compute() {
     const r = Math.max(0, parseFloat(rate.value) || 0);
-    let totalHours = 0;
+    // Estimation par pépite : informative, indépendante de la sélection.
     for (const cell of eurCells) {
       const h = parseFloat(cell.dataset.hours) || 0;
-      totalHours += h;
-      cell.textContent = r > 0 ? `≈ ${euro(h * r * WEEKS_PER_MONTH)}/mois` : '';
+      cell.textContent = r > 0 ? `≈ ${euro(monthlyGain(h, r))}/mois` : '';
     }
+    // Le total, lui, ne cumule QUE les pépites cochées (pas de promesse globale).
+    const selected = checks.filter((c) => c.checked);
+    const totalHours = selected.reduce((s, c) => s + (parseFloat(c.dataset.hours) || 0), 0);
+    const n = selected.length;
+    selCount.textContent = `${n} pépite${n > 1 ? 's' : ''} cochée${n > 1 ? 's' : ''}`;
     totH.textContent = Number.isInteger(totalHours) ? totalHours : totalHours.toFixed(1);
-    totMonth.textContent = euro(round10(totalHours * r * WEEKS_PER_MONTH));
-    totYear.textContent = euro(round10(totalHours * r * WEEKS_PER_YEAR));
+    totMonth.textContent = euro(round10(monthlyGain(totalHours, r)));
+    totYear.textContent = euro(round10(yearlyGain(totalHours, r)));
   }
 
   rate.addEventListener('input', compute);
+  checks.forEach((c) => c.addEventListener('change', compute));
   compute();
 </script>

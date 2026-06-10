@@ -31,6 +31,10 @@ jobs:
         env:
           SITE_URL: https://adzzz-code.github.io
           BASE_PATH: /Lean-periodic-table-/
+          # Analytics sans cookie — à décommenter une fois le compte créé
+          # (cf. docs/DEPLOIEMENT.md, section Analytics) :
+          # PUBLIC_ANALYTICS_SRC: https://plausible.io/js/script.js
+          # PUBLIC_ANALYTICS_DOMAIN: adzzz-code.github.io
         run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:

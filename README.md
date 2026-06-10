@@ -22,12 +22,13 @@ adaptés à leur contexte (moyens limités, petites équipes), avec leurs **limi
 
 ## Trois entrées (la cible ne connaît pas le Lean)
 
-1. **« J'ai un problème »** → `/diagnostic/` : 12 problèmes en langage courant → concepts
+1. **« J'ai un problème »** → `/diagnostic/` : 16 problèmes en langage courant → concepts
    recommandés, avec le « pourquoi » de chacun.
 2. **« J'ai pas le temps »** → `/pepites/` : sélection fort impact / faible effort, orientée
-   **gain de temps**, avec un **calculateur** (coût horaire → gains €/mois et €/an, récurrents).
-3. **« Je veux explorer »** → le **tableau** (filtres famille/niveau, recherche) et la
-   **vue graphe** (`/graphe/`) des relations entre concepts.
+   **gain de temps**, avec un **calculateur** (coût horaire → gains €/mois et €/an, récurrents)
+   qui ne cumule **que les pépites cochées**.
+3. **« Je veux explorer »** → le **tableau** : filtres famille/niveau **partageables par URL**,
+   recherche en langage courant (mots-clés par concept).
 
 Page **À propos / méthode** : `/a-propos/`.
 
@@ -37,8 +38,8 @@ Cadrage complet : [`docs/PRD.md`](docs/PRD.md) · Roadmap : [`docs/ROADMAP.md`](
 
 - [Astro](https://astro.build) (site statique, SEO-friendly), JavaScript, CSS natif.
 - Contenu = source de vérité dans `src/data/` : `families.js`, `concepts.js`, `sources.js`,
-  `problems.js`, `quickwins.js`.
-- Qualité vérifiée en CI : intégrité des données, ESLint, Prettier, build.
+  `keywords.js`, `problems.js`, `quickwins.js`.
+- Qualité vérifiée en CI : intégrité des données, tests unitaires, ESLint, Prettier, build.
 
 ## Démarrer
 
@@ -47,10 +48,11 @@ npm install
 npm run dev       # serveur de développement
 npm run build     # build statique dans dist/
 npm run preview   # prévisualiser le build
-npm run validate  # intégrité des données (slugs, sources, pépites…)
+npm run validate  # intégrité des données (slugs, sources, mots-clés, pépites…)
+npm test          # tests unitaires (recherche, calcul de gain)
 npm run lint      # ESLint
 npm run format    # Prettier
-npm run og        # (re)génère l'image Open Graph
+npm run og        # (re)génère les images Open Graph (site + une par fiche)
 ```
 
 ## Structure
@@ -60,27 +62,31 @@ docs/                           PRD · ROADMAP · BACKLOG · AUDIT · DEPLOIEMEN
 src/data/families.js            Familles (colonnes) + niveaux (lignes)
 src/data/concepts.js            Concepts — source de vérité du contenu
 src/data/sources.js             Sources / références par concept
+src/data/keywords.js            Mots-clés de recherche (langage courant) par concept
 src/data/problems.js            Entrée « par le problème » (diagnostic)
 src/data/quickwins.js           Pépites (gain de temps) + estimation horaire
-src/layouts/Base.astro          Layout commun (SEO, OG, JSON-LD, navigation)
+src/layouts/Base.astro          Layout commun (SEO, OG, JSON-LD, navigation, analytics)
 src/lib/url.js                  withBase() — liens compatibles racine & sous-dossier
+src/lib/search.js               Logique de recherche (testée)
+src/lib/gains.js                Calcul de gain des pépites (testé)
 src/pages/index.astro           Accueil : entrées + tableau interactif
 src/pages/concept/[slug].astro  Fiche détaillée d'un concept
 src/pages/diagnostic/           Diagnostic par problème (liste + détail)
-src/pages/pepites.astro         Pépites + calculateur de gain
-src/pages/graphe.astro          Vue graphe des relations
+src/pages/pepites.astro         Pépites + calculateur de gain (opt-in)
 src/pages/a-propos.astro        À propos & méthode
 src/pages/404.astro             Page introuvable
 scripts/                        validate-data.mjs · generate-og.mjs
+tests/                          Tests unitaires (node --test)
 ```
 
 ## Ajouter un concept
 
 1. Ajouter une entrée dans `src/data/concepts.js` (gabarit : voir l'en-tête du fichier et
    `docs/PRD.md` §4).
-2. Ajouter **≥ 1 source** dans `src/data/sources.js` (obligatoire).
+2. Ajouter **≥ 1 source** dans `src/data/sources.js` et **≥ 1 mot-clé** en langage courant
+   dans `src/data/keywords.js` (obligatoires).
 3. `npm run validate` pour vérifier l'intégrité. La case apparaît automatiquement à
-   l'intersection famille × niveau.
+   l'intersection famille × niveau ; l'image OG de la fiche est générée au build.
 
 ## Licence
 

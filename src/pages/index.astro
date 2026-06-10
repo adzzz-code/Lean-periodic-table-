@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import { families, levels } from '../data/families.js';
 import { concepts } from '../data/concepts.js';
 import { problems } from '../data/problems.js';
+import { keywords } from '../data/keywords.js';
 import { withBase } from '../lib/url.js';
 
 // Index { level -> familyId -> [concepts] } pour la matrice.
@@ -146,7 +147,7 @@ const featured = problems.filter((p) => p.featured);
                         data-family={c.family}
                         data-level={c.level}
                         data-pme={c.pmeStarter ? '1' : '0'}
-                        data-search={`${c.name} ${c.symbol} ${c.fullName}`.toLowerCase()}
+                        data-search={`${c.name} ${c.symbol} ${c.fullName} ${(keywords[c.slug] || []).join(' ')}`.toLowerCase()}
                         aria-label={`${c.name} — famille ${f.name}, niveau ${l.level} (${l.name})${c.pmeStarter ? ', incontournable TPE/PME' : ''}`}
                       >
                         <span class="num">{c.number}</span>
@@ -167,29 +168,57 @@ const featured = problems.filter((p) => p.featured);
         }
       </div>
     </div>
+
+    <p class="no-result" id="no-result" hidden>
+      Aucun concept ne correspond à cette recherche. Essayez avec d'autres mots, ou
+      <a href={withBase('/diagnostic/')}>partez plutôt de votre problème →</a>
+    </p>
   </div>
 </Base>
 
 <script>
+  import { parseTerms, matchesAll } from '../lib/search.js';
+
   const search = document.getElementById('search');
   const pmeToggle = document.getElementById('pme-toggle');
   const famButtons = Array.from(document.querySelectorAll('#family-filters .fam-btn'));
   const lvlButtons = Array.from(document.querySelectorAll('#level-filters .lvl-btn'));
   const els = Array.from(document.querySelectorAll('.el'));
   const count = document.getElementById('count');
+  const noResult = document.getElementById('no-result');
 
   const activeFamilies = new Set(famButtons.map((b) => b.dataset.family));
   const activeLevels = new Set(lvlButtons.map((b) => b.dataset.level));
 
-  // Normalise pour une recherche insensible à la casse ET aux accents.
-  const norm = (s) =>
-    (s || '')
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase();
+  // Restaure l'état depuis l'URL (vue filtrée partageable : ?q=…&fam=…&niv=…&pme=1).
+  const params = new URLSearchParams(location.search);
+  if (params.get('q')) search.value = params.get('q');
+  if (params.get('pme') === '1') pmeToggle.checked = true;
+  const restoreSet = (param, buttons, set, key) => {
+    if (!params.get(param)) return;
+    const keep = new Set(params.get(param).split(','));
+    for (const btn of buttons) {
+      const on = keep.has(btn.dataset[key]);
+      btn.setAttribute('aria-pressed', String(on));
+      if (!on) set.delete(btn.dataset[key]);
+    }
+  };
+  restoreSet('fam', famButtons, activeFamilies, 'family');
+  restoreSet('niv', lvlButtons, activeLevels, 'level');
+
+  // Reflète l'état courant dans l'URL (sans recharger) pour pouvoir partager la vue.
+  function syncUrl() {
+    const p = new URLSearchParams();
+    if (search.value.trim()) p.set('q', search.value.trim());
+    if (activeFamilies.size < famButtons.length) p.set('fam', [...activeFamilies].join(','));
+    if (activeLevels.size < lvlButtons.length) p.set('niv', [...activeLevels].join(','));
+    if (pmeToggle.checked) p.set('pme', '1');
+    const qs = p.toString();
+    history.replaceState(null, '', qs ? `?${qs}` : location.pathname);
+  }
 
   function apply() {
-    const terms = norm(search.value).split(/\s+/).filter(Boolean);
+    const terms = parseTerms(search.value);
     const pmeOnly = pmeToggle.checked;
     let visible = 0;
 
@@ -198,8 +227,7 @@ const featured = problems.filter((p) => p.featured);
       const lvlOk = activeLevels.has(el.dataset.level);
       const pmeOk = !pmeOnly || el.dataset.pme === '1';
       // Multi-mots : tous les termes doivent être présents (accents ignorés).
-      const haystack = norm(el.dataset.search);
-      const searchOk = terms.every((t) => haystack.includes(t));
+      const searchOk = matchesAll(el.dataset.search, terms);
 
       // Filtres (famille / niveau / mode PME) → on masque vraiment (la case se vide).
       const hidden = !famOk || !lvlOk || !pmeOk;
@@ -210,6 +238,8 @@ const featured = problems.filter((p) => p.featured);
       if (!hidden && searchOk) visible++;
     }
     count.textContent = `${visible} concept${visible > 1 ? 's' : ''} affiché${visible > 1 ? 's' : ''}`;
+    noResult.hidden = visible > 0;
+    syncUrl();
   }
 
   function toggleButton(btn, set, key) {

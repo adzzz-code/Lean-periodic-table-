@@ -26,13 +26,20 @@
       Avec **estimation indicative du temps gagné** par pépite (`estimate`, présentée honnêtement comme ordre de grandeur).
 - [x] `P1` **Calculateur de gain** : saisie du coût horaire → gains €/mois et €/an, par pépite et au total
       (le temps gagné est **récurrent** → annualisé). Basé sur `hoursPerWeek`.
+      **Opt-in (2026-06-10)** : le total ne cumule que les pépites **cochées** (une seule par
+      défaut) — pas de promesse globale, cohérent avec la posture anti cargo cult.
 - [x] `P1` Recherche **insensible aux accents** + **multi-mots** (tous les termes doivent matcher).
       _Fuzzy/tolérance aux fautes : reste à faire._
-- [ ] `P1` État de filtre persistant dans l'URL (partage d'une vue filtrée).
+- [x] `P1` Recherche **en langage courant** : mots-clés par concept (`src/data/keywords.js`,
+      ≥ 1 imposé par `npm run validate`) + message « partez de votre problème » si aucun résultat.
+- [x] `P1` État de filtre persistant dans l'URL (partage d'une vue filtrée : `?q=…&fam=…&niv=…&pme=1`).
 - [x] **Parcours de diagnostic guidé** « quel problème → quels concepts » (`/diagnostic/`) —
       **entrée prioritaire** pour la cible qui ne connaît pas le Lean ; en tête d'accueil + nav.
-- [ ] `P2` Élargir/affiner les problèmes du diagnostic (couverture, recommandations).
-- [x] `P2` **Vue graphe** des concepts liés (`/graphe/`) — SVG radial par famille, surbrillance des relations au survol.
+- [x] `P2` Élargir/affiner les problèmes du diagnostic : 16 problèmes, **chaque concept est
+      désormais recommandé par au moins un problème** (alerte `npm run validate` sinon).
+- [x] ~~`P2` Vue graphe~~ — **retirée** (2026-06-10) : peu de valeur pour la cible, inutilisable
+      au tactile. Remplacée par les liens entrants/sortants sur les fiches (« concepts liés »
+      complets, calculés au build).
 - [ ] `P2` Aperçu rapide d'une fiche en survol / panneau latéral (sans changer de page).
 - [x] `P2` **Filtre par niveau de maturité** (chips Niveau 1-4, en plus des familles).
 
@@ -59,9 +66,14 @@
 - [x] `P1` **Validation des données en CI** : `scripts/validate-data.mjs` + `npm run validate` (slugs/symboles uniques,
       `related` existants, champs requis), bloquant dans `ci.yml`.
 - [x] `P1` **Page 404** personnalisée + **page « À propos / méthode »** (`/a-propos/`, liée en en-tête et pied).
-- [ ] `P2` Tests légers (build + cohérence des données) en CI.
+- [x] `P2` Tests légers en CI : `npm test` (node --test) — logique de recherche
+      (`src/lib/search.js`) et calcul de gain (`src/lib/gains.js`), branchés dans `ci.yml`.
+- [x] `P2` **Image OG par fiche** : générée au build (`scripts/generate-og.mjs` en `prebuild`,
+      sorties non versionnées dans `public/og/`) — chaque partage de fiche a son aperçu.
 - [ ] `P2` Audit performance / Lighthouse.
 - [ ] `P2` Préparer l'i18n (structure de contenu prête pour l'EN) — sans traduire en V1.
+- [ ] `P2` **Nom de domaine propre** (l'URL Pages avec tiret final dessert la marque) —
+      CNAME sur Pages + repasser `BASE_PATH` à `/` (cf. `DEPLOIEMENT.md`).
 
 ## 5. Accessibilité
 
@@ -73,7 +85,10 @@
 
 ## 6. Produit & croissance
 
-- [ ] `P1` Analytics respectueux de la vie privée (Plausible / Umami).
+- [~] `P1` Analytics respectueux de la vie privée (Plausible / Umami) : **support intégré**
+  (variables `PUBLIC_ANALYTICS_SRC` / `PUBLIC_ANALYTICS_DOMAIN` au build, zéro script tant
+  que non configuré — cf. `DEPLOIEMENT.md`). **Reste : créer le compte** (action owner) et
+  décommenter les 2 lignes dans `deploy.yml`.
 - [ ] `P2` Boucle de feedback (« cette fiche vous a-t-elle aidé ? », suggestion de concept).
 - [ ] `P2` Export PDF d'une fiche ou d'un parcours.
 - [ ] `P2` Partage social d'une fiche.
