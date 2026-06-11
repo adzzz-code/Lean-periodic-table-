@@ -1,0 +1,1019 @@
+---
+// Schéma pédagogique d'un concept, rendu en SVG au build (aucun JS client).
+// Reçoit la description déclarative depuis src/data/visuals.js + la couleur de famille.
+const { visual, color = '#1668a0', name = '' } = Astro.props;
+
+const W = 720;
+const INK = '#22303f';
+const SOFT = '#5b6b7c';
+const LINE = '#c3cdd8';
+
+// Coupe un libellé en 1-2 lignes pour tenir dans une boîte.
+function wrap(text, max = 18) {
+  const t = String(text);
+  if (t.length <= max) return [t];
+  const words = t.split(' ');
+  let l1 = '';
+  let i = 0;
+  while (i < words.length && (l1 + ' ' + words[i]).trim().length <= max) {
+    l1 = (l1 + ' ' + words[i]).trim();
+    i++;
+  }
+  if (!l1) {
+    l1 = words[0];
+    i = 1;
+  }
+  return [l1, words.slice(i).join(' ')].filter(Boolean);
+}
+
+const v = visual ?? {};
+const type = v.type;
+
+// ── Géométries précalculées par type ──
+let H = 200;
+let model = {};
+
+if (type === 'steps') {
+  const n = v.steps.length;
+  const margin = 12;
+  const gap = 8;
+  const tip = 12;
+  const w = (W - 2 * margin - (n - 1) * gap) / n;
+  H = 112;
+  model.boxes = v.steps.map((label, i) => {
+    const x = margin + i * (w + gap);
+    const y = 24;
+    const h = 64;
+    const right = `${x + w - tip},${y} ${x + w},${y + h / 2} ${x + w - tip},${y + h}`;
+    const left =
+      i === 0 ? `${x},${y + h} ${x},${y}` : `${x},${y + h} ${x + tip},${y + h / 2} ${x},${y}`;
+    return {
+      points: `${x},${y} ${right} ${left}`,
+      cx: x + w / 2 + (i === 0 ? 0 : tip / 2),
+      cy: y + h / 2,
+      lines: wrap(label, Math.max(10, Math.floor(w / 8))),
+    };
+  });
+}
+
+if (type === 'cycle') {
+  const n = v.steps.length;
+  const cx = 360;
+  const cy = 120;
+  const rx = 252;
+  const ry = 76;
+  H = 240;
+  const pos = v.steps.map((label, i) => {
+    const a = (-90 + (i * 360) / n) * (Math.PI / 180);
+    return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a), lines: wrap(label, 20) };
+  });
+  model.nodes = pos;
+  model.arrows = pos.map((p, i) => {
+    const q = pos[(i + 1) % n];
+    const sx = p.x + (q.x - p.x) * 0.34;
+    const sy = p.y + (q.y - p.y) * 0.34;
+    const ex = p.x + (q.x - p.x) * 0.66;
+    const ey = p.y + (q.y - p.y) * 0.66;
+    return { sx, sy, ex, ey };
+  });
+}
+
+if (type === 'chain') {
+  const n = v.steps.length;
+  const bh = 46;
+  const gap = 32;
+  H = 16 + n * bh + (n - 1) * gap + 16;
+  model.nodes = v.steps.map((label, i) => ({
+    y: 16 + i * (bh + gap),
+    lines: wrap(label, 52),
+    last: i === n - 1,
+  }));
+  model.bh = bh;
+  model.gap = gap;
+}
+
+if (type === 'fishbone') {
+  H = 250;
+  model.branches = v.branches.map((label, i) => {
+    const top = i % 2 === 0;
+    const sx = top ? 150 + (i / 2) * 160 : 230 + ((i - 1) / 2) * 160;
+    return { sx, top, label, ex: sx - 64, ey: top ? 48 : 202, ly: top ? 36 : 222 };
+  });
+}
+
+if (type === 'bars') {
+  H = v.note ? 240 : 215;
+  if (v.groups) {
+    const maxV = Math.max(...v.groups.flatMap((g) => g.bars));
+    model.groups = v.groups.map((g, gi) => {
+      const x0 = gi === 0 ? 30 : 380;
+      const n = g.bars.length;
+      const gap = 12;
+      const bw = (310 - (n - 1) * gap) / n;
+      return {
+        title: g.title,
+        tx: x0 + 155,
+        bars: g.bars.map((val, i) => {
+          const h = (val / maxV) * 120;
+          return { x: x0 + i * (bw + gap), y: 178 - h, w: bw, h, val };
+        }),
+      };
+    });
+  } else {
+    const n = v.bars.length;
+    const gap = 18;
+    const bw = (620 - (n - 1) * gap) / n;
+    const maxV = Math.max(...v.bars.map((b) => b.value));
+    model.bars = v.bars.map((b, i) => {
+      const h = (b.value / maxV) * 130;
+      return {
+        ...b,
+        x: 50 + i * (bw + gap),
+        y: 178 - h,
+        w: bw,
+        h,
+        lines: wrap(b.label, Math.max(8, Math.floor(bw / 7))),
+      };
+    });
+  }
+}
+
+if (type === 'curve' && v.kind === 'control') {
+  H = 245;
+  const ys = [118, 104, 126, 112, 132, 108, 122, 98, 128, 40, 116, 124, 110, 120];
+  model.pts = ys.map((y, i) => ({ x: 50 + (i * 640) / (ys.length - 1), y, out: y < 58 }));
+  model.poly = model.pts.map((p) => `${p.x},${p.y}`).join(' ');
+}
+
+if (type === 'curve' && v.kind === 'kano') {
+  H = 280;
+}
+
+if (type === 'compare') {
+  const lines = Math.max(v.left.lines.length, v.right.lines.length);
+  H = 8 + 34 + lines * 26 + 28;
+  model.lines = lines;
+  model.panelH = 34 + lines * 26 + 14;
+}
+
+if (type === 'flow') {
+  const n = v.nodes.length;
+  const margin = 16;
+  const between = v.waits ? 58 : 40;
+  const w = (W - 2 * margin - (n - 1) * between) / n;
+  H = v.note ? 150 : 120;
+  model.w = w;
+  model.between = between;
+  model.nodes = v.nodes.map((node, i) => ({
+    ...node,
+    x: margin + i * (w + between),
+    lines: wrap(node.label, Math.max(10, Math.floor(w / 7.5))),
+  }));
+}
+
+if (type === 'house') H = 270;
+
+if (type === 'matrix') {
+  H = v.xLabel ? 280 : 250;
+  const xs = [110, 365];
+  const ys = [30, 130];
+  model.cells = v.quadrants.map((label, i) => ({
+    x: xs[i % 2],
+    y: ys[Math.floor(i / 2)],
+    lines: wrap(label, 22),
+    accent: v.accent === i,
+  }));
+}
+
+if (type === 'grid') {
+  H = 255;
+  model.cols = ['Devis', 'Pose', 'SAV', 'Relances'];
+  model.rows = [
+    { name: 'Le gérant', levels: ['O', 'U', 'U', 'U'] },
+    { name: 'Sam', levels: ['U', 'L', 'I', 'L'] },
+    { name: 'Lila', levels: ['U', 'I', 'L', 'U'] },
+  ];
+}
+
+if (type === 'spaghetti') H = 215;
+if (type === 'formula') H = 140;
+---
+
+<figure class="concept-visual">
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={`Schéma : ${name}`} width="100%">
+    <defs>
+      <marker
+        id="va"
+        viewBox="0 0 10 10"
+        refX="8"
+        refY="5"
+        markerWidth="7"
+        markerHeight="7"
+        orient="auto-start-reverse"
+      >
+        <path d="M0,0 L10,5 L0,10 z" fill={SOFT}></path>
+      </marker>
+    </defs>
+
+    {
+      type === 'steps' &&
+        model.boxes.map((b) => (
+          <>
+            <polygon points={b.points} fill="#fff" stroke={color} stroke-width="1.6" />
+            <text
+              x={b.cx}
+              y={b.cy + (b.lines.length > 1 ? -3 : 5)}
+              text-anchor="middle"
+              font-size="13"
+              font-weight="600"
+              fill={INK}
+            >
+              {b.lines.map((l, li) => (
+                <tspan x={b.cx} dy={li === 0 ? 0 : 15}>
+                  {l}
+                </tspan>
+              ))}
+            </text>
+          </>
+        ))
+    }
+
+    {
+      type === 'cycle' && (
+        <>
+          {model.arrows.map((a) => (
+            <line
+              x1={a.sx}
+              y1={a.sy}
+              x2={a.ex}
+              y2={a.ey}
+              stroke={SOFT}
+              stroke-width="1.6"
+              marker-end="url(#va)"
+            />
+          ))}
+          {model.nodes.map((p) => (
+            <>
+              <rect
+                x={p.x - 90}
+                y={p.y - 22}
+                width="180"
+                height="44"
+                rx="9"
+                fill="#fff"
+                stroke={color}
+                stroke-width="1.6"
+              />
+              <text
+                x={p.x}
+                y={p.y + (p.lines.length > 1 ? -2 : 5)}
+                text-anchor="middle"
+                font-size="13"
+                font-weight="600"
+                fill={INK}
+              >
+                {p.lines.map((l, li) => (
+                  <tspan x={p.x} dy={li === 0 ? 0 : 15}>
+                    {l}
+                  </tspan>
+                ))}
+              </text>
+            </>
+          ))}
+        </>
+      )
+    }
+
+    {
+      type === 'chain' &&
+        model.nodes.map((nd, i) => (
+          <>
+            {i > 0 && (
+              <line
+                x1="360"
+                y1={nd.y - model.gap}
+                x2="360"
+                y2={nd.y - 6}
+                stroke={SOFT}
+                stroke-width="1.6"
+                marker-end="url(#va)"
+              />
+            )}
+            <rect
+              x="130"
+              y={nd.y}
+              width="460"
+              height={model.bh}
+              rx="9"
+              fill={nd.last ? color : '#fff'}
+              fill-opacity={nd.last ? '0.12' : '1'}
+              stroke={nd.last ? color : LINE}
+              stroke-width="1.6"
+            />
+            <text
+              x="360"
+              y={nd.y + model.bh / 2 + (nd.lines.length > 1 ? -2 : 5)}
+              text-anchor="middle"
+              font-size="13.5"
+              font-weight={nd.last ? '700' : '600'}
+              fill={INK}
+            >
+              {nd.lines.map((l, li) => (
+                <tspan x="360" dy={li === 0 ? 0 : 15}>
+                  {l}
+                </tspan>
+              ))}
+            </text>
+          </>
+        ))
+    }
+
+    {
+      type === 'fishbone' && (
+        <>
+          <line
+            x1="24"
+            y1="125"
+            x2="540"
+            y2="125"
+            stroke={SOFT}
+            stroke-width="2"
+            marker-end="url(#va)"
+          />
+          {model.branches.map((b) => (
+            <>
+              <line x1={b.sx} y1="125" x2={b.ex} y2={b.ey} stroke={LINE} stroke-width="1.6" />
+              <text
+                x={b.ex}
+                y={b.ly}
+                text-anchor="middle"
+                font-size="13"
+                font-weight="600"
+                fill={INK}
+              >
+                {b.label}
+              </text>
+            </>
+          ))}
+          <rect
+            x="552"
+            y="99"
+            width="148"
+            height="52"
+            rx="9"
+            fill={color}
+            fill-opacity="0.12"
+            stroke={color}
+            stroke-width="1.6"
+          />
+          <text x="626" y="130" text-anchor="middle" font-size="14" font-weight="700" fill={INK}>
+            {v.effect}
+          </text>
+        </>
+      )
+    }
+
+    {
+      type === 'bars' && !v.groups && (
+        <>
+          {model.bars.map((b) => (
+            <>
+              <rect
+                x={b.x}
+                y={b.y}
+                width={b.w}
+                height={b.h}
+                rx="4"
+                fill={b.accent ? color : LINE}
+              />
+              <text
+                x={b.x + b.w / 2}
+                y={b.y - 6}
+                text-anchor="middle"
+                font-size="12"
+                font-weight="700"
+                fill={b.accent ? color : SOFT}
+              >
+                {b.value}
+              </text>
+              <text x={b.x + b.w / 2} y="196" text-anchor="middle" font-size="12" fill={SOFT}>
+                {b.lines.map((l, li) => (
+                  <tspan x={b.x + b.w / 2} dy={li === 0 ? 0 : 13}>
+                    {l}
+                  </tspan>
+                ))}
+              </text>
+            </>
+          ))}
+          <line x1="40" y1="178" x2="690" y2="178" stroke={LINE} />
+          {v.note && (
+            <text
+              x="360"
+              y="232"
+              text-anchor="middle"
+              font-size="12.5"
+              font-style="italic"
+              fill={SOFT}
+            >
+              {v.note}
+            </text>
+          )}
+        </>
+      )
+    }
+
+    {
+      type === 'bars' && v.groups && (
+        <>
+          {model.groups.map((g) => (
+            <>
+              <text
+                x={g.tx}
+                y="22"
+                text-anchor="middle"
+                font-size="13.5"
+                font-weight="700"
+                fill={INK}
+              >
+                {g.title}
+              </text>
+              {g.bars.map((b) => (
+                <>
+                  <rect
+                    x={b.x}
+                    y={b.y}
+                    width={b.w}
+                    height={b.h}
+                    rx="4"
+                    fill={color}
+                    fill-opacity="0.75"
+                  />
+                  <text
+                    x={b.x + b.w / 2}
+                    y={b.y - 5}
+                    text-anchor="middle"
+                    font-size="11.5"
+                    fill={SOFT}
+                  >
+                    {b.val}
+                  </text>
+                </>
+              ))}
+            </>
+          ))}
+          <line x1="30" y1="178" x2="340" y2="178" stroke={LINE} />
+          <line x1="380" y1="178" x2="690" y2="178" stroke={LINE} />
+          {v.note && (
+            <text
+              x="360"
+              y="225"
+              text-anchor="middle"
+              font-size="12.5"
+              font-style="italic"
+              fill={SOFT}
+            >
+              {v.note}
+            </text>
+          )}
+        </>
+      )
+    }
+
+    {
+      type === 'curve' && v.kind === 'control' && (
+        <>
+          <line
+            x1="50"
+            y1="58"
+            x2="640"
+            y2="58"
+            stroke={color}
+            stroke-width="1.4"
+            stroke-dasharray="6 5"
+          />
+          <line x1="50" y1="118" x2="640" y2="118" stroke={LINE} stroke-width="1.4" />
+          <line
+            x1="50"
+            y1="178"
+            x2="640"
+            y2="178"
+            stroke={color}
+            stroke-width="1.4"
+            stroke-dasharray="6 5"
+          />
+          <text x="648" y="62" font-size="11.5" fill={SOFT}>
+            limite haute
+          </text>
+          <text x="648" y="122" font-size="11.5" fill={SOFT}>
+            moyenne
+          </text>
+          <text x="648" y="182" font-size="11.5" fill={SOFT}>
+            limite basse
+          </text>
+          <polyline points={model.poly} fill="none" stroke={SOFT} stroke-width="1.6" />
+          {model.pts.map((p) => (
+            <circle
+              cx={p.x}
+              cy={p.y}
+              r={p.out ? 6 : 3.5}
+              fill={p.out ? color : '#fff'}
+              stroke={p.out ? color : SOFT}
+              stroke-width="1.5"
+            />
+          ))}
+          <text x="468" y="30" font-size="12.5" font-weight="700" fill={color}>
+            vraie dérive → agir
+          </text>
+          <text
+            x="360"
+            y="232"
+            text-anchor="middle"
+            font-size="12.5"
+            font-style="italic"
+            fill={SOFT}
+          >
+            Entre les limites : variation normale — ne pas toucher.
+          </text>
+        </>
+      )
+    }
+
+    {
+      type === 'curve' && v.kind === 'kano' && (
+        <>
+          <line x1="70" y1="20" x2="70" y2="230" stroke={LINE} stroke-width="1.5" />
+          <line x1="70" y1="230" x2="690" y2="230" stroke={LINE} stroke-width="1.5" />
+          <line x1="70" y1="125" x2="690" y2="125" stroke={LINE} stroke-dasharray="4 5" />
+          <path d="M70,220 L690,42" fill="none" stroke={SOFT} stroke-width="2" />
+          <path d="M70,225 C250,118 420,132 690,128" fill="none" stroke={INK} stroke-width="2" />
+          <path d="M70,124 C350,118 520,88 690,28" fill="none" stroke={color} stroke-width="2.4" />
+          <text x="500" y="36" font-size="12.5" font-weight="700" fill={color}>
+            Enthousiasmant (surprend)
+          </text>
+          <text x="600" y="106" font-size="12.5" font-weight="600" fill={SOFT}>
+            Proportionnel
+          </text>
+          <text x="540" y="150" font-size="12.5" font-weight="600" fill={INK}>
+            Basique (le dû)
+          </text>
+          <text x="380" y="254" text-anchor="middle" font-size="12" fill={SOFT}>
+            Niveau de réalisation →
+          </text>
+          <text x="36" y="160" font-size="12" fill={SOFT} transform="rotate(-90 36 160)">
+            Satisfaction →
+          </text>
+        </>
+      )
+    }
+
+    {
+      type === 'compare' && (
+        <>
+          <rect
+            x="14"
+            y="8"
+            width="330"
+            height={model.panelH}
+            rx="10"
+            fill="#fff"
+            stroke={LINE}
+            stroke-width="1.5"
+          />
+          <rect
+            x="376"
+            y="8"
+            width="330"
+            height={model.panelH}
+            rx="10"
+            fill={color}
+            fill-opacity="0.07"
+            stroke={color}
+            stroke-width="1.6"
+          />
+          <text x="179" y="32" text-anchor="middle" font-size="14" font-weight="700" fill={SOFT}>
+            {v.left.title}
+          </text>
+          <text x="541" y="32" text-anchor="middle" font-size="14" font-weight="700" fill={color}>
+            {v.right.title}
+          </text>
+          {v.left.lines.map((l, i) => (
+            <text x="34" y={60 + i * 26} font-size="13" fill={INK}>
+              · {l}
+            </text>
+          ))}
+          {v.right.lines.map((l, i) => (
+            <text x="396" y={60 + i * 26} font-size="13" fill={INK}>
+              · {l}
+            </text>
+          ))}
+          <text
+            x="360"
+            y={8 + model.panelH / 2 + 7}
+            text-anchor="middle"
+            font-size="22"
+            font-weight="800"
+            fill={color}
+          >
+            →
+          </text>
+        </>
+      )
+    }
+
+    {
+      type === 'flow' && (
+        <>
+          {model.nodes.map((nd, i) => (
+            <>
+              {i > 0 && !v.waits && (
+                <line
+                  x1={nd.x - model.between + 6}
+                  y1="56"
+                  x2={nd.x - 8}
+                  y2="56"
+                  stroke={SOFT}
+                  stroke-width="1.6"
+                  marker-end="url(#va)"
+                />
+              )}
+              {i > 0 && v.waits && (
+                <>
+                  <line
+                    x1={nd.x - model.between + 2}
+                    y1="56"
+                    x2={nd.x - 8}
+                    y2="56"
+                    stroke={SOFT}
+                    stroke-width="1.4"
+                    marker-end="url(#va)"
+                  />
+                  <polygon
+                    points={`${nd.x - model.between / 2 - 11},${78} ${nd.x - model.between / 2 + 11},${78} ${nd.x - model.between / 2},${96}`}
+                    fill="#fff"
+                    stroke={SOFT}
+                    stroke-width="1.4"
+                  />
+                  <text
+                    x={nd.x - model.between / 2}
+                    y="110"
+                    text-anchor="middle"
+                    font-size="10.5"
+                    fill={SOFT}
+                  >
+                    attente
+                  </text>
+                </>
+              )}
+              <rect
+                x={nd.x}
+                y="30"
+                width={model.w}
+                height="52"
+                rx="9"
+                fill={nd.accent ? color : '#fff'}
+                fill-opacity={nd.accent ? '0.12' : '1'}
+                stroke={nd.accent ? color : LINE}
+                stroke-width={nd.accent ? '2' : '1.5'}
+              />
+              <text
+                x={nd.x + model.w / 2}
+                y={56 + (nd.lines.length > 1 ? -3 : 4)}
+                text-anchor="middle"
+                font-size="12.5"
+                font-weight={nd.accent ? '700' : '600'}
+                fill={INK}
+              >
+                {nd.lines.map((l, li) => (
+                  <tspan x={nd.x + model.w / 2} dy={li === 0 ? 0 : 14}>
+                    {l}
+                  </tspan>
+                ))}
+              </text>
+            </>
+          ))}
+          {v.note && (
+            <text
+              x="360"
+              y="138"
+              text-anchor="middle"
+              font-size="12.5"
+              font-style="italic"
+              fill={SOFT}
+            >
+              {v.note}
+            </text>
+          )}
+        </>
+      )
+    }
+
+    {
+      type === 'house' && (
+        <>
+          <polygon
+            points="110,86 360,16 610,86"
+            fill={color}
+            fill-opacity="0.12"
+            stroke={color}
+            stroke-width="1.6"
+          />
+          <text x="360" y="68" text-anchor="middle" font-size="14" font-weight="700" fill={INK}>
+            {v.roof}
+          </text>
+          {v.pillars.map((p, i) => (
+            <>
+              <rect
+                x={i === 0 ? 150 : 390}
+                y="100"
+                width="180"
+                height="108"
+                rx="8"
+                fill="#fff"
+                stroke={color}
+                stroke-width="1.6"
+              />
+              <text
+                x={i === 0 ? 240 : 480}
+                y="148"
+                text-anchor="middle"
+                font-size="13"
+                font-weight="600"
+                fill={INK}
+              >
+                {wrap(p, 18).map((l, li) => (
+                  <tspan x={i === 0 ? 240 : 480} dy={li === 0 ? 0 : 16}>
+                    {l}
+                  </tspan>
+                ))}
+              </text>
+            </>
+          ))}
+          <rect
+            x="110"
+            y="222"
+            width="500"
+            height="34"
+            rx="8"
+            fill="#eef2f6"
+            stroke={LINE}
+            stroke-width="1.5"
+          />
+          <text x="360" y="244" text-anchor="middle" font-size="12.5" font-weight="600" fill={SOFT}>
+            {v.base}
+          </text>
+        </>
+      )
+    }
+
+    {
+      type === 'matrix' && (
+        <>
+          {model.cells.map((c) => (
+            <>
+              <rect
+                x={c.x}
+                y={c.y}
+                width="250"
+                height="95"
+                rx="9"
+                fill={c.accent ? color : '#fff'}
+                fill-opacity={c.accent ? '0.12' : '1'}
+                stroke={c.accent ? color : LINE}
+                stroke-width={c.accent ? '2' : '1.5'}
+              />
+              <text
+                x={c.x + 125}
+                y={c.y + 48 + (c.lines.length > 1 ? -4 : 4)}
+                text-anchor="middle"
+                font-size="13.5"
+                font-weight={c.accent ? '700' : '600'}
+                fill={INK}
+              >
+                {c.lines.map((l, li) => (
+                  <tspan x={c.x + 125} dy={li === 0 ? 0 : 16}>
+                    {l}
+                  </tspan>
+                ))}
+              </text>
+            </>
+          ))}
+          {v.xLabel && (
+            <text x="362" y="262" text-anchor="middle" font-size="12.5" fill={SOFT}>
+              {v.xLabel}
+            </text>
+          )}
+          {v.yLabel && (
+            <text x="62" y="128" font-size="12.5" fill={SOFT} transform="rotate(-90 62 128)">
+              {v.yLabel}
+            </text>
+          )}
+        </>
+      )
+    }
+
+    {
+      type === 'grid' && (
+        <>
+          <rect
+            x="395"
+            y="26"
+            width="120"
+            height="170"
+            rx="8"
+            fill={color}
+            fill-opacity="0.1"
+            stroke={color}
+            stroke-width="1.6"
+          />
+          {model.cols.map((c, i) => (
+            <text
+              x={200 + i * 120}
+              y="46"
+              text-anchor="middle"
+              font-size="13"
+              font-weight="700"
+              fill={INK}
+            >
+              {c}
+            </text>
+          ))}
+          {model.rows.map((r, ri) => (
+            <>
+              <text
+                x="125"
+                y={86 + ri * 44}
+                text-anchor="end"
+                font-size="13"
+                font-weight="600"
+                fill={INK}
+              >
+                {r.name}
+              </text>
+              {r.levels.map((lv, ci) => (
+                <text
+                  x={200 + ci * 120}
+                  y={86 + ri * 44}
+                  text-anchor="middle"
+                  font-size="15"
+                  font-weight="800"
+                  fill={lv === 'I' ? LINE : lv === 'L' ? SOFT : color}
+                >
+                  {lv}
+                </text>
+              ))}
+            </>
+          ))}
+          <text x="360" y="222" text-anchor="middle" font-size="12" fill={SOFT}>
+            I appris · L fait avec aide · U autonome · O peut former
+          </text>
+          <text
+            x="360"
+            y="244"
+            text-anchor="middle"
+            font-size="12.5"
+            font-style="italic"
+            fill={color}
+            font-weight="600"
+          >
+            Le SAV ne tient que sur une personne → priorité de formation.
+          </text>
+        </>
+      )
+    }
+
+    {
+      type === 'spaghetti' && (
+        <>
+          <rect
+            x="14"
+            y="10"
+            width="330"
+            height="166"
+            rx="10"
+            fill="#fff"
+            stroke={LINE}
+            stroke-width="1.5"
+          />
+          <rect
+            x="376"
+            y="10"
+            width="330"
+            height="166"
+            rx="10"
+            fill={color}
+            fill-opacity="0.06"
+            stroke={color}
+            stroke-width="1.6"
+          />
+          <text x="179" y="34" text-anchor="middle" font-size="14" font-weight="700" fill={SOFT}>
+            Avant
+          </text>
+          <text x="541" y="34" text-anchor="middle" font-size="14" font-weight="700" fill={color}>
+            Après réorganisation
+          </text>
+          <path
+            d="M50,70 C150,150 90,50 220,140 S160,60 300,130 S190,160 80,110 S240,80 310,70"
+            fill="none"
+            stroke={SOFT}
+            stroke-width="1.8"
+            opacity="0.85"
+          />
+          <line
+            x1="410"
+            y1="80"
+            x2="650"
+            y2="80"
+            stroke={color}
+            stroke-width="2"
+            marker-end="url(#va)"
+          />
+          <line
+            x1="410"
+            y1="112"
+            x2="600"
+            y2="112"
+            stroke={color}
+            stroke-width="2"
+            marker-end="url(#va)"
+          />
+          <line
+            x1="410"
+            y1="144"
+            x2="630"
+            y2="144"
+            stroke={color}
+            stroke-width="2"
+            marker-end="url(#va)"
+          />
+          <text x="179" y="200" text-anchor="middle" font-size="12.5" font-weight="700" fill={SOFT}>
+            ≈ 1,9 km de marche / jour
+          </text>
+          <text
+            x="541"
+            y="200"
+            text-anchor="middle"
+            font-size="12.5"
+            font-weight="700"
+            fill={color}
+          >
+            ≈ 0,4 km / jour
+          </text>
+        </>
+      )
+    }
+
+    {
+      type === 'formula' && (
+        <>
+          {[
+            { x: 40, w: 190, d: v.a },
+            { x: 285, w: 190, d: v.b },
+            { x: 530, w: 170, d: v.result, accent: true },
+          ].map((b) => (
+            <>
+              <rect
+                x={b.x}
+                y="30"
+                width={b.w}
+                height="80"
+                rx="10"
+                fill={b.accent ? color : '#fff'}
+                fill-opacity={b.accent ? '0.12' : '1'}
+                stroke={b.accent ? color : LINE}
+                stroke-width={b.accent ? '2' : '1.5'}
+              />
+              <text x={b.x + b.w / 2} y="56" text-anchor="middle" font-size="12" fill={SOFT}>
+                {b.d.label}
+              </text>
+              <text
+                x={b.x + b.w / 2}
+                y="88"
+                text-anchor="middle"
+                font-size="19"
+                font-weight="800"
+                fill={INK}
+              >
+                {b.d.value}
+              </text>
+            </>
+          ))}
+          <text x="257" y="78" text-anchor="middle" font-size="24" font-weight="800" fill={SOFT}>
+            ÷
+          </text>
+          <text x="502" y="78" text-anchor="middle" font-size="24" font-weight="800" fill={SOFT}>
+            =
+          </text>
+        </>
+      )
+    }
+  </svg>
+</figure>
+
+<style>
+  .concept-visual {
+    margin: 0;
+  }
+  .concept-visual svg {
+    display: block;
+  }
+</style>

@@ -159,7 +159,32 @@ export const glossary = [
   {
     term: 'Obeya',
     def: '« Grande salle » : pièce ou mur où l’on rend visible l’avancement d’un projet pour décider vite, ensemble.',
-    slug: 'management-visuel',
+    slug: 'obeya',
+  },
+  {
+    term: 'SIPOC',
+    def: 'Vue d’un processus en cinq colonnes — Fournisseurs, Entrées, Processus, Sorties, Clients — pour le cadrer avant de l’améliorer.',
+    slug: 'sipoc',
+  },
+  {
+    term: 'Kano (modèle de)',
+    def: 'Classement des attentes clients en basiques (dues), proportionnelles et enthousiasmantes (inattendues).',
+    slug: 'kano',
+  },
+  {
+    term: 'AMDEC / FMEA',
+    def: 'Analyse des modes de défaillance, de leurs effets et de leur criticité : prévenir les risques plutôt que les subir.',
+    slug: 'amdec',
+  },
+  {
+    term: 'Diagramme spaghetti',
+    def: 'Tracé des déplacements réels sur un plan, pour révéler les allers-retours inutiles.',
+    slug: 'diagramme-spaghetti',
+  },
+  {
+    term: 'ILUO',
+    def: 'Échelle visuelle de polyvalence en quatre niveaux : apprend (I), fait avec aide (L), autonome (U), capable de former (O).',
+    slug: 'matrice-competences',
   },
   {
     term: 'OEE / TRS',

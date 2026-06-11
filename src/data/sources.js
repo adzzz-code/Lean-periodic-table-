@@ -27,6 +27,11 @@ export const sources = {
   gemba: ['Masaaki Imai — Gemba Kaizen (1997)'],
   gaspillages: ['Taiichi Ohno — Toyota Production System (1978, les 7 muda)'],
   ctq: ['Méthodologie Six Sigma (CTQ tree, phase Define)'],
+  sipoc: [
+    'Méthodologie Six Sigma (phase Define)',
+    'Geary Rummler & Alan Brache — Improving Performance (1990)',
+  ],
+  kano: ['Noriaki Kano — Attractive Quality and Must-Be Quality (1984)'],
 
   // Flux & système de production
   vsm: ['Mike Rother & John Shook — Learning to See (1999)'],
@@ -38,6 +43,10 @@ export const sources = {
   jit: ['Taiichi Ohno — Toyota Production System (1978)'],
   smed: ['Shigeo Shingo — A Revolution in Manufacturing: The SMED System (1985)'],
   heijunka: ['Jeffrey Liker — The Toyota Way (2004)', 'Toyota Production System'],
+  'diagramme-spaghetti': [
+    'Origine : études des mouvements de Frank & Lillian Gilbreth (début XXᵉ siècle)',
+    'Littérature lean — analyse d’implantation et chantiers 5S',
+  ],
 
   // Stabilité & qualité
   'cinq-s': [
@@ -52,6 +61,7 @@ export const sources = {
   'poka-yoke': ['Shigeo Shingo — Zero Quality Control (1986)'],
   jidoka: ['Toyota (Sakichi Toyoda) ; Taiichi Ohno — Toyota Production System'],
   tpm: ['Seiichi Nakajima — Introduction to TPM (1988)'],
+  amdec: ['US Military — MIL-P-1629 (1949, origine de la FMEA)', 'AIAG & VDA — FMEA Handbook'],
 
   // Résolution de problèmes
   pdca: ['W. Edwards Deming — Out of the Crisis (1986)', 'Walter A. Shewhart (cycle de Shewhart)'],
@@ -81,6 +91,14 @@ export const sources = {
   kaizen: ['Masaaki Imai — Kaizen (1986)'],
   'leader-standard-work': ['David Mann — Creating a Lean Culture (2005)'],
   'hoshin-kanri': ['Yoji Akao — Hoshin Kanri: Policy Deployment for Successful TQM (1991)'],
+  obeya: [
+    'Toyota — développement de la Prius (projet G21, années 1990)',
+    'Jeffrey Liker — The Toyota Way (2004)',
+  ],
+  'matrice-competences': [
+    'Training Within Industry (TWI) — Job Instruction',
+    'Pratique standard du management lean (échelle ILUO)',
+  ],
 
   // Amélioration avancée / Six Sigma
   kata: ['Mike Rother — Toyota Kata (2009)'],

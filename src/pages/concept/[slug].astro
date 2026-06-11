@@ -1,8 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
+import ConceptVisual from '../../components/ConceptVisual.astro';
 import { concepts, conceptBySlug } from '../../data/concepts.js';
 import { familyById, levels } from '../../data/families.js';
 import { sources } from '../../data/sources.js';
+import { visuals } from '../../data/visuals.js';
 import { withBase } from '../../lib/url.js';
 
 export function getStaticPaths() {
@@ -14,6 +16,7 @@ const c = conceptBySlug[slug];
 const fam = familyById[c.family];
 const lvl = levels.find((l) => l.level === c.level);
 const refs = sources[slug] ?? [];
+const visual = visuals[slug];
 
 const impactLabel = { high: 'Fort', medium: 'Moyen', low: 'Faible' };
 const effortLabel = { low: 'Faible', medium: 'Moyen', high: 'Élevé' };
@@ -76,7 +79,21 @@ const definedTerm = {
 
       <p class="lead">{c.definition}</p>
 
+      <p class="memo-cta">
+        <a class="memo-link" href={withBase(`/concept/${slug}/memo/`)}>
+          📄 Fiche mémo — version imprimable / PDF
+        </a>
+      </p>
+
       <div class="grid-cards">
+        {
+          visual && (
+            <section class="card visual-card">
+              <h2>En un schéma</h2>
+              <ConceptVisual visual={visual} color={fam.color} name={c.name} />
+            </section>
+          )
+        }
         <section class="card">
           <h2>L'essentiel</h2>
           <dl>

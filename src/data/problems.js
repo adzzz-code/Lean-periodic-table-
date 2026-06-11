@@ -84,6 +84,10 @@ export const problems = [
         slug: 'gaspillages',
         why: 'Mettre un nom — et un coût — sur ces déplacements et attentes invisibles.',
       },
+      {
+        slug: 'diagramme-spaghetti',
+        why: 'Tracer les déplacements réels pour réorganiser l’espace en connaissance de cause.',
+      },
     ],
   },
   {
@@ -161,6 +165,10 @@ export const problems = [
         slug: 'kanban',
         why: 'Tirer le travail au rythme réel pour éviter les en-cours qui s’accumulent.',
       },
+      {
+        slug: 'sipoc',
+        why: 'Poser le processus à plat en 30 minutes avant de cartographier les temps.',
+      },
     ],
   },
   {
@@ -220,6 +228,10 @@ export const problems = [
       },
       { slug: 'poka-yoke', why: 'Empêcher l’erreur à la source grâce à un détrompeur.' },
       { slug: 'cinq-s', why: 'Un poste organisé est la base d’un travail régulier.' },
+      {
+        slug: 'matrice-competences',
+        why: 'Voir qui maîtrise quoi, et organiser la polyvalence par la formation.',
+      },
     ],
   },
   {
@@ -336,6 +348,10 @@ export const problems = [
         why: 'Distinguer ce pour quoi le client paie de ce qui ne lui apporte rien.',
       },
       { slug: 'gemba', why: 'Observer le parcours réel du client pour comprendre son expérience.' },
+      {
+        slug: 'kano',
+        why: 'Distinguer le dû, le proportionnel et ce qui enchante vraiment.',
+      },
     ],
   },
   {
@@ -367,6 +383,10 @@ export const problems = [
         why: 'Mesurer les vraies pertes (micro-arrêts, ralentissements) pour cibler.',
       },
       { slug: 'cinq-s', why: 'Un équipement propre et rangé révèle tôt les anomalies.' },
+      {
+        slug: 'amdec',
+        why: 'Anticiper les défaillances graves pour sécuriser d’abord le pire.',
+      },
     ],
   },
   {
@@ -509,6 +529,10 @@ export const problems = [
       {
         slug: 'kpi',
         why: 'Suivre l’avancement avec 3-4 chiffres, pas avec des impressions.',
+      },
+      {
+        slug: 'obeya',
+        why: 'Un mur de pilotage rend l’avancement visible et les blocages criants.',
       },
     ],
   },

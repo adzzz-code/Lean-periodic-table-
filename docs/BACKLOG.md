@@ -24,7 +24,16 @@
 - [x] `P1` **Landing pages diagnostic** : chaque problème enrichi d'un **contexte** (2 §, langage
       de dirigeant — SEO long-tail) et d'une **FAQ** (objections réelles, réponses honnêtes),
       rendue en JSON-LD `FAQPage`. Champs obligatoires, imposés par `npm run validate`.
-- [ ] `P2` Étendre à ~60 concepts (cf. V2) : ex. SIPOC, Kano, QFD, Spaghetti, Yamazumi, 5 Pourquoi inversés.
+- [~] `P2` Étendre à ~60 concepts (cf. V2) : **46/60** — ajoutés le 2026-06-11 : SIPOC, modèle
+  de Kano, diagramme spaghetti, Obeya, matrice de compétences (ILUO), AMDEC/FMEA (chacun
+  avec sources, mots-clés, glossaire, schéma et rattachement au diagnostic).
+  Candidats suivants : QFD, Yamazumi, Kamishibai, Milk run, 5G, Jishuken.
+- [x] `P1` **Schéma visuel sur 100 % des fiches** : `src/data/visuals.js` (déclaratif) +
+      `ConceptVisual.astro` (13 types de SVG rendus au build, zéro JS client, aria-label) —
+      obligatoire pour tout concept (`npm run validate`).
+- [x] `P1` **Fiche mémo téléchargeable** sur chaque concept (`/concept/[slug]/memo/`) :
+      une page A4 de révision (essentiel, limites, premier pas, indicateurs, schéma, sources),
+      imprimable / enregistrable en PDF via le navigateur (zéro dépendance PDF), `noindex`.
 - [ ] `P2` Mini-cas concrets TPE/PME illustrés (1 par famille).
 
 ## 2. UX & interactivité

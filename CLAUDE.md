@@ -13,8 +13,8 @@ quand un outil ne sert à rien et ses limites — anti « cargo cult »).
 
 ## État courant
 
-**V1 livrée** : tableau interactif + 40 fiches concepts. Cadrage validé le 2026-06-07
-(cf. `docs/PRD.md` §9). Build statique Astro OK (`npm run build`).
+**V1 livrée, V2 en cours** : tableau interactif + **46 fiches concepts** (extension V2 vers ~60).
+Cadrage validé le 2026-06-07 (cf. `docs/PRD.md` §9). Build statique Astro OK (`npm run build`).
 
 ## Concept produit
 
@@ -37,8 +37,11 @@ quand un outil ne sert à rien et ses limites — anti « cargo cult »).
 - ~~Vue graphe~~ : **retirée** (2026-06-10) — peu de valeur pour la cible, inutilisable au
   tactile. Le maillage passe par les « concepts liés » des fiches (liens sortants **et**
   entrants, calculés au build).
-- Fiche = gabarit fixe : Essentiel · **Limites & anti-usage** · couche TPE/PME · badge
-  pertinence (impact/effort) · couche praticien · concepts liés · **sources**. Détail : `docs/PRD.md` §4.
+- Fiche = gabarit fixe : Essentiel · **schéma visuel** (`src/data/visuals.js`, rendu SVG au
+  build par `ConceptVisual.astro`, obligatoire) · **Limites & anti-usage** · couche TPE/PME ·
+  badge pertinence (impact/effort) · couche praticien · concepts liés · **sources** ·
+  **fiche mémo** téléchargeable (`/concept/[slug]/memo/`, A4 imprimable → PDF navigateur,
+  `noindex`). Détail : `docs/PRD.md` §4.
 
 ## Conventions
 

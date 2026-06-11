@@ -472,6 +472,27 @@ a {
   gap: 16px;
   margin: 22px 0;
 }
+/* Schéma : pleine largeur dans la grille de cartes. */
+.visual-card {
+  grid-column: 1 / -1;
+}
+.memo-cta {
+  margin: 4px 0 0;
+}
+.memo-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--brand);
+  background: rgba(22, 104, 160, 0.08);
+  border: 1px solid rgba(22, 104, 160, 0.3);
+  border-radius: 999px;
+  padding: 6px 14px;
+  text-decoration: none;
+}
+.memo-link:hover {
+  background: rgba(22, 104, 160, 0.15);
+}
 .card {
   background: var(--surface);
   border: 1px solid var(--line);
