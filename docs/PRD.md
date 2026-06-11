@@ -66,6 +66,8 @@ Tous les croisements (famille × niveau) ne sont pas remplis — les « trous »
 | ------------------------ | ---------------------------------------------------------------------------------------------------- |
 | **En-tête**              | Symbole court (`5S`, `VSM`…), nom complet, famille (couleur), n°, niveau de maturité                 |
 | **Essentiel**            | Définition en 1 phrase + à quoi ça sert                                                              |
+| **En un schéma**         | Schéma visuel pédagogique (SVG rendu au build, `src/data/visuals.js`)                                |
+| **Comment faire**        | Mode opératoire pas-à-pas (≥ 4 étapes concrètes pour une TPE/PME, `src/data/howto.js`)               |
 | **Limites & anti-usage** | À quoi ça **ne** sert **pas**, quand ne pas l'utiliser, limites, pièges classiques                   |
 | **Couche TPE/PME**       | Pourquoi ça compte pour une petite structure · 1er pas réaliste · exemple concret · erreur fréquente |
 | **Badge pertinence**     | Impact / effort pour une petite équipe (ex. fort impact / faible effort)                             |

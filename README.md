@@ -17,8 +17,9 @@ adaptés à leur contexte (moyens limités, petites équipes), avec leurs **limi
 - **Lignes = niveau de maturité** (Fondamentaux → Structuration → Optimisation → Excellence) :
   guide naturellement « par où commencer ».
 - Chaque case = un **concept** (52 à ce jour) avec une fiche détaillée : essentiel,
-  **schéma visuel**, **limites & anti-usage**, couche dédiée TPE/PME, badge de pertinence
-  (impact/effort), concepts liés, sources — et une **fiche mémo A4** imprimable / PDF.
+  **schéma visuel**, **« comment faire » pas-à-pas**, **limites & anti-usage**, couche dédiée
+  TPE/PME, badge de pertinence (impact/effort), concepts liés, sources — et une **fiche mémo
+  A4** imprimable / PDF.
 - **Mode TPE/PME** : met en avant les incontournables pour une petite structure.
 
 ## Trois entrées (la cible ne connaît pas le Lean)
@@ -69,6 +70,7 @@ src/data/problems.js            Entrée « par le problème » (landing pages : 
 src/data/quickwins.js           Pépites (gain de temps) + estimation horaire
 src/data/glossary.js            Glossaire (termes japonais, acronymes)
 src/data/visuals.js             Schémas visuels par concept (déclaratif)
+src/data/howto.js               « Comment faire » : mode opératoire pas-à-pas par concept
 src/components/ConceptVisual.astro  Rendu SVG des schémas (au build)
 src/layouts/Base.astro          Layout commun (SEO, OG, JSON-LD, navigation, analytics)
 src/lib/url.js                  withBase() — liens compatibles racine & sous-dossier
@@ -90,8 +92,9 @@ tests/                          Tests unitaires (node --test)
 
 1. Ajouter une entrée dans `src/data/concepts.js` (gabarit : voir l'en-tête du fichier et
    `docs/PRD.md` §4).
-2. Ajouter **≥ 1 source** (`src/data/sources.js`), **≥ 1 mot-clé** en langage courant
-   (`src/data/keywords.js`) et **un schéma** (`src/data/visuals.js`) — obligatoires.
+2. Ajouter **≥ 1 source** (`src/data/sources.js`), **≥ 1 mot-clé** (`src/data/keywords.js`),
+   **un schéma** (`src/data/visuals.js`) et **un « comment faire » de ≥ 4 étapes**
+   (`src/data/howto.js`) — tous obligatoires.
 3. `npm run validate` pour vérifier l'intégrité. La case apparaît automatiquement à
    l'intersection famille × niveau ; l'image OG et la fiche mémo sont générées au build.
 
