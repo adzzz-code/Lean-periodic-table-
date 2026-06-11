@@ -85,6 +85,10 @@ export const sources = {
   a3: ['John Shook — Managing to Learn (2008)', 'Toyota (méthode A3)'],
   dmaic: ['Méthodologie Six Sigma (Motorola, puis General Electric)'],
   'huit-d': ['Ford Motor Company — Team Oriented Problem Solving, TOPS-8D (1987)'],
+  qqoqccp: [
+    'Hexamètre de Quintilien (rhétorique classique), repris par les outils qualité',
+    'Équivalent anglo-saxon : 5W2H (littérature qualité)',
+  ],
 
   // Mesure & maîtrise statistique
   pareto: [
@@ -96,6 +100,15 @@ export const sources = {
   spc: [
     'Walter A. Shewhart — Economic Control of Quality of Manufactured Product (1931)',
     'W. Edwards Deming',
+  ],
+  'feuille-releves': ['Kaoru Ishikawa — Guide to Quality Control (1968, les 7 outils de base)'],
+  'matrice-impact-effort': [
+    'PICK chart — Lockheed Martin (pratique Lean Six Sigma)',
+    'Littérature amélioration continue (matrice gains/efforts)',
+  ],
+  capabilite: [
+    'Douglas Montgomery — Introduction to Statistical Quality Control',
+    'Méthodologie Six Sigma (indices Cp / Cpk)',
   ],
 
   // Management & culture
@@ -114,9 +127,25 @@ export const sources = {
     'Training Within Industry (TWI) — Job Instruction',
     'Pratique standard du management lean (échelle ILUO)',
   ],
+  'point-quotidien': [
+    'David Mann — Creating a Lean Culture (2005, daily accountability)',
+    'Pratique du lean management quotidien (stand-up / huddle)',
+  ],
+  'systeme-suggestions': [
+    'Japan Human Relations Association — Kaizen Teian (1992)',
+    'Masaaki Imai — Kaizen (1986)',
+  ],
 
   // Amélioration avancée / Six Sigma
   kata: ['Mike Rother — Toyota Kata (2009)'],
   'theorie-contraintes': ['Eliyahu M. Goldratt — The Goal / Le But (1984)'],
   'six-sigma': ['Mikel Harry & Richard Schroeder — Six Sigma (2000)', 'Motorola (origine, 1986)'],
+  yokoten: [
+    'Toyota — pratique yokoten (déploiement horizontal)',
+    'Jeffrey Liker — The Toyota Way (2004)',
+  ],
+  kaikaku: [
+    'Norman Bodek — Kaikaku: The Power and Magic of Lean (2004)',
+    'Masaaki Imai — Kaizen (1986, kaizen vs innovation)',
+  ],
 };

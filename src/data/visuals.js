@@ -248,6 +248,10 @@ export const visuals = {
       'Clôture (D8)',
     ],
   },
+  qqoqccp: {
+    type: 'steps',
+    steps: ['Quoi ?', 'Qui ?', 'Où ?', 'Quand ?', 'Comment ?', 'Combien ?', 'Pourquoi ?'],
+  },
 
   // Mesure & maîtrise statistique
   pareto: {
@@ -282,6 +286,38 @@ export const visuals = {
     note: 'Les pertes se multiplient : 90 % × 85 % × 95 % ≈ 73 %.',
   },
   spc: { type: 'curve', kind: 'control' },
+  'feuille-releves': {
+    type: 'bars',
+    bars: [
+      { label: 'Produit manquant', value: 14, accent: true },
+      { label: 'Délai trop long', value: 6 },
+      { label: 'Prix', value: 3 },
+    ],
+    note: 'Compter une semaine avant de conclure — les faits surprennent.',
+  },
+  'matrice-impact-effort': {
+    type: 'matrix',
+    xLabel: 'Effort →',
+    yLabel: '← Impact',
+    quadrants: [
+      'Gains rapides — faire maintenant',
+      'Projets — planifier',
+      'Bonus — si le temps le permet',
+      'À abandonner sans remords',
+    ],
+    accent: 0,
+  },
+  capabilite: {
+    type: 'compare',
+    left: {
+      title: 'Non capable (Cpk < 1)',
+      lines: ['Dispersion déborde la tolérance', 'Rebuts inévitables', 'Contrôles renforcés'],
+    },
+    right: {
+      title: 'Capable (Cpk ≥ 1,33)',
+      lines: ['Dispersion bien dans la tolérance', 'Défauts rarissimes', 'Contrôles allégés'],
+    },
+  },
 
   // Management & culture
   'management-visuel': {
@@ -317,6 +353,14 @@ export const visuals = {
     quadrants: ['Objectifs & jalons', 'Avancement', 'Problèmes ouverts', 'Plan d’action'],
   },
   'matrice-competences': { type: 'grid' },
+  'point-quotidien': {
+    type: 'cycle',
+    steps: ['10 min debout', 'Tableau sous les yeux', 'Blocages remontés', 'Actions du jour'],
+  },
+  'systeme-suggestions': {
+    type: 'cycle',
+    steps: ['Idée du terrain', 'Réponse sous 7 jours', 'Test rapide', 'Reconnaissance'],
+  },
   kamishibai: {
     type: 'cycle',
     steps: ['Tirer une carte', 'Vérifier le standard', 'Vert ou rouge', 'Corriger si écart'],
@@ -350,5 +394,20 @@ export const visuals = {
   jishuken: {
     type: 'cycle',
     steps: ['Problème difficile', 'Atelier encadré', 'Apprentissage', 'Standard relevé'],
+  },
+  yokoten: {
+    type: 'steps',
+    steps: ['Amélioration prouvée', 'Standard écrit', 'Adaptée ailleurs', 'Vérifiée partout'],
+  },
+  kaikaku: {
+    type: 'compare',
+    left: {
+      title: 'Kaizen — petits pas',
+      lines: ['Continu, peu risqué', 'Améliore l’existant', 'Porté par l’équipe'],
+    },
+    right: {
+      title: 'Kaikaku — rupture',
+      lines: ['Ponctuel, préparé', 'Repense le modèle', 'Décision de direction'],
+    },
   },
 };

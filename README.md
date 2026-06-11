@@ -16,7 +16,7 @@ adaptés à leur contexte (moyens limités, petites équipes), avec leurs **limi
   Résolution de problèmes, Mesure, Management & culture, Avancé / Six Sigma).
 - **Lignes = niveau de maturité** (Fondamentaux → Structuration → Optimisation → Excellence) :
   guide naturellement « par où commencer ».
-- Chaque case = un **concept** (52 à ce jour) avec une fiche détaillée : essentiel,
+- Chaque case = un **concept** (60 à ce jour) avec une fiche détaillée : essentiel,
   **schéma visuel**, **« comment faire » pas-à-pas**, **limites & anti-usage**, couche dédiée
   TPE/PME, badge de pertinence (impact/effort), concepts liés, sources — et une **fiche mémo
   A4** imprimable / PDF.

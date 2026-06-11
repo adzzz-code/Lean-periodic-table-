@@ -274,6 +274,13 @@ export const howto = {
     'Déployer et prévenir le retour (D6-D7).',
     'Clôturer et reconnaître l’équipe (D8).',
   ],
+  qqoqccp: [
+    'Écrire le problème en une phrase.',
+    'Répondre par écrit aux 7 questions : quoi, qui, où, quand, comment, combien, pourquoi.',
+    'Vérifier chaque réponse sur le terrain (pas de mémoire).',
+    'Chiffrer ce qui peut l’être (combien, depuis quand).',
+    'Passer à l’analyse de cause (5 Pourquoi) sur ce problème bien posé.',
+  ],
 
   // ───────── Mesure & maîtrise statistique ─────────
   pareto: [
@@ -303,6 +310,27 @@ export const howto = {
     'Tracer la courbe avec des limites de contrôle.',
     'Distinguer variation normale et vraie dérive.',
     'N’intervenir que hors limites (pas à chaque point).',
+  ],
+  'feuille-releves': [
+    'Choisir UNE question à trancher (quels défauts ? quels motifs ?).',
+    'Définir 4-5 catégories simples, plus une case « autre ».',
+    'Mettre la feuille là où le fait se produit.',
+    'Cocher au moment même, pendant une semaine.',
+    'Compter, classer (Pareto) et décider.',
+  ],
+  'matrice-impact-effort': [
+    'Lister toutes les actions envisagées (10-15 max).',
+    'Tracer 4 cases : impact fort/faible × effort faible/fort.',
+    'Placer chaque action, en équipe si possible.',
+    'Faire d’abord les « gains rapides » (fort impact, faible effort).',
+    'Planifier les projets, abandonner explicitement le reste.',
+  ],
+  capabilite: [
+    'Vérifier que le processus est stable (MSP d’abord).',
+    'Relever une trentaine de mesures de la caractéristique critique.',
+    'Calculer la dispersion et la comparer à la tolérance (Cp, Cpk).',
+    'Si Cpk < 1,33 : réduire la variation avant de promettre.',
+    'Documenter le calcul pour le client ou l’audit.',
   ],
 
   // ───────── Management & culture ─────────
@@ -355,6 +383,20 @@ export const howto = {
     'Marquer vert (OK) ou rouge (écart).',
     'Corriger tout écart rouge dans la foulée.',
   ],
+  'point-quotidien': [
+    'Fixer une heure quotidienne, courte et non négociable.',
+    'Se tenir debout, devant le tableau ou le planning.',
+    'Faire le tour : hier, aujourd’hui, blocages.',
+    'Décider qui aide qui — sans résoudre en séance.',
+    'Tenir 10 minutes maximum, tous les jours.',
+  ],
+  'systeme-suggestions': [
+    'Mettre un support « idées » simple et visible.',
+    'S’engager sur une réponse sous 7 jours, quelle qu’elle soit.',
+    'Tester vite les idées retenues, avec leur auteur.',
+    'Reconnaître publiquement chaque idée appliquée.',
+    'Suivre le nombre d’idées proposées et appliquées.',
+  ],
 
   // ───────── Amélioration avancée / Six Sigma ─────────
   kata: [
@@ -384,5 +426,19 @@ export const howto = {
     'Travailler en plusieurs séances guidées.',
     'Laisser l’équipe chercher (ne pas donner la solution).',
     'Conclure par un standard relevé et des compétences acquises.',
+  ],
+  yokoten: [
+    'Choisir une amélioration prouvée et stabilisée.',
+    'En écrire le principe (pas seulement la solution locale).',
+    'Repérer où le même problème existe ailleurs.',
+    'Adapter avec l’équipe du nouvel endroit.',
+    'Vérifier que le gain se reproduit.',
+  ],
+  kaikaku: [
+    'Vérifier que le kaizen plafonne malgré de vrais efforts.',
+    'Définir la cible de rupture et ce qu’on s’interdit de garder.',
+    'Préparer les parties prenantes (nemawashi).',
+    'Mener la rupture sur un périmètre net, vite.',
+    'Re-stabiliser : standards, formation, suivi.',
   ],
 };

@@ -106,6 +106,7 @@ export const glossary = [
   {
     term: 'Kaikaku',
     def: 'Changement radical, par rupture — le complément du kaizen (petits pas) quand le modèle entier est à revoir.',
+    slug: 'kaikaku',
   },
   {
     term: 'Kaizen',
@@ -282,6 +283,21 @@ export const glossary = [
   {
     term: 'Yokoten',
     def: 'Déploiement horizontal : répliquer ailleurs une amélioration qui a fait ses preuves quelque part.',
-    slug: 'kaizen',
+    slug: 'yokoten',
+  },
+  {
+    term: 'QQOQCCP',
+    def: 'Sept questions pour décrire complètement un problème : Quoi, Qui, Où, Quand, Comment, Combien, Pourquoi (équivalent du 5W2H).',
+    slug: 'qqoqccp',
+  },
+  {
+    term: 'Teian',
+    def: 'Système de suggestions : un canal permanent pour que chacun propose des améliorations, avec réponse rapide.',
+    slug: 'systeme-suggestions',
+  },
+  {
+    term: 'Cp / Cpk',
+    def: 'Indices de capabilité : comparent la dispersion d’un processus (et son centrage, pour le Cpk) à la tolérance exigée.',
+    slug: 'capabilite',
   },
 ];
