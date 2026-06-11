@@ -8,6 +8,7 @@ import { keywords } from '../src/data/keywords.js';
 import { problems } from '../src/data/problems.js';
 import { quickwins } from '../src/data/quickwins.js';
 import { glossary } from '../src/data/glossary.js';
+import { visuals } from '../src/data/visuals.js';
 
 const famIds = new Set(families.map((f) => f.id));
 const lvls = new Set(levels.map((l) => l.level));
@@ -57,6 +58,7 @@ for (const c of concepts) {
   const kw = keywords[c.slug];
   if (!Array.isArray(kw) || kw.length === 0)
     issues.push(`${id} : aucun mot-clé de recherche (cf. keywords.js)`);
+  if (!visuals[c.slug]?.type) issues.push(`${id} : aucun schéma visuel (cf. visuals.js)`);
 }
 
 // Toute clé de sources / keywords doit correspondre à un concept existant.
@@ -64,6 +66,8 @@ for (const key of Object.keys(sources))
   if (!setSlugs.has(key)) issues.push(`sources.js : clé orpheline « ${key} » (slug inconnu)`);
 for (const key of Object.keys(keywords))
   if (!setSlugs.has(key)) issues.push(`keywords.js : clé orpheline « ${key} » (slug inconnu)`);
+for (const key of Object.keys(visuals))
+  if (!setSlugs.has(key)) issues.push(`visuals.js : clé orpheline « ${key} » (slug inconnu)`);
 
 // Problèmes (entrée par le problème) : slugs uniques, ≥ 1 solution, concepts existants,
 // et contenu de landing page complet (contexte + FAQ — cf. en-tête de problems.js).

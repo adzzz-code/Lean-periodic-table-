@@ -390,6 +390,83 @@ export const concepts = [
     },
     related: ['voix-client', 'six-sigma', 'spc'],
   },
+  {
+    number: 41,
+    slug: 'sipoc',
+    symbol: 'Si',
+    name: 'SIPOC',
+    fullName: 'SIPOC — Fournisseurs, Entrées, Processus, Sorties, Clients',
+    family: 'client-valeur',
+    level: 2,
+    definition:
+      "Vue d'ensemble d'un processus en cinq colonnes : Fournisseurs, Entrées, Processus (5-7 étapes), Sorties, Clients.",
+    purpose:
+      "Cadrer un processus — son périmètre et ses acteurs — avant de l'analyser ou de l'améliorer.",
+    limits: {
+      notFor:
+        "Ce n'est pas une analyse : le SIPOC décrit à haut niveau, il ne montre ni les temps, ni les problèmes.",
+      whenNot: 'Inutile pour un processus évident à deux étapes que tout le monde connaît.',
+      pitfalls:
+        'Détailler 20 étapes : un SIPOC se limite à 5-7 macro-étapes, sinon c’est une cartographie ratée.',
+    },
+    pme: {
+      why: 'Clarifie en 30 minutes « qui fournit quoi à qui » — souvent la première fois que le processus est posé à plat.',
+      firstStep:
+        'Sur un tableau, décrire un processus clé en 5-7 étapes, puis remplir les quatre autres colonnes en équipe.',
+      example:
+        "Un traiteur formalise le SIPOC de ses prestations et découvre qu'aucune étape ne vérifie les allergies déclarées.",
+      commonMistake:
+        'Le remplir seul dans son bureau au lieu de le construire avec ceux qui font le processus.',
+    },
+    relevance: { impact: 'medium', effort: 'low' },
+    pmeStarter: false,
+    practitioner: {
+      deeper: 'Outil de la phase Define du DMAIC ; prépare la VSM en délimitant le périmètre.',
+      prerequisites: ['Processus identifié'],
+      successIndicators: ["Périmètre partagé par l'équipe", 'Entrées et sorties clarifiées'],
+    },
+    related: ['vsm', 'voix-client', 'dmaic'],
+  },
+  {
+    number: 42,
+    slug: 'kano',
+    symbol: 'Kn',
+    name: 'Modèle de Kano',
+    fullName: 'Modèle de Kano — attentes basiques, proportionnelles, enthousiasmantes',
+    family: 'client-valeur',
+    level: 3,
+    definition:
+      "Classe les attentes clients en trois familles : basiques (dues), proportionnelles (plus il y en a, mieux c'est) et enthousiasmantes (inattendues).",
+    purpose:
+      'Investir au bon endroit : sécuriser le dû, doser le proportionnel, surprendre là où ça compte.',
+    limits: {
+      notFor:
+        "Ne mesure pas l'importance d'un client ou d'un segment : il qualifie des attentes, pas des marchés.",
+      whenNot: "Peu utile si l'offre échoue déjà sur les basiques : commencez par tenir le dû.",
+      pitfalls:
+        "Oublier que les enthousiasmantes d'hier deviennent les basiques de demain (le wifi à l'hôtel).",
+    },
+    pme: {
+      why: "Évite d'investir dans des « plus » que le client ne valorise pas pendant qu'un basique fuit (rappels oubliés, retards).",
+      firstStep:
+        'Lister 10 attentes clients et les classer : dû / proportionnel / surprise. Vérifier que le dû est tenu à 100 %.',
+      example:
+        'Un gîte investissait dans la déco (surprise) alors que le ménage (basique) générait les mauvais avis.',
+      commonMistake: "Promettre l'extraordinaire avant de fiabiliser l'ordinaire.",
+    },
+    relevance: { impact: 'medium', effort: 'low' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        "Questionnaire de Kano (forme fonctionnelle / dysfonctionnelle) ; alimente les CTQ et les arbitrages d'offre.",
+      prerequisites: ['VOC recueillie'],
+      successIndicators: [
+        'Basiques tenus à 100 %',
+        'Investissements alignés sur la perception client',
+      ],
+    },
+    related: ['voix-client', 'valeur', 'ctq'],
+  },
 
   // ───────────────────── Flux & système de production ─────────────────────
   {
@@ -591,6 +668,43 @@ export const concepts = [
       successIndicators: ['Variabilité de charge réduite', 'Stocks lissés'],
     },
     related: ['jit', 'smed', 'gaspillages'],
+  },
+  {
+    number: 43,
+    slug: 'diagramme-spaghetti',
+    symbol: 'Sg',
+    name: 'Diagramme spaghetti',
+    fullName: 'Diagramme spaghetti — tracer les déplacements réels',
+    family: 'flux',
+    level: 2,
+    definition:
+      "Tracé, sur un plan, de tous les déplacements réels d'une personne ou d'un produit pendant une période donnée.",
+    purpose:
+      "Rendre visibles les allers-retours inutiles pour réorganiser l'espace et raccourcir les trajets.",
+    limits: {
+      notFor:
+        "Ne montre que les déplacements : ni les attentes, ni les défauts, ni les flux d'information.",
+      whenNot: "Peu d'intérêt si l'activité est statique (poste fixe, peu de mouvements).",
+      pitfalls:
+        'Tracer une journée « idéale » au lieu d’une journée réelle, ou conclure sans mesurer les distances.',
+    },
+    pme: {
+      why: "Une feuille et un crayon suffisent pour découvrir que l'on marche des kilomètres dans son propre local.",
+      firstStep:
+        'Imprimer le plan du local et tracer chaque déplacement pendant une à deux heures représentatives.',
+      example:
+        'Un restaurant trace le service du midi et déplace le poste boissons : 1,5 km de marche en moins par service.',
+      commonMistake: "Réorganiser l'espace selon l'intuition, sans avoir tracé les flux réels.",
+    },
+    relevance: { impact: 'medium', effort: 'low' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        "Souvent couplé au chantier 5S et à la revue d'implantation (layout) ; prioriser par distance × fréquence.",
+      prerequisites: ['Plan du local'],
+      successIndicators: ['Distance parcourue réduite', 'Implantation revue'],
+    },
+    related: ['cinq-s', 'gaspillages', 'vsm'],
   },
 
   // ───────────────────────── Stabilité & qualité ─────────────────────────
@@ -805,6 +919,45 @@ export const concepts = [
       successIndicators: ['TRS / OEE', 'Pannes évitées'],
     },
     related: ['cinq-s', 'oee', 'travail-standardise'],
+  },
+  {
+    number: 46,
+    slug: 'amdec',
+    symbol: 'Am',
+    name: 'AMDEC',
+    fullName: 'AMDEC / FMEA — analyse des modes de défaillance et de leurs effets',
+    family: 'stabilite-qualite',
+    level: 3,
+    definition:
+      'Méthode préventive qui liste ce qui pourrait défaillir, évalue gravité, fréquence et détection, et priorise les risques.',
+    purpose:
+      "Prévenir les défaillances importantes avant qu'elles n'arrivent, au lieu de les subir.",
+    limits: {
+      notFor:
+        "Pas une boule de cristal : l'AMDEC structure le jugement de l'équipe, elle ne prévoit que ce qu'on imagine.",
+      whenNot:
+        'Disproportionnée en version complète pour une TPE : une version simplifiée (gravité × fréquence) suffit presque toujours.',
+      pitfalls:
+        "Cotations interminables en salle au lieu d'aller vérifier sur le terrain ; AMDEC jamais revue après incident.",
+    },
+    pme: {
+      why: "Trois questions suffisent : qu'est-ce qui peut rater ? est-ce grave ? le verrait-on à temps ? — et on sécurise d'abord le pire.",
+      firstStep:
+        'Sur un processus critique, lister cinq défaillances possibles, les noter gravité × fréquence (1-3), traiter la pire.',
+      example:
+        'Un food-truck cote ses risques : la panne du groupe froid sort en tête, il installe une alarme de température à 30 €.',
+      commonMistake:
+        'Tout coter finement au lieu de traiter rapidement les deux ou trois risques évidents.',
+    },
+    relevance: { impact: 'medium', effort: 'medium' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        'Criticité IPR/RPN = G × F × D ; variantes produit / processus / moyen ; nourrie par les incidents et reliée aux poka-yoke.',
+      prerequisites: ['Processus décrit', "Historique d'incidents"],
+      successIndicators: ['Risques majeurs traités', 'Incidents graves évités'],
+    },
+    related: ['poka-yoke', 'tpm', 'ishikawa'],
   },
 
   // ─────────────────────── Résolution de problèmes ───────────────────────
@@ -1286,6 +1439,81 @@ export const concepts = [
       successIndicators: ['Alignement des actions sur la stratégie', 'Objectifs atteints'],
     },
     related: ['kpi', 'nemawashi', 'pensee-long-terme'],
+  },
+  {
+    number: 44,
+    slug: 'obeya',
+    symbol: 'Ob',
+    name: 'Obeya',
+    fullName: 'Obeya — la grande salle de pilotage visuel',
+    family: 'management',
+    level: 3,
+    definition:
+      "Une pièce — ou un simple mur — où tout l'avancement d'un projet est affiché : objectifs, jalons, problèmes, actions.",
+    purpose:
+      'Décider vite et ensemble, devant les faits affichés, plutôt qu’en réunions dispersées.',
+    limits: {
+      notFor:
+        "Ce n'est pas une salle de réunion décorée : sans rituel d'animation régulier, c'est du papier au mur.",
+      whenNot:
+        "Surdimensionnée pour le quotidien : l'obeya sert un projet ou un enjeu ; pour l'opérationnel, le tableau visuel suffit.",
+      pitfalls:
+        'Multiplier les affichages jamais mis à jour — l’obeya « musée » que personne n’anime.',
+    },
+    pme: {
+      why: 'Un mur de pilotage pour LE gros sujet du moment (déménagement, nouveau produit, certification) aligne tout le monde sans réunions à rallonge.',
+      firstStep:
+        "Dédier un mur au projet en cours : objectif, jalons, problèmes ouverts, qui fait quoi — et s'y retrouver 15 minutes par semaine.",
+      example:
+        "Une PME pilote son déménagement d'atelier sur un mur obeya : retards visibles, décisions prises en 15 minutes hebdomadaires.",
+      commonMistake: 'Construire un bel affichage puis continuer à décider par e-mails.',
+    },
+    relevance: { impact: 'medium', effort: 'low' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        'Née chez Toyota (développement de la Prius) ; rituels courts et cadencés devant le mur, problèmes traités en A3.',
+      prerequisites: ['Projet avec un enjeu réel', 'Management visuel'],
+      successIndicators: ['Décisions prises en séance', 'Retards détectés tôt'],
+    },
+    related: ['management-visuel', 'hoshin-kanri', 'a3'],
+  },
+  {
+    number: 45,
+    slug: 'matrice-competences',
+    symbol: 'Mc',
+    name: 'Matrice de compétences',
+    fullName: 'Matrice de compétences (ILUO) — qui sait faire quoi',
+    family: 'management',
+    level: 2,
+    definition:
+      'Tableau croisant les personnes et les tâches clés, avec le niveau de maîtrise de chacun (échelle ILUO).',
+    purpose:
+      'Voir les fragilités (tâches à personne unique) et piloter la polyvalence par la formation.',
+    limits: {
+      notFor:
+        "Ce n'est pas un outil d'évaluation RH ni de sanction : il sert à développer les compétences, pas à noter les gens.",
+      whenNot: 'Sans plan de formation derrière, la matrice constate les trous sans les combler.',
+      pitfalls:
+        'La remplir une fois et ne jamais la mettre à jour ; surestimer les maîtrises par politesse.',
+    },
+    pme: {
+      why: "Dans une petite équipe, chaque tâche maîtrisée par une seule personne est un arrêt d'activité en puissance (congés, maladie, départ).",
+      firstStep:
+        'Lister les 8-10 tâches critiques en colonnes, l’équipe en lignes, et marquer honnêtement qui sait faire quoi.',
+      example:
+        'Un atelier découvre que seul le gérant sait faire les devis : il forme un second et part enfin en vacances.',
+      commonMistake: 'Confondre « a déjà fait une fois » et « maîtrise en autonomie ».',
+    },
+    relevance: { impact: 'high', effort: 'low' },
+    pmeStarter: true,
+    practitioner: {
+      deeper:
+        'Échelle ILUO (apprend / fait avec aide / autonome / forme les autres) ; revue mensuelle, liée au plan de formation.',
+      prerequisites: ['Tâches critiques identifiées'],
+      successIndicators: ['Zéro tâche à personne unique', 'Polyvalence en hausse'],
+    },
+    related: ['travail-standardise', 'respect-personnes', 'management-visuel'],
   },
 
   // ─────────────────── Amélioration avancée / Six Sigma ───────────────────

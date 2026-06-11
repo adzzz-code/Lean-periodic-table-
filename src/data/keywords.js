@@ -19,6 +19,8 @@ export const keywords = {
   gemba: ['terrain', 'atelier', 'aller voir', 'observation'],
   gaspillages: ['muda', 'mura', 'muri', 'pertes', 'temps perdu', '7 gaspillages', 'déchets'],
   ctq: ['exigence', 'critère mesurable', 'spécification', 'norme', 'critique qualité'],
+  sipoc: ['processus', 'cadrage', 'périmètre', "vue d'ensemble", 'fournisseurs', 'clients'],
+  kano: ['attentes', 'satisfaction', 'basique', 'différenciation', 'offre', 'avis clients'],
 
   // Flux & système de production
   vsm: ['cartographie', 'flux de valeur', 'processus', 'délais', 'attentes', 'value stream'],
@@ -35,6 +37,14 @@ export const keywords = {
   jit: ['juste-à-temps', 'just in time', 'stock', 'trésorerie', 'flux'],
   smed: ['changement de série', 'réglage', 'préparation', 'setup', 'temps de changement'],
   heijunka: ['lissage', 'charge', 'à-coups', 'coups de feu', 'variabilité', 'planification'],
+  'diagramme-spaghetti': [
+    'déplacements',
+    'trajets',
+    'allers-retours',
+    'implantation',
+    'plan',
+    'marche',
+  ],
 
   // Stabilité & qualité
   'cinq-s': ['rangement', 'ordre', 'tri', 'organisation', 'propreté', 'désordre', 'chercher'],
@@ -50,6 +60,7 @@ export const keywords = {
   'poka-yoke': ['détrompeur', 'anti-erreur', 'erreur', 'oubli', 'sécuriser'],
   jidoka: ['arrêt au défaut', 'qualité à la source', 'autonomation', 'défauts'],
   tpm: ['panne', 'maintenance', 'entretien', 'machine', 'équipement'],
+  amdec: ['risques', 'défaillance', 'prévention', 'fmea', 'anticiper', 'gravité', 'criticité'],
 
   // Résolution de problèmes
   pdca: ['roue de deming', 'tester', 'expérimenter', 'plan do check act', 'essai'],
@@ -70,6 +81,16 @@ export const keywords = {
   kaizen: ['chantier', 'amélioration', 'irritants', 'équipe', 'atelier'],
   'leader-standard-work': ['routine', 'rituels', 'tournée', 'manager', 'dirigeant', 'régularité'],
   'hoshin-kanri': ['stratégie', 'objectifs', 'déploiement', 'alignement', 'priorités annuelles'],
+  obeya: ['salle de pilotage', 'projet', 'mur', 'affichage', 'avancement', 'coordination'],
+  'matrice-competences': [
+    'polyvalence',
+    'formation',
+    'compétences',
+    'iluo',
+    'remplacement',
+    'personne clé',
+    'absence',
+  ],
 
   // Amélioration avancée / Six Sigma
   kata: ['routine', 'coaching', 'entraînement', 'habitude', 'amélioration durable'],

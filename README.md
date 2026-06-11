@@ -16,8 +16,9 @@ adaptés à leur contexte (moyens limités, petites équipes), avec leurs **limi
   Résolution de problèmes, Mesure, Management & culture, Avancé / Six Sigma).
 - **Lignes = niveau de maturité** (Fondamentaux → Structuration → Optimisation → Excellence) :
   guide naturellement « par où commencer ».
-- Chaque case = un **concept** avec une fiche détaillée : essentiel, **limites & anti-usage**,
-  couche dédiée TPE/PME, badge de pertinence (impact/effort) et concepts liés.
+- Chaque case = un **concept** (46 à ce jour) avec une fiche détaillée : essentiel,
+  **schéma visuel**, **limites & anti-usage**, couche dédiée TPE/PME, badge de pertinence
+  (impact/effort), concepts liés, sources — et une **fiche mémo A4** imprimable / PDF.
 - **Mode TPE/PME** : met en avant les incontournables pour une petite structure.
 
 ## Trois entrées (la cible ne connaît pas le Lean)
@@ -67,12 +68,15 @@ src/data/keywords.js            Mots-clés de recherche (langage courant) par co
 src/data/problems.js            Entrée « par le problème » (landing pages : contexte + FAQ)
 src/data/quickwins.js           Pépites (gain de temps) + estimation horaire
 src/data/glossary.js            Glossaire (termes japonais, acronymes)
+src/data/visuals.js             Schémas visuels par concept (déclaratif)
+src/components/ConceptVisual.astro  Rendu SVG des schémas (au build)
 src/layouts/Base.astro          Layout commun (SEO, OG, JSON-LD, navigation, analytics)
 src/lib/url.js                  withBase() — liens compatibles racine & sous-dossier
 src/lib/search.js               Logique de recherche (testée)
 src/lib/gains.js                Calcul de gain des pépites (testé)
 src/pages/index.astro           Accueil : entrées + tableau interactif
 src/pages/concept/[slug].astro  Fiche détaillée d'un concept
+src/pages/concept/[slug]/memo.astro  Fiche mémo A4 (imprimable / PDF)
 src/pages/diagnostic/           Diagnostic par problème (liste + détail)
 src/pages/pepites.astro         Pépites + calculateur de gain (opt-in)
 src/pages/glossaire.astro       Glossaire
@@ -86,10 +90,10 @@ tests/                          Tests unitaires (node --test)
 
 1. Ajouter une entrée dans `src/data/concepts.js` (gabarit : voir l'en-tête du fichier et
    `docs/PRD.md` §4).
-2. Ajouter **≥ 1 source** dans `src/data/sources.js` et **≥ 1 mot-clé** en langage courant
-   dans `src/data/keywords.js` (obligatoires).
+2. Ajouter **≥ 1 source** (`src/data/sources.js`), **≥ 1 mot-clé** en langage courant
+   (`src/data/keywords.js`) et **un schéma** (`src/data/visuals.js`) — obligatoires.
 3. `npm run validate` pour vérifier l'intégrité. La case apparaît automatiquement à
-   l'intersection famille × niveau ; l'image OG de la fiche est générée au build.
+   l'intersection famille × niveau ; l'image OG et la fiche mémo sont générées au build.
 
 ## Licence
 

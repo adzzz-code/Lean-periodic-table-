@@ -1,0 +1,263 @@
+---
+// Fiche mémo : version « révision » d'un concept, sur une page A4, imprimable
+// ou enregistrable en PDF via le navigateur (zéro dépendance de génération PDF).
+import ConceptVisual from '../../../components/ConceptVisual.astro';
+import { concepts, conceptBySlug } from '../../../data/concepts.js';
+import { familyById, levels } from '../../../data/families.js';
+import { sources } from '../../../data/sources.js';
+import { visuals } from '../../../data/visuals.js';
+import { withBase } from '../../../lib/url.js';
+
+export function getStaticPaths() {
+  return concepts.map((c) => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const c = conceptBySlug[slug];
+const fam = familyById[c.family];
+const lvl = levels.find((l) => l.level === c.level);
+const refs = sources[slug] ?? [];
+const visual = visuals[slug];
+const siteUrl = new URL(withBase('/'), Astro.site).href;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Version mémo : la page de référence pour les moteurs reste la fiche. -->
+    <meta name="robots" content="noindex" />
+    <title>{c.name} — fiche mémo · Lean Élémentaire</title>
+  </head>
+  <body>
+    <nav class="screen-only toolbar">
+      <a href={withBase(`/concept/${slug}/`)}>← Retour à la fiche complète</a>
+      <button onclick="window.print()">🖨 Imprimer / enregistrer en PDF</button>
+    </nav>
+
+    <main class="memo" style={`--c:${fam.color}`}>
+      <header>
+        <div class="tile">
+          <span class="num">{c.number}</span>
+          <span class="sym">{c.symbol}</span>
+        </div>
+        <div>
+          <h1>{c.name}</h1>
+          <p class="full">{c.fullName}</p>
+          <p class="meta">
+            {fam.name} · Niveau {c.level} — {lvl.name}{
+              c.pmeStarter ? ' · ★ incontournable TPE/PME' : ''
+            }
+          </p>
+        </div>
+      </header>
+
+      <section>
+        <h2>L'essentiel</h2>
+        <p><strong>{c.definition}</strong></p>
+        <p>{c.purpose}</p>
+      </section>
+
+      {
+        visual && (
+          <section class="visual">
+            <ConceptVisual visual={visual} color={fam.color} name={c.name} />
+          </section>
+        )
+      }
+
+      <section class="warn">
+        <h2>À ne pas confondre — limites</h2>
+        <ul>
+          <li>{c.limits.notFor}</li>
+          <li>{c.limits.whenNot}</li>
+          <li><strong>Piège :</strong> {c.limits.pitfalls}</li>
+        </ul>
+      </section>
+
+      <div class="two-col">
+        <section>
+          <h2>Votre premier pas</h2>
+          <p>{c.pme.firstStep}</p>
+          <p class="soft"><strong>Erreur fréquente :</strong> {c.pme.commonMistake}</p>
+        </section>
+        <section>
+          <h2>Ça marche si…</h2>
+          <ul>
+            {c.practitioner.successIndicators.map((s) => <li>{s}</li>)}
+          </ul>
+        </section>
+      </div>
+
+      <footer>
+        <span>Sources : {refs.join(' · ')}</span>
+        <span>Lean Élémentaire — {siteUrl}</span>
+      </footer>
+    </main>
+  </body>
+</html>
+
+<style>
+  :root {
+    --ink: #22303f;
+    --soft: #5b6b7c;
+    --line: #d6dee6;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family:
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      Roboto,
+      sans-serif;
+    color: var(--ink);
+    background: #eef2f6;
+  }
+  .toolbar {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 14px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .toolbar a {
+    color: #1668a0;
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .toolbar button {
+    background: #1668a0;
+    color: #fff;
+    border: 0;
+    border-radius: 8px;
+    padding: 9px 16px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .memo {
+    max-width: 800px;
+    margin: 0 auto 40px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: 6px solid var(--c);
+    padding: 26px 32px;
+  }
+  header {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    border-bottom: 2px solid var(--c);
+    padding-bottom: 14px;
+  }
+  .tile {
+    position: relative;
+    flex: 0 0 auto;
+    width: 76px;
+    height: 76px;
+    border: 2px solid var(--c);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .tile .num {
+    position: absolute;
+    top: 4px;
+    left: 8px;
+    font-size: 0.7rem;
+    color: var(--soft);
+  }
+  .tile .sym {
+    font-size: 1.7rem;
+    font-weight: 800;
+  }
+  h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    letter-spacing: -0.02em;
+  }
+  .full {
+    margin: 2px 0 4px;
+    color: var(--soft);
+  }
+  .meta {
+    margin: 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--c);
+  }
+  h2 {
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--c);
+    margin: 18px 0 6px;
+  }
+  p,
+  li {
+    font-size: 0.95rem;
+    line-height: 1.45;
+    margin: 4px 0;
+  }
+  ul {
+    margin: 4px 0;
+    padding-left: 20px;
+  }
+  .warn h2 {
+    color: #b4232a;
+  }
+  .soft {
+    color: var(--soft);
+  }
+  .visual {
+    margin-top: 14px;
+  }
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 28px;
+  }
+  footer {
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: 14px;
+    font-size: 0.72rem;
+    color: var(--soft);
+  }
+  @media (max-width: 640px) {
+    .two-col {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media print {
+    body {
+      background: #fff;
+    }
+    .screen-only {
+      display: none !important;
+    }
+    .memo {
+      max-width: none;
+      margin: 0;
+      border-left: 0;
+      border-right: 0;
+      border-bottom: 0;
+      padding: 10mm 12mm;
+    }
+    @page {
+      size: A4;
+      margin: 8mm;
+    }
+  }
+</style>
