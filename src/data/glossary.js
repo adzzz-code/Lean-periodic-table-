@@ -187,6 +187,36 @@ export const glossary = [
     slug: 'matrice-competences',
   },
   {
+    term: '5G',
+    def: 'Cinq « Gen » pour ancrer une analyse dans le réel : Genba (terrain), Genbutsu (l’objet), Genjitsu (les faits), Genri (principes), Gensoku (standards).',
+    slug: 'cinq-g',
+  },
+  {
+    term: 'QFD',
+    def: 'Déploiement de la fonction qualité : traduit la voix du client en caractéristiques techniques priorisées (maison de la qualité).',
+    slug: 'qfd',
+  },
+  {
+    term: 'Yamazumi',
+    def: 'Diagramme en barres empilées qui montre la charge de chaque poste pour l’équilibrer sur le takt.',
+    slug: 'yamazumi',
+  },
+  {
+    term: 'Milk run',
+    def: 'Tournée de ramassage/livraison à itinéraire et horaires fixes, en petites quantités fréquentes.',
+    slug: 'milk-run',
+  },
+  {
+    term: 'Kamishibai',
+    def: 'Audits courts et tournants par cartes (T-cards) pour vérifier que les standards sont tenus.',
+    slug: 'kamishibai',
+  },
+  {
+    term: 'Jishuken',
+    def: 'Atelier kaizen intensif piloté par le management, qui développe les personnes sur un problème difficile.',
+    slug: 'jishuken',
+  },
+  {
     term: 'OEE / TRS',
     def: 'Taux de rendement synthétique d’un équipement : disponibilité × performance × qualité.',
     slug: 'oee',

@@ -21,6 +21,14 @@ export const keywords = {
   ctq: ['exigence', 'critère mesurable', 'spécification', 'norme', 'critique qualité'],
   sipoc: ['processus', 'cadrage', 'périmètre', "vue d'ensemble", 'fournisseurs', 'clients'],
   kano: ['attentes', 'satisfaction', 'basique', 'différenciation', 'offre', 'avis clients'],
+  qfd: [
+    'besoins client',
+    'conception',
+    'cahier des charges',
+    'maison de la qualité',
+    'traduire les attentes',
+  ],
+  'cinq-g': ['terrain', 'faits réels', 'aller voir', 'principes', 'objet réel'],
 
   // Flux & système de production
   vsm: ['cartographie', 'flux de valeur', 'processus', 'délais', 'attentes', 'value stream'],
@@ -45,6 +53,8 @@ export const keywords = {
     'plan',
     'marche',
   ],
+  yamazumi: ['équilibrage', 'charge', 'postes', 'répartition', 'goulot', 'temps de cycle'],
+  'milk-run': ['tournée', 'livraison', 'ramassage', 'logistique', 'transport', 'approvisionnement'],
 
   // Stabilité & qualité
   'cinq-s': ['rangement', 'ordre', 'tri', 'organisation', 'propreté', 'désordre', 'chercher'],
@@ -91,9 +101,11 @@ export const keywords = {
     'personne clé',
     'absence',
   ],
+  kamishibai: ['audit', 'cartes', 'contrôle', 'standards', 'tournée', 'vérification'],
 
   // Amélioration avancée / Six Sigma
   kata: ['routine', 'coaching', 'entraînement', 'habitude', 'amélioration durable'],
   'theorie-contraintes': ['goulot', 'goulet', 'contrainte', 'capacité', 'retard', 'le but', 'toc'],
   'six-sigma': ['variation', 'défauts', 'qualité', 'statistique', 'ceintures', 'black belt'],
+  jishuken: ['chantier', 'atelier', 'formation', 'management', 'problème difficile', 'autonomie'],
 };

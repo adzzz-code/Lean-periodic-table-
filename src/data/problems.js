@@ -130,6 +130,10 @@ export const problems = [
         slug: 'huit-d',
         why: 'Pour une réclamation client sérieuse : protéger le client d’abord, éradiquer ensuite.',
       },
+      {
+        slug: 'jishuken',
+        why: 'Pour un problème dur et récurrent : un atelier encadré qui rend l’équipe autonome.',
+      },
     ],
   },
   {
@@ -200,6 +204,10 @@ export const problems = [
         slug: 'gaspillages',
         why: 'Repérer le stock dormant le plus coûteux pour commencer par lui.',
       },
+      {
+        slug: 'milk-run',
+        why: 'Livrer plus souvent en petites quantités via une tournée régulière, sans surstock.',
+      },
     ],
   },
   {
@@ -260,6 +268,10 @@ export const problems = [
       },
       { slug: 'takt-time', why: 'Caler la cadence sur la demande réelle, ni plus ni moins.' },
       { slug: 'kanban', why: 'Réguler l’arrivée du travail pour lisser la charge.' },
+      {
+        slug: 'yamazumi',
+        why: 'Équilibrer la charge entre les postes pour supprimer débordés et temps morts.',
+      },
     ],
   },
   {
@@ -351,6 +363,10 @@ export const problems = [
       {
         slug: 'kano',
         why: 'Distinguer le dû, le proportionnel et ce qui enchante vraiment.',
+      },
+      {
+        slug: 'qfd',
+        why: 'Traduire les attentes en choix concrets quand on conçoit une offre.',
       },
     ],
   },
@@ -534,6 +550,10 @@ export const problems = [
         slug: 'obeya',
         why: 'Un mur de pilotage rend l’avancement visible et les blocages criants.',
       },
+      {
+        slug: 'cinq-g',
+        why: 'Constater les faits réels sur le terrain plutôt que de piloter à l’intuition.',
+      },
     ],
   },
   {
@@ -571,6 +591,10 @@ export const problems = [
       {
         slug: 'hansei',
         why: 'Tirer les leçons de ce qui n’a pas tenu, sans chercher de coupable.',
+      },
+      {
+        slug: 'kamishibai',
+        why: 'Des audits courts par cartes empêchent les standards de se déliter en douce.',
       },
     ],
   },
