@@ -13,7 +13,7 @@ quand un outil ne sert à rien et ses limites — anti « cargo cult »).
 
 ## État courant
 
-**V1 livrée, V2 en cours** : tableau interactif + **46 fiches concepts** (extension V2 vers ~60).
+**V1 livrée, V2 en cours** : tableau interactif + **52 fiches concepts** (extension V2 vers ~60).
 Cadrage validé le 2026-06-07 (cf. `docs/PRD.md` §9). Build statique Astro OK (`npm run build`).
 
 ## Concept produit

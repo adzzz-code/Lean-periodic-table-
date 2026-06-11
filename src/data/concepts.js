@@ -220,6 +220,45 @@ export const concepts = [
     },
     related: ['hoshin-kanri', 'respect-personnes'],
   },
+  {
+    number: 47,
+    slug: 'cinq-g',
+    symbol: '5G',
+    name: 'Les 5G',
+    fullName: 'Les 5G — Genba, Genbutsu, Genjitsu, Genri, Gensoku',
+    family: 'mindset',
+    level: 2,
+    definition:
+      "Aller sur le terrain réel (Genba), examiner l'objet réel (Genbutsu), vérifier les faits réels (Genjitsu), puis remonter aux principes (Genri) et aux standards (Gensoku).",
+    purpose: "Ancrer l'analyse d'un problème dans le réel avant de raisonner en théorie.",
+    limits: {
+      notFor:
+        "Ce n'est pas une méthode de résolution : les 5G cadrent l'observation, pas les contre-mesures.",
+      whenNot: 'Inutile de dérouler les 5 « Gen » pour un fait trivial déjà constaté.',
+      pitfalls:
+        "S'arrêter aux 3 premiers G (le constat) sans remonter aux principes et aux standards.",
+    },
+    pme: {
+      why: 'Évite de décider depuis le bureau : on va voir, on touche, on vérifie avant de trancher.',
+      firstStep:
+        "Sur le prochain problème, aller sur place, regarder l'objet concerné et noter les faits chiffrés avant toute hypothèse.",
+      example:
+        "Face à des retours clients, un gérant va voir les produits retournés (Genbutsu) et découvre un défaut d'emballage, pas de fabrication.",
+      commonMistake: 'Discuter du problème en réunion sans que personne ne soit allé voir.',
+    },
+    relevance: { impact: 'high', effort: 'low' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        'Extension des 3G (Genba, Genbutsu, Genjitsu) par Genri et Gensoku ; socle du Genchi Genbutsu.',
+      prerequisites: ["Posture d'observation"],
+      successIndicators: [
+        'Décisions fondées sur des faits constatés',
+        "Moins d'hypothèses non vérifiées",
+      ],
+    },
+    related: ['genchi-genbutsu', 'gemba', 'cinq-pourquoi'],
+  },
 
   // ─────────────────────── Voix du client & valeur ───────────────────────
   {
@@ -467,6 +506,42 @@ export const concepts = [
     },
     related: ['voix-client', 'valeur', 'ctq'],
   },
+  {
+    number: 48,
+    slug: 'qfd',
+    symbol: 'Qf',
+    name: 'QFD',
+    fullName: 'QFD — déploiement de la fonction qualité (maison de la qualité)',
+    family: 'client-valeur',
+    level: 4,
+    definition:
+      'Méthode qui traduit la voix du client en caractéristiques techniques priorisées, via une matrice dite « maison de la qualité ».',
+    purpose: "Relier ce que veut le client à ce que l'entreprise doit concevoir et mesurer.",
+    limits: {
+      notFor:
+        "Pas un outil du quotidien : le QFD sert la conception d'un produit ou service, pas le pilotage courant.",
+      whenNot: 'Disproportionné pour une offre simple : un tableau besoins → réponses suffit.',
+      pitfalls:
+        'Construire une matrice géante et illisible au lieu de prioriser quelques attentes clés.',
+    },
+    pme: {
+      why: "Force à partir du client réel pour concevoir une offre, au lieu de l'imaginer depuis l'atelier.",
+      firstStep:
+        'Lister les 5 attentes clients principales et, en face, la caractéristique concrète qui y répond.',
+      example:
+        'Un menuisier conçoit une gamme en partant des attentes (« pose rapide », « entretien facile ») traduites en choix techniques.',
+      commonMistake: "Concevoir d'abord le produit, puis chercher à qui le vendre.",
+    },
+    relevance: { impact: 'low', effort: 'high' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        'Maison de la qualité (corrélations, cibles, benchmark) ; relie VOC, CTQ et spécifications.',
+      prerequisites: ['VOC structurée', 'CTQ'],
+      successIndicators: ['Offre alignée sur les attentes', 'Arbitrages de conception tracés'],
+    },
+    related: ['voix-client', 'ctq', 'kano'],
+  },
 
   // ───────────────────── Flux & système de production ─────────────────────
   {
@@ -705,6 +780,81 @@ export const concepts = [
       successIndicators: ['Distance parcourue réduite', 'Implantation revue'],
     },
     related: ['cinq-s', 'gaspillages', 'vsm'],
+  },
+  {
+    number: 49,
+    slug: 'yamazumi',
+    symbol: 'Ym',
+    name: 'Yamazumi',
+    fullName: 'Yamazumi — équilibrage des postes',
+    family: 'flux',
+    level: 3,
+    definition:
+      "Diagramme en barres empilées montrant la charge de travail de chaque poste, pour l'équilibrer par rapport au takt.",
+    purpose: 'Répartir le travail équitablement entre postes et révéler le goulot.',
+    limits: {
+      notFor:
+        'Ne réduit pas la charge totale : il la répartit. Pour gagner du temps, il faut aussi éliminer du gaspillage.',
+      whenNot: 'Peu utile sur un poste unique ou un travail non décomposable en tâches.',
+      pitfalls:
+        'Équilibrer sur le papier sans tenir compte des compétences réelles ni des contraintes physiques.',
+    },
+    pme: {
+      why: 'Quand une personne est débordée et une autre attend, le yamazumi montre où redistribuer concrètement.',
+      firstStep:
+        'Découper une séquence en tâches chronométrées et empiler la charge de chaque personne sur une barre.',
+      example:
+        "Un atelier d'assemblage rééquilibre trois postes : le goulot passe de 14 à 11 min, la cadence suit la demande.",
+      commonMistake:
+        'Charger au maximum chaque poste au lieu de viser le takt (cadence de la demande).',
+    },
+    relevance: { impact: 'medium', effort: 'medium' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        "Comparaison charge / takt par poste ; base de l'équilibrage de ligne et du travail standardisé.",
+      prerequisites: ['Tâches chronométrées', 'Takt time connu'],
+      successIndicators: ['Postes équilibrés', 'Goulot identifié et réduit'],
+    },
+    related: ['takt-time', 'heijunka', 'travail-standardise'],
+  },
+  {
+    number: 50,
+    slug: 'milk-run',
+    symbol: 'Mr',
+    name: 'Milk run',
+    fullName: 'Milk run — tournée de ramassage/livraison cadencée',
+    family: 'flux',
+    level: 3,
+    definition:
+      'Tournée à itinéraire et horaires fixes qui dessert plusieurs points en un seul passage, en petites quantités fréquentes.',
+    purpose:
+      'Approvisionner ou livrer souvent et en petites quantités, sans multiplier les trajets.',
+    limits: {
+      notFor:
+        'Ne convient pas à des flux très volumineux ou totalement imprévisibles entre deux points uniques.',
+      whenNot: "Sans régularité de la demande, l'itinéraire fixe perd son intérêt.",
+      pitfalls:
+        'Garder une tournée figée alors que les besoins ont changé (points morts, détours inutiles).',
+    },
+    pme: {
+      why: 'Mutualiser une tournée (fournisseurs, dépôts, chantiers) réduit les trajets tout en livrant plus souvent.',
+      firstStep:
+        'Regrouper plusieurs petits enlèvements/livraisons en une tournée hebdomadaire à horaire fixe.',
+      example:
+        "Un artisan organise une tournée fixe d'appro le lundi chez trois fournisseurs au lieu de trois allers-retours.",
+      commonMistake:
+        "Multiplier les trajets urgents en oubliant qu'une tournée régulière coûte moins cher.",
+    },
+    relevance: { impact: 'medium', effort: 'medium' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        'Logistique lean : petites quantités fréquentes, couplé au kanban et au lissage (heijunka).',
+      prerequisites: ['Flux réguliers', 'Points à desservir identifiés'],
+      successIndicators: ['Kilomètres réduits', 'Fréquence de livraison en hausse'],
+    },
+    related: ['kanban', 'jit', 'heijunka'],
   },
 
   // ───────────────────────── Stabilité & qualité ─────────────────────────
@@ -1515,6 +1665,42 @@ export const concepts = [
     },
     related: ['travail-standardise', 'respect-personnes', 'management-visuel'],
   },
+  {
+    number: 51,
+    slug: 'kamishibai',
+    symbol: 'Ks',
+    name: 'Kamishibai',
+    fullName: 'Kamishibai — audits courts par cartes',
+    family: 'management',
+    level: 3,
+    definition:
+      'Système de cartes (T-cards) déclenchant des audits courts et tournants pour vérifier que les standards sont tenus.',
+    purpose:
+      'Maintenir les standards vivants par des vérifications régulières, brèves et visibles.',
+    limits: {
+      notFor:
+        "Ce n'est pas un outil de surveillance des personnes : il vérifie des standards, pas la productivité individuelle.",
+      whenNot:
+        "Sans standards établis, il n'y a rien à auditer : le kamishibai vient après le travail standardisé.",
+      pitfalls: 'Cocher les cartes pour la forme, sans corriger ce qui est trouvé hors standard.',
+    },
+    pme: {
+      why: 'Quelques cartes et 5 minutes par jour suffisent à empêcher les standards de se déliter en douce.',
+      firstStep:
+        'Créer 5 cartes de vérification (sécurité, 5S, qualité) et en tirer une au hasard chaque jour.',
+      example:
+        "Un atelier tire une carte kamishibai par jour ; un écart 5S détecté est corrigé dans l'heure.",
+      commonMistake: 'Auditer sans rien faire des cartes rouges (écarts) trouvées.',
+    },
+    relevance: { impact: 'medium', effort: 'low' },
+    pmeStarter: false,
+    practitioner: {
+      deeper: 'Cartes vertes/rouges, rotation des points audités ; brique du leader standard work.',
+      prerequisites: ['Standards existants'],
+      successIndicators: ['Standards tenus dans la durée', 'Écarts corrigés vite'],
+    },
+    related: ['travail-standardise', 'leader-standard-work', 'management-visuel'],
+  },
 
   // ─────────────────── Amélioration avancée / Six Sigma ───────────────────
   {
@@ -1622,6 +1808,44 @@ export const concepts = [
       successIndicators: ['Capabilité (Cpk)', 'Réduction durable des défauts'],
     },
     related: ['dmaic', 'spc', 'ctq'],
+  },
+  {
+    number: 52,
+    slug: 'jishuken',
+    symbol: 'Jk',
+    name: 'Jishuken',
+    fullName: 'Jishuken — atelier kaizen piloté par le management',
+    family: 'avance',
+    level: 4,
+    definition:
+      "Atelier d'amélioration intensif, piloté par le management, qui développe les personnes en résolvant un problème difficile.",
+    purpose:
+      "Faire monter en compétence les équipes en s'attaquant ensemble à un problème exigeant.",
+    limits: {
+      notFor:
+        "Ce n'est pas un kaizen rapide : le jishuken vise l'apprentissage profond sur un problème dur, pas un quick win.",
+      whenNot: "Prématuré sans culture d'amélioration de base ni management capable de coacher.",
+      pitfalls:
+        "Viser le résultat à tout prix en oubliant l'objectif premier : développer les personnes.",
+    },
+    pme: {
+      why: "Pour un patron, c'est une façon de transmettre sa capacité à résoudre les problèmes plutôt que de tout porter.",
+      firstStep:
+        "Choisir un problème récurrent et exigeant, et y consacrer un atelier encadré sur plusieurs séances avec l'équipe.",
+      example:
+        "Un dirigeant anime un jishuken sur les retards de livraison ; l'équipe en sort autonome sur la méthode.",
+      commonMistake:
+        "Transformer le jishuken en réunion descendante au lieu de laisser l'équipe chercher.",
+    },
+    relevance: { impact: 'medium', effort: 'high' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        "Groupes d'étude autonomes (self-study) chez Toyota ; approfondit le kata d'amélioration.",
+      prerequisites: ['Culture kaizen', 'Management coach'],
+      successIndicators: ['Autonomie de résolution accrue', 'Problème dur résolu durablement'],
+    },
+    related: ['kaizen', 'kata', 'a3'],
   },
 ];
 

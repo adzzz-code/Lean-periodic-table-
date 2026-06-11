@@ -58,8 +58,9 @@ La progression suit la logique du produit : **d'abord une référence crédible 
 - [x] **Landing pages diagnostic** : chaque problème = contexte (langage de dirigeant) + FAQ
       avec données structurées `FAQPage` — le levier SEO long-tail du projet.
 - [x] **Glossaire** (`/glossaire/`) : ~45 termes japonais/acronymes en une phrase, liés aux fiches.
-- [~] Élargissement du contenu (objectif ~60 concepts) : **46** au 2026-06-11 (+ SIPOC, Kano,
-  spaghetti, Obeya, matrice de compétences, AMDEC).
+- [~] Élargissement du contenu (objectif ~60 concepts) : **52** au 2026-06-11 (+ SIPOC, Kano,
+  spaghetti, Obeya, matrice de compétences, AMDEC, QFD, Yamazumi, Milk run, Kamishibai,
+  Jishuken, 5G).
 - [x] **Fiches enrichies** : schéma visuel pédagogique sur 100 % des fiches (SVG au build) +
       **fiche mémo A4 téléchargeable** par concept (révision, imprimable / PDF navigateur).
 - [ ] Fiches enrichies (suite) : check-lists de démarrage, mini-cas par famille.

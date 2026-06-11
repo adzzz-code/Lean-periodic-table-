@@ -37,6 +37,16 @@ export const visuals = {
       lines: ['Réputation protégée', 'Clients fidèles', 'Marge durable'],
     },
   },
+  'cinq-g': {
+    type: 'steps',
+    steps: [
+      'Genba — terrain',
+      "Genbutsu — l'objet",
+      'Genjitsu — les faits',
+      'Genri — principes',
+      'Gensoku — standards',
+    ],
+  },
 
   // Voix du client & valeur
   valeur: {
@@ -78,6 +88,16 @@ export const visuals = {
     steps: ['Fournisseurs', 'Entrées', 'Processus (5-7 étapes)', 'Sorties', 'Clients'],
   },
   kano: { type: 'curve', kind: 'kano' },
+  qfd: {
+    type: 'steps',
+    steps: [
+      'Voix du client',
+      'Quoi (besoins)',
+      'Comment (réponses)',
+      'Priorités',
+      'Cibles techniques',
+    ],
+  },
 
   // Flux & système de production
   vsm: {
@@ -134,6 +154,29 @@ export const visuals = {
     note: 'Même volume total — sans les pics qui épuisent ni les creux qui coûtent.',
   },
   'diagramme-spaghetti': { type: 'spaghetti' },
+  yamazumi: {
+    type: 'bars',
+    groups: [
+      { title: 'Déséquilibré', bars: [14, 7, 10] },
+      { title: 'Équilibré (≤ takt)', bars: [11, 10, 10] },
+    ],
+    note: 'Même travail, mieux réparti — le goulot tombe de 14 à 11 min.',
+  },
+  'milk-run': {
+    type: 'compare',
+    left: {
+      title: 'Trajets séparés',
+      lines: ['Un aller-retour par point', 'Camion à moitié vide', 'Beaucoup de kilomètres'],
+    },
+    right: {
+      title: 'Milk run',
+      lines: [
+        'Une tournée, plusieurs points',
+        'Petites quantités fréquentes',
+        'Kilomètres réduits',
+      ],
+    },
+  },
 
   // Stabilité & qualité
   'cinq-s': {
@@ -274,6 +317,10 @@ export const visuals = {
     quadrants: ['Objectifs & jalons', 'Avancement', 'Problèmes ouverts', 'Plan d’action'],
   },
   'matrice-competences': { type: 'grid' },
+  kamishibai: {
+    type: 'cycle',
+    steps: ['Tirer une carte', 'Vérifier le standard', 'Vert ou rouge', 'Corriger si écart'],
+  },
 
   // Amélioration avancée / Six Sigma
   kata: {
@@ -299,5 +346,9 @@ export const visuals = {
       title: 'Processus maîtrisé',
       lines: ['Résultats resserrés', 'Défauts rares', 'Promesse tenue'],
     },
+  },
+  jishuken: {
+    type: 'cycle',
+    steps: ['Problème difficile', 'Atelier encadré', 'Apprentissage', 'Standard relevé'],
   },
 };

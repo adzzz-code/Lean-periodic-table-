@@ -32,6 +32,21 @@ export const sources = {
     'Geary Rummler & Alan Brache — Improving Performance (1990)',
   ],
   kano: ['Noriaki Kano — Attractive Quality and Must-Be Quality (1984)'],
+  qfd: [
+    'Yoji Akao — Quality Function Deployment (1990)',
+    'Shigeru Mizuno & Yoji Akao — origine (Mitsubishi, chantier naval de Kobe, 1972)',
+  ],
+  'cinq-g': ['Toyota — pratique du Genchi Genbutsu (3G étendu à 5G)', 'Littérature Toyota Way'],
+  yamazumi: [
+    'Toyota Production System — équilibrage de ligne',
+    'Mike Rother & John Shook — Learning to See (1999)',
+  ],
+  'milk-run': [
+    'Toyota Production System — logistique interne (flux cadencé)',
+    'Littérature lean logistics',
+  ],
+  kamishibai: ['Toyota — kamishibai boards', 'David Mann — Creating a Lean Culture (2005)'],
+  jishuken: ['Toyota — jishuken (groupes d’étude autonomes)', 'Littérature Toyota Way'],
 
   // Flux & système de production
   vsm: ['Mike Rother & John Shook — Learning to See (1999)'],
