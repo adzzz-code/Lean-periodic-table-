@@ -50,6 +50,10 @@ export const problems = [
         slug: 'amelioration-continue',
         why: 'Installer le réflexe des petits pas réguliers plutôt que la grande refonte.',
       },
+      {
+        slug: 'matrice-impact-effort',
+        why: 'Si plusieurs chantiers vous tentent : choisir d’abord les gains rapides.',
+      },
     ],
   },
   {
@@ -125,6 +129,10 @@ export const problems = [
       {
         slug: 'ishikawa',
         why: 'Explorer en équipe toutes les causes possibles avant de conclure.',
+      },
+      {
+        slug: 'qqoqccp',
+        why: 'Poser le problème par écrit (quoi, quand, combien) avant de chercher le pourquoi.',
       },
       {
         slug: 'huit-d',
@@ -304,6 +312,10 @@ export const problems = [
       },
       { slug: 'management-visuel', why: 'Un tableau partagé aligne mieux qu’une pile d’e-mails.' },
       { slug: 'nemawashi', why: 'Consulter avant d’annoncer évite le rejet silencieux.' },
+      {
+        slug: 'systeme-suggestions',
+        why: 'Un canal d’idées avec réponse rapide prouve que la parole du terrain compte.',
+      },
     ],
   },
   {
@@ -327,6 +339,10 @@ export const problems = [
     ],
     solutions: [
       { slug: 'kpi', why: 'Choisir 3-4 chiffres vitaux et les suivre chaque semaine.' },
+      {
+        slug: 'feuille-releves',
+        why: 'Compter les faits une semaine — une feuille et un crayon suffisent.',
+      },
       { slug: 'pareto', why: 'Concentrer l’effort sur les 20 % de causes qui pèsent 80 %.' },
       { slug: 'management-visuel', why: 'Afficher les chiffres pour que chacun voie et réagisse.' },
     ],
@@ -427,6 +443,10 @@ export const problems = [
     solutions: [
       { slug: 'ctq', why: 'Traduire l’exigence en un critère mesurable et vérifiable.' },
       { slug: 'spc', why: 'Suivre le procédé pour réagir aux vraies dérives sans sur-réagir.' },
+      {
+        slug: 'capabilite',
+        why: 'Prouver, chiffres à l’appui, que le processus tient la tolérance demandée.',
+      },
       { slug: 'poka-yoke', why: 'Sécuriser le point critique contre l’erreur.' },
       {
         slug: 'dmaic',
@@ -473,6 +493,10 @@ export const problems = [
       {
         slug: 'leader-standard-work',
         why: 'Des rituels courts et réguliers qui traitent les problèmes avant qu’ils ne flambent.',
+      },
+      {
+        slug: 'point-quotidien',
+        why: 'Dix minutes debout chaque matin : les blocages remontent avant de devenir des urgences.',
       },
     ],
   },
@@ -543,6 +567,10 @@ export const problems = [
         why: 'Arbitrer le quotidien à l’aune du cap, pas de l’urgence du jour.',
       },
       {
+        slug: 'kaikaku',
+        why: 'Quand les petits pas ne suffisent plus : préparer une rupture, puis re-stabiliser.',
+      },
+      {
         slug: 'kpi',
         why: 'Suivre l’avancement avec 3-4 chiffres, pas avec des impressions.',
       },
@@ -595,6 +623,10 @@ export const problems = [
       {
         slug: 'kamishibai',
         why: 'Des audits courts par cartes empêchent les standards de se déliter en douce.',
+      },
+      {
+        slug: 'yokoten',
+        why: 'Une amélioration qui tient se réplique ailleurs — au lieu de rester locale puis de s’oublier.',
       },
     ],
   },

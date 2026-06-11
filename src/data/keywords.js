@@ -79,12 +79,23 @@ export const keywords = {
   a3: ['une page', 'résolution structurée', 'rapport', 'synthèse', "plan d'action"],
   dmaic: ['six sigma', 'projet', 'variation', 'mesure', 'amélioration structurée'],
   'huit-d': ['réclamation', 'client mécontent', 'non-conformité', 'action corrective'],
+  qqoqccp: ['poser le problème', 'décrire', 'questions', '5w2h', 'cadrage', 'qui quoi où quand'],
 
   // Mesure & maîtrise statistique
   pareto: ['80/20', 'priorités', 'classement', 'essentiel', 'éparpillement'],
   kpi: ['indicateur', 'tableau de bord', 'chiffres', 'pilotage', 'mesure'],
   oee: ['trs', 'rendement', 'machine', 'disponibilité', 'micro-arrêts', 'performance'],
   spc: ['carte de contrôle', 'msp', 'variation', 'dérive', 'statistique', 'stabilité'],
+  'feuille-releves': ['compter', 'relevé', 'cocher', 'fréquence', 'faits', 'pointage'],
+  'matrice-impact-effort': [
+    'prioriser',
+    'choisir',
+    'gains rapides',
+    'quick win',
+    'tri',
+    'arbitrer',
+  ],
+  capabilite: ['cp', 'cpk', 'tolérance', 'dispersion', 'garantie', 'audit qualité'],
 
   // Management & culture
   'management-visuel': ['tableau', 'affichage', 'visible', 'suivi', 'réunion', 'communication'],
@@ -102,10 +113,14 @@ export const keywords = {
     'absence',
   ],
   kamishibai: ['audit', 'cartes', 'contrôle', 'standards', 'tournée', 'vérification'],
+  'point-quotidien': ['réunion', 'debout', 'stand-up', 'rituel', '10 minutes', 'huddle', 'équipe'],
+  'systeme-suggestions': ['idées', 'boîte à idées', 'suggestions', 'participation', 'teian'],
 
   // Amélioration avancée / Six Sigma
   kata: ['routine', 'coaching', 'entraînement', 'habitude', 'amélioration durable'],
   'theorie-contraintes': ['goulot', 'goulet', 'contrainte', 'capacité', 'retard', 'le but', 'toc'],
   'six-sigma': ['variation', 'défauts', 'qualité', 'statistique', 'ceintures', 'black belt'],
   jishuken: ['chantier', 'atelier', 'formation', 'management', 'problème difficile', 'autonomie'],
+  yokoten: ['répliquer', 'déployer', 'partager', 'bonnes pratiques', 'généraliser'],
+  kaikaku: ['rupture', 'transformation', 'refonte', 'changement radical', 'réorganisation'],
 };

@@ -1317,6 +1317,40 @@ export const concepts = [
     },
     related: ['cinq-pourquoi', 'ishikawa', 'pdca'],
   },
+  {
+    number: 53,
+    slug: 'qqoqccp',
+    symbol: '5W',
+    name: 'QQOQCCP',
+    fullName: 'QQOQCCP — Quoi, Qui, Où, Quand, Comment, Combien, Pourquoi (5W2H)',
+    family: 'resolution',
+    level: 1,
+    definition:
+      'Décrire complètement un problème en répondant à sept questions : Quoi, Qui, Où, Quand, Comment, Combien, Pourquoi.',
+    purpose: 'Poser un problème clairement et factuellement avant de chercher causes ou solutions.',
+    limits: {
+      notFor: "Ce n'est pas une analyse de cause : le QQOQCCP décrit, les 5 Pourquoi creusent.",
+      whenNot: 'Inutile pour un fait simple et déjà bien cerné.',
+      pitfalls: 'Répondre de mémoire, depuis le bureau, au lieu de vérifier sur le terrain.',
+    },
+    pme: {
+      why: 'La moitié des problèmes « insolubles » sont juste mal posés : dix minutes de QQOQCCP les rendent traitables.',
+      firstStep:
+        "Sur le prochain problème agaçant, remplir les sept questions par écrit avant d'en discuter.",
+      example:
+        'Un retard « inexpliqué » devient clair une fois posé : quoi (livraison X), quand (les vendredis), combien (2 sur 3).',
+      commonMistake: "Sauter aux solutions avant d'avoir décrit le problème.",
+    },
+    relevance: { impact: 'high', effort: 'low' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        "Équivalent du 5W2H anglo-saxon ; alimente la phase « définir » de l'A3, du 8D et du DMAIC.",
+      prerequisites: ['Faits accessibles'],
+      successIndicators: ['Problèmes posés par écrit', 'Moins de débats stériles'],
+    },
+    related: ['cinq-pourquoi', 'a3', 'huit-d'],
+  },
 
   // ─────────────────── Mesure & maîtrise statistique ────────────────────
   {
@@ -1453,6 +1487,114 @@ export const concepts = [
       successIndicators: ['Processus sous contrôle statistique', 'Capabilité'],
     },
     related: ['ctq', 'dmaic', 'six-sigma'],
+  },
+  {
+    number: 54,
+    slug: 'feuille-releves',
+    symbol: 'Fr',
+    name: 'Feuille de relevés',
+    fullName: 'Feuille de relevés (check sheet) — compter avant d’agir',
+    family: 'mesure',
+    level: 1,
+    definition:
+      "Formulaire simple où l'on coche les faits au moment où ils se produisent (défauts, pannes, motifs d'appel…).",
+    purpose: 'Remplacer les impressions par un comptage simple, fait sur le terrain.',
+    limits: {
+      notFor: 'Ne dit ni la cause ni la solution : elle fournit les faits bruts.',
+      whenNot: 'Inutile si la donnée existe déjà dans un logiciel (caisse, tickets).',
+      pitfalls: "Faire compliqué : au-delà de 5-6 catégories, la feuille n'est plus remplie.",
+    },
+    pme: {
+      why: 'Une feuille et un crayon suffisent pour transformer « j’ai l’impression que » en « 14 fois cette semaine ».',
+      firstStep:
+        'Choisir UNE question (quels défauts ? quels motifs d’appel ?) et compter pendant une semaine.',
+      example:
+        'Un commerce compte les demandes non satisfaites : 60 % concernent deux produits absents du rayon.',
+      commonMistake: 'Compter trop de choses à la fois, puis abandonner la feuille.',
+    },
+    relevance: { impact: 'medium', effort: 'low' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        "L'un des 7 outils de base de la qualité (Ishikawa) ; alimente le Pareto et l'analyse de causes.",
+      prerequisites: ['Catégories simples définies'],
+      successIndicators: ['Décisions appuyées sur des comptages', 'Pareto possible'],
+    },
+    related: ['pareto', 'ishikawa', 'kpi'],
+  },
+  {
+    number: 55,
+    slug: 'matrice-impact-effort',
+    symbol: 'Ie',
+    name: 'Matrice impact / effort',
+    fullName: 'Matrice impact / effort — prioriser les actions',
+    family: 'mesure',
+    level: 2,
+    definition:
+      'Classer les actions possibles selon deux questions : qu’est-ce que ça rapporte (impact) et qu’est-ce que ça coûte (effort) ?',
+    purpose:
+      'Choisir ses batailles : commencer par les gains rapides, planifier les gros projets, abandonner le reste.',
+    limits: {
+      notFor:
+        "L'évaluation reste subjective : la matrice structure le jugement, elle ne le remplace pas.",
+      whenNot: 'Inutile pour une action unique et évidente : c’est un outil de tri.',
+      pitfalls: 'Tout classer en « fort impact » : si tout est prioritaire, rien ne l’est.',
+    },
+    pme: {
+      why: "Avec peu de temps et de moyens, l'ordre des chantiers compte plus que leur liste.",
+      firstStep:
+        'Lister 10 actions envisagées et les placer sur 4 cases : impact fort/faible × effort faible/fort.',
+      example:
+        'Sur 12 idées, un gérant en classe 3 en « gains rapides » et les fait ce mois-ci ; 5 sont abandonnées sans remords.',
+      commonMistake:
+        'Commencer par le projet séduisant à fort effort au lieu des gains rapides qui financent la suite.',
+    },
+    relevance: { impact: 'high', effort: 'low' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        'Variante du PICK chart (Possible, Implement, Challenge, Kill) du Lean Six Sigma ; se croise bien avec Pareto.',
+      prerequisites: ["Liste d'actions candidates"],
+      successIndicators: ['Gains rapides réalisés en premier', 'Projets abandonnés explicitement'],
+    },
+    related: ['pareto', 'pdca', 'kaizen'],
+  },
+  {
+    number: 56,
+    slug: 'capabilite',
+    symbol: 'Cp',
+    name: 'Capabilité',
+    fullName: 'Capabilité (Cp / Cpk) — le processus tient-il la tolérance ?',
+    family: 'mesure',
+    level: 4,
+    definition:
+      "Mesure statistique comparant la dispersion réelle d'un processus à la tolérance exigée par le client.",
+    purpose:
+      'Savoir, preuve à l’appui, si une exigence chiffrée sera tenue — avant que le client ne le découvre.',
+    limits: {
+      notFor:
+        "N'a de sens que sur un processus stable : la capabilité d'un processus chaotique ne prédit rien.",
+      whenNot: 'Inutile sans exigence chiffrée ni mesure fiable.',
+      pitfalls: "Calculer un Cpk sur cinq mesures ou sur un processus non stabilisé, et s'y fier.",
+    },
+    pme: {
+      why: 'C’est la réponse factuelle à un client ou une norme qui demande des garanties chiffrées.',
+      firstStep:
+        'Sur la caractéristique critique, relever une trentaine de mesures et comparer la dispersion à la tolérance.',
+      example:
+        'Un usineur démontre un Cpk de 1,4 sur la cote critique : l’audit client passe sans contrôle renforcé.',
+      commonMistake:
+        'Confondre « dans la tolérance aujourd’hui » et « capable d’y rester demain ».',
+    },
+    relevance: { impact: 'low', effort: 'high' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        'Cp (dispersion) vs Cpk (dispersion + centrage) ; seuils usuels 1,33 / 1,67 ; suit la MSP, précède la garantie client.',
+      prerequisites: ['Processus stable (MSP)', 'Mesure fiable'],
+      successIndicators: ['Cpk ≥ seuil convenu', 'Contrôles allégés'],
+    },
+    related: ['spc', 'ctq', 'six-sigma'],
   },
 
   // ───────────────────────── Management & culture ─────────────────────────
@@ -1701,6 +1843,79 @@ export const concepts = [
     },
     related: ['travail-standardise', 'leader-standard-work', 'management-visuel'],
   },
+  {
+    number: 57,
+    slug: 'point-quotidien',
+    symbol: 'Pq',
+    name: 'Point quotidien',
+    fullName: 'Point quotidien — réunion debout de 10 minutes',
+    family: 'management',
+    level: 1,
+    definition:
+      "Réunion d'équipe courte, debout, à heure fixe, devant le tableau : hier, aujourd'hui, blocages.",
+    purpose:
+      "Synchroniser l'équipe et traiter les blocages chaque jour, avant qu'ils ne grossissent.",
+    limits: {
+      notFor:
+        "Ce n'est pas une réunion de résolution : un blocage profond se traite après, à part.",
+      whenNot: "À deux personnes côte à côte toute la journée, l'échange continu suffit souvent.",
+      pitfalls:
+        'Laisser dériver au-delà de 15 minutes : la réunion debout redevient une réunion comme les autres.',
+    },
+    pme: {
+      why: "Dix minutes par jour remplacent des dizaines d'e-mails et d'interruptions, et font remonter les problèmes tôt.",
+      firstStep:
+        'Fixer un rendez-vous quotidien de 10 minutes debout, à heure fixe, devant le planning ou le tableau.',
+      example:
+        'Une équipe de pose démarre à 7 h 50 par un point : chantiers du jour, matériel manquant signalé avant le départ.',
+      commonMistake:
+        "Annuler le point « parce qu'on est débordé » — c'est justement là qu'il sert.",
+    },
+    relevance: { impact: 'high', effort: 'low' },
+    pmeStarter: true,
+    practitioner: {
+      deeper:
+        "Brique du lean management quotidien (Mann) ; s'appuie sur le management visuel, nourrit l'andon.",
+      prerequisites: ['Tableau ou planning visible'],
+      successIndicators: ['Blocages remontés le jour même', "Moins d'interruptions dispersées"],
+    },
+    related: ['management-visuel', 'leader-standard-work', 'andon'],
+  },
+  {
+    number: 58,
+    slug: 'systeme-suggestions',
+    symbol: 'Te',
+    name: 'Système de suggestions',
+    fullName: 'Système de suggestions (teian)',
+    family: 'management',
+    level: 2,
+    definition:
+      'Dispositif simple et permanent pour que chacun propose des améliorations — et reçoive une réponse rapide.',
+    purpose: "Capter les idées du terrain en continu et entretenir l'envie d'améliorer.",
+    limits: {
+      notFor: 'Pas une boîte à idées décorative : sans réponse rapide, c’est pire que rien.',
+      whenNot: 'Inutile de formaliser à 2-3 personnes : un point hebdo fait le même travail.',
+      pitfalls: 'Récompenser au volume, ou laisser les idées sans réponse pendant des semaines.',
+    },
+    pme: {
+      why: 'Ceux qui font le travail voient des gisements invisibles du bureau ; un canal simple les fait remonter toute l’année.',
+      firstStep:
+        "Mettre une feuille « idées » visible, et s'engager à répondre à chaque idée sous 7 jours.",
+      example:
+        'Un atelier traite deux idées par mois : au bout d’un an, vingt améliorations dont la moitié venues du terrain.',
+      commonMistake:
+        "Promettre des primes complexes au lieu d'une réponse rapide et de la reconnaissance.",
+    },
+    relevance: { impact: 'medium', effort: 'medium' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        'Kaizen teian : beaucoup de petites idées fréquentes plutôt que de grandes idées rares ; le taux de réponse compte plus que la prime.',
+      prerequisites: ['Réponse rapide garantie', 'Confiance'],
+      successIndicators: ['Idées proposées par mois', 'Part des idées mises en œuvre'],
+    },
+    related: ['kaizen', 'respect-personnes', 'amelioration-continue'],
+  },
 
   // ─────────────────── Amélioration avancée / Six Sigma ───────────────────
   {
@@ -1846,6 +2061,76 @@ export const concepts = [
       successIndicators: ['Autonomie de résolution accrue', 'Problème dur résolu durablement'],
     },
     related: ['kaizen', 'kata', 'a3'],
+  },
+  {
+    number: 59,
+    slug: 'yokoten',
+    symbol: 'Yk',
+    name: 'Yokoten',
+    fullName: 'Yokoten — déploiement horizontal',
+    family: 'avance',
+    level: 3,
+    definition:
+      'Répliquer ailleurs — autre poste, équipe ou site — une amélioration qui a fait ses preuves, en l’adaptant.',
+    purpose: "Multiplier le retour d'une amélioration au lieu de la laisser locale.",
+    limits: {
+      notFor: 'Pas un copier-coller : on transfère le principe et on adapte au contexte.',
+      whenNot: "Inutile tant que l'amélioration d'origine n'est pas stabilisée et mesurée.",
+      pitfalls: "Imposer la solution d'une équipe à une autre sans l'impliquer : rejet assuré.",
+    },
+    pme: {
+      why: 'Même en petite structure : ce qui marche à l’atelier peut marcher au bureau, d’un chantier à l’autre.',
+      firstStep:
+        'Prendre la dernière amélioration qui marche et se demander : où ailleurs a-t-on le même problème ?',
+      example:
+        'Le système à deux bacs qui marche sur la visserie est répliqué sur les consommables du bureau.',
+      commonMistake: "Considérer l'amélioration « finie » une fois son poste d'origine traité.",
+    },
+    relevance: { impact: 'medium', effort: 'low' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        'Déploiement horizontal chez Toyota ; on déploie un standard prouvé, pas une anecdote.',
+      prerequisites: ['Amélioration prouvée et standardisée'],
+      successIndicators: ['Améliorations répliquées', 'Standards partagés'],
+    },
+    related: ['kaizen', 'travail-standardise', 'kata'],
+  },
+  {
+    number: 60,
+    slug: 'kaikaku',
+    symbol: 'Kk',
+    name: 'Kaikaku',
+    fullName: 'Kaikaku — changement par rupture',
+    family: 'avance',
+    level: 4,
+    definition:
+      'Repenser en profondeur un processus ou un modèle quand les petits pas ne suffisent plus.',
+    purpose: "Obtenir un saut de performance quand l'amélioration incrémentale plafonne.",
+    limits: {
+      notFor:
+        'Pas un réflexe : la rupture se justifie quand le kaizen plafonne, pas avant de l’avoir tenté.',
+      whenNot: 'À éviter en période fragile : une rupture ratée coûte bien plus qu’un kaizen raté.',
+      pitfalls:
+        'Confondre kaikaku et « tout casser » : la rupture se prépare (nemawashi) et se re-stabilise (standards).',
+    },
+    pme: {
+      why: 'Déménagement, digitalisation, refonte de l’offre : ces ruptures gagnent à être préparées en kaikaku, pas subies.',
+      firstStep:
+        'Identifier un processus où l’amélioration plafonne malgré les efforts, et poser la question : et si on repartait de zéro ?',
+      example:
+        'Un imprimeur passe du devis manuel (2 jours) au configurateur en ligne (10 minutes) : une rupture, pas une optimisation.',
+      commonMistake: 'Enchaîner les ruptures sans jamais stabiliser ni standardiser entre deux.',
+    },
+    relevance: { impact: 'medium', effort: 'high' },
+    pmeStarter: false,
+    practitioner: {
+      deeper:
+        'Complément du kaizen (Imai) : après la rupture, le kaizen reprend sur le nouveau standard.',
+      prerequisites: ['Kaizen tenté et plafonnant', 'Capacité à absorber le risque'],
+      successIndicators: ['Saut de performance mesuré', 'Re-stabilisation rapide'],
+    },
+    related: ['amelioration-continue', 'hoshin-kanri', 'nemawashi'],
   },
 ];
 

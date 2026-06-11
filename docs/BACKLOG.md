@@ -24,11 +24,12 @@
 - [x] `P1` **Landing pages diagnostic** : chaque problème enrichi d'un **contexte** (2 §, langage
       de dirigeant — SEO long-tail) et d'une **FAQ** (objections réelles, réponses honnêtes),
       rendue en JSON-LD `FAQPage`. Champs obligatoires, imposés par `npm run validate`.
-- [~] `P2` Étendre à ~60 concepts (cf. V2) : **52/60** — ajoutés le 2026-06-11 : SIPOC, modèle
-  de Kano, diagramme spaghetti, Obeya, matrice de compétences (ILUO), AMDEC/FMEA, puis QFD,
-  Yamazumi, Milk run, Kamishibai, Jishuken, les 5G (chacun avec sources, mots-clés, glossaire,
-  schéma et rattachement au diagnostic). Candidats suivants : Gemba walk dédié, A3 stratégique,
-  Standard combinaison, Heijunka box, 3P.
+- [x] `P2` Étendre à ~60 concepts (cf. V2) : **60/60 ✅** — ajoutés le 2026-06-11 : SIPOC, modèle
+      de Kano, diagramme spaghetti, Obeya, matrice de compétences (ILUO), AMDEC/FMEA, QFD,
+      Yamazumi, Milk run, Kamishibai, Jishuken, les 5G, puis QQOQCCP, feuille de relevés, matrice
+      impact/effort, capabilité (Cp/Cpk), point quotidien, système de suggestions (teian), yokoten
+      et kaikaku — chacun avec sources, mots-clés, glossaire, schéma, « comment faire » et
+      rattachement au diagnostic.
 - [x] `P1` **Schéma visuel sur 100 % des fiches** : `src/data/visuals.js` (déclaratif) +
       `ConceptVisual.astro` (13 types de SVG rendus au build, zéro JS client, aria-label) —
       obligatoire pour tout concept (`npm run validate`).
