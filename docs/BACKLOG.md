@@ -32,8 +32,11 @@
 - [x] `P1` **Schéma visuel sur 100 % des fiches** : `src/data/visuals.js` (déclaratif) +
       `ConceptVisual.astro` (13 types de SVG rendus au build, zéro JS client, aria-label) —
       obligatoire pour tout concept (`npm run validate`).
+- [x] `P1` **« Comment faire » sur 100 % des fiches** : mode opératoire pas-à-pas
+      (`src/data/howto.js`, ≥ 4 étapes concrètes pour TPE/PME), affiché sur la fiche après
+      l'essentiel et repris dans la fiche mémo. Obligatoire (`npm run validate`).
 - [x] `P1` **Fiche mémo téléchargeable** sur chaque concept (`/concept/[slug]/memo/`) :
-      une page A4 de révision (essentiel, limites, premier pas, indicateurs, schéma, sources),
+      une page A4 de révision (essentiel, comment faire, limites, indicateurs, schéma, sources),
       imprimable / enregistrable en PDF via le navigateur (zéro dépendance PDF), `noindex`.
 - [ ] `P2` Mini-cas concrets TPE/PME illustrés (1 par famille).
 

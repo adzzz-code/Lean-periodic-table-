@@ -61,8 +61,9 @@ La progression suit la logique du produit : **d'abord une référence crédible 
 - [~] Élargissement du contenu (objectif ~60 concepts) : **52** au 2026-06-11 (+ SIPOC, Kano,
   spaghetti, Obeya, matrice de compétences, AMDEC, QFD, Yamazumi, Milk run, Kamishibai,
   Jishuken, 5G).
-- [x] **Fiches enrichies** : schéma visuel pédagogique sur 100 % des fiches (SVG au build) +
-      **fiche mémo A4 téléchargeable** par concept (révision, imprimable / PDF navigateur).
+- [x] **Fiches enrichies** : schéma visuel pédagogique + **« comment faire » pas-à-pas** sur
+      100 % des fiches, et **fiche mémo A4 téléchargeable** par concept (révision, imprimable /
+      PDF navigateur).
 - [ ] Fiches enrichies (suite) : check-lists de démarrage, mini-cas par famille.
 
 ## 🚀 V3 — Personnalisation & diffusion

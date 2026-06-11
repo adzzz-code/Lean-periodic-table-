@@ -38,7 +38,8 @@ Cadrage validé le 2026-06-07 (cf. `docs/PRD.md` §9). Build statique Astro OK (
   tactile. Le maillage passe par les « concepts liés » des fiches (liens sortants **et**
   entrants, calculés au build).
 - Fiche = gabarit fixe : Essentiel · **schéma visuel** (`src/data/visuals.js`, rendu SVG au
-  build par `ConceptVisual.astro`, obligatoire) · **Limites & anti-usage** · couche TPE/PME ·
+  build par `ConceptVisual.astro`, obligatoire) · **Comment faire** (mode opératoire pas-à-pas,
+  `src/data/howto.js`, ≥ 4 étapes, obligatoire) · **Limites & anti-usage** · couche TPE/PME ·
   badge pertinence (impact/effort) · couche praticien · concepts liés · **sources** ·
   **fiche mémo** téléchargeable (`/concept/[slug]/memo/`, A4 imprimable → PDF navigateur,
   `noindex`). Détail : `docs/PRD.md` §4.
@@ -47,10 +48,11 @@ Cadrage validé le 2026-06-07 (cf. `docs/PRD.md` §9). Build statique Astro OK (
 
 - **Source de vérité contenu** : `src/data/concepts.js` (+ `families.js`, `sources.js`,
   `keywords.js`, `problems.js`, `quickwins.js`, `glossary.js`). Ne pas dupliquer ailleurs.
-  Ajouter un concept = une entrée respectant le gabarit + **≥ 1 source** + **≥ 1 mot-clé** de
-  recherche en langage courant (`keywords.js`). Un problème = `context` (≥ 1 §) + `faq` (≥ 1
-  Q/R) obligatoires. Problèmes et pépites pointent des slugs existants (pépites = fort
-  impact/faible effort, vérifié par `npm run validate`).
+  Ajouter un concept = une entrée respectant le gabarit + **≥ 1 source** + **≥ 1 mot-clé**
+  (`keywords.js`) + **un schéma** (`visuals.js`) + **un « comment faire » de ≥ 4 étapes**
+  (`howto.js`). Un problème = `context` (≥ 1 §) + `faq` (≥ 1 Q/R) obligatoires. Problèmes et
+  pépites pointent des slugs existants (pépites = fort impact/faible effort, vérifié par
+  `npm run validate`).
 - **Qualité** : `npm run validate` (intégrité + sources + mots-clés), `npm test` (recherche,
   calcul de gain), `npm run lint`, `npm run format` — vérifiés en CI.
 - **OG images** : `scripts/generate-og.mjs` (lancé en `prebuild`) — `public/og.png` (versionnée)

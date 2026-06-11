@@ -5,6 +5,7 @@ import { concepts, conceptBySlug } from '../../data/concepts.js';
 import { familyById, levels } from '../../data/families.js';
 import { sources } from '../../data/sources.js';
 import { visuals } from '../../data/visuals.js';
+import { howto } from '../../data/howto.js';
 import { withBase } from '../../lib/url.js';
 
 export function getStaticPaths() {
@@ -17,6 +18,7 @@ const fam = familyById[c.family];
 const lvl = levels.find((l) => l.level === c.level);
 const refs = sources[slug] ?? [];
 const visual = visuals[slug];
+const steps = howto[slug] ?? [];
 
 const impactLabel = { high: 'Fort', medium: 'Moyen', low: 'Faible' };
 const effortLabel = { low: 'Faible', medium: 'Moyen', high: 'Élevé' };
@@ -103,6 +105,19 @@ const definedTerm = {
             <dd>{c.purpose}</dd>
           </dl>
         </section>
+
+        {
+          steps.length > 0 && (
+            <section class="card howto-card">
+              <h2>Comment faire</h2>
+              <ol class="howto">
+                {steps.map((s) => (
+                  <li>{s}</li>
+                ))}
+              </ol>
+            </section>
+          )
+        }
 
         <section class="card warn">
           <h2>Limites & anti-usage</h2>
